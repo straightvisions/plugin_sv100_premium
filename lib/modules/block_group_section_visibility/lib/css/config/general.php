@@ -26,4 +26,15 @@
 				$properties
 			)
 		);
+
+		$properties						= array();
+		$section_dynamic_visibility		= array_map(function ($val) { return $val ? 'block' : 'none'; }, $module->get_setting('section_dynamic_visibility')->get_data());
+		$properties['display']			= $module->get_setting('section_dynamic_visibility')->prepare_css_property_responsive($section_dynamic_visibility);
+
+		echo $_s->build_css(
+			is_admin() ? '' : '#section_navigation',
+			array_merge(
+				$properties
+			)
+		);
 	}
