@@ -62,6 +62,12 @@
 				->set_type('js')
 				->set_path( 'lib/js/frontend/custom_lightbox.js' );
 
+			add_filter( 'rocket_delay_js_exclusions', function ( $excluded_files = array() ) {
+				$excluded_files[] = '/lib/js/frontend/custom_lightbox.js';
+
+				return $excluded_files;
+			} );
+
 			return $this;
 		}
 
