@@ -40,7 +40,6 @@
 
 		protected function register_scripts(): block_group_flip {
 			$this->get_script( 'style_flip' )
-				->set_is_gutenberg()
 				->set_path( 'lib/css/common/style_flip.css' );
 
 			return $this;
