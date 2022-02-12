@@ -58,6 +58,10 @@
 			$this->get_script( 'custom_lightbox' )
 				->set_path( 'lib/css/common/custom_lightbox.css' );
 
+			$this->get_script( 'style_lightbox_close_button' )
+				->set_is_gutenberg()
+				->set_path( 'lib/css/common/style_lightbox_close_button.css' );
+
 			$this->get_script( 'custom_lightbox_js' )
 				->set_type('js')
 				->set_path( 'lib/js/frontend/custom_lightbox.js' );
