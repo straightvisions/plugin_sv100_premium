@@ -12,5 +12,6 @@
 			$this->load_module('block_group_toggle');
 			$this->load_module('block_group_flip');
 			$this->load_module('custom_lightbox');
+			$this->load_module('block_patterns');
 		}
 	}
