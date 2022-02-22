@@ -4,18 +4,11 @@
 	right: 15px;
 	top: 15px;
 }
-@media (min-width: 0px) and (orientation: landscape){
-	.wp-block-buttons.is-style-sv-lightbox-close-button{
-		right: 45px;
-		top: 15px;
-	}
-}
 .wp-block-buttons.is-style-sv-lightbox-close-button .wp-block-button__link{
 	text-align:right;
 	background-color:transparent !important;
 	border:0 !important;
 	padding:0 !important;
-	color:#FFF !important;
 	line-height:1 !important;
 	mix-blend-mode: difference;
 }
