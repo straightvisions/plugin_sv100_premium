@@ -22,13 +22,39 @@
 				->set_description( __( 'Show Lightbox when linking to an anchor for Group with Hidden Style', 'sv100' ) )
 				->load_type( 'checkbox' );
 
-			$this->get_setting( 'width' )
+			$this->get_setting( 'lightbox' )
+				->set_title( __( 'Add a new lightbox', 'sv100' ) )
+				->load_type( 'group' );
+
+			$this->get_setting( 'lightbox' )
+				->run_type()
+				->add_child()
+				->set_ID( 'entry_label' )
+				->set_title( __( 'Label', 'sv100' ) )
+				->set_description( __( 'A label to differentiate your uploaded fonts.', 'sv100' ) )
+				->load_type( 'text' );
+
+			$this->get_setting( 'lightbox' )
+				->run_type()
+				->add_child()
+				->set_ID( 'entry_id' )
+				->set_title( __( 'ID', 'sv100' ) )
+				->set_description( __( 'Unique ID for Anchor/Link, allowed chars: A-Z, a-z, 0-9, _, -', 'sv100' ) )
+				->load_type( 'id' );
+
+			$this->get_setting( 'lightbox' )
+				->run_type()
+				->add_child()
+				->set_ID( 'width' )
 				->set_title( __( 'Lightbox Width', 'sv100' ) )
 				->set_is_responsive(true)
 				->set_default_value('75vw')
 				->load_type( 'text' );
 
-			$this->get_setting( 'height' )
+			$this->get_setting( 'lightbox' )
+				->run_type()
+				->add_child()
+				->set_ID( 'height' )
 				->set_title( __( 'Lightbox Height', 'sv100' ) )
 				->set_is_responsive(true)
 				->set_default_value('75vh')
@@ -62,9 +88,16 @@
 				->set_is_gutenberg()
 				->set_path( 'lib/css/common/style_lightbox_close_button.css' );
 
+			$selectors	= array();
+			foreach($this->get_setting( 'lightbox' )->get_data() as $lightbox){
+				$selectors[]		= "a[href='#".$lightbox['entry_id']."']";
+			}
+			$selector	= implode(',',$selectors);
+
 			$this->get_script( 'custom_lightbox_js' )
 				->set_type('js')
-				->set_path( 'lib/js/frontend/custom_lightbox.js' );
+				->set_path( 'lib/js/frontend/custom_lightbox.js' )
+				->set_localized(array('selector' => $selector));
 
 			add_filter( 'rocket_delay_js_exclusions', function ( $excluded_files = array() ) {
 				$excluded_files[] = '/lib/js/frontend/custom_lightbox.js';
