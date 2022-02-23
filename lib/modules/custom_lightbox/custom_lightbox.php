@@ -60,6 +60,20 @@
 				->set_default_value('75vh')
 				->load_type( 'text' );
 
+			$this->get_setting( 'lightbox' )
+				->run_type()
+				->add_child()
+				->set_ID( 'margin' )
+				->set_title( __( 'Margin', 'sv100_premium' ) )
+				->set_is_responsive(true)
+				->set_default_value(array(
+					'top'		=> 'auto',
+					'right'		=> 'auto',
+					'bottom'	=> 'auto',
+					'left'		=> 'auto'
+				))
+				->load_type( 'margin' );
+
 			$this->get_setting('lightbox')
 				->run_type()
 				->add_child()
