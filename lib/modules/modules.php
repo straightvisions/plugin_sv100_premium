@@ -7,6 +7,7 @@
 		}
 		
 		public function init() {
+			$this->load_module('common');
 			$this->load_module('block_group_section_visibility');
 			$this->load_module('block_group_sticky');
 			$this->load_module('block_group_toggle');

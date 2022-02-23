@@ -41,9 +41,12 @@
 					->set_is_gutenberg()
 					->set_path( 'lib/css/common/section_visibility_editor.css' );
 
+				$this->get_module('common')->get_script( 'is_in_viewport_js' )->set_is_enqueued();
+
 				$this->get_script( 'section_visibility_js' )
 					->set_type('js')
-					->set_path( 'lib/js/frontend/section_visibility.js' );
+					->set_path( 'lib/js/frontend/section_visibility.js' )
+					->set_deps(array($this->get_module('common')->get_script( 'is_in_viewport_js' )->get_handle()));
 			}
 
 			return $this;
