@@ -62,7 +62,8 @@
 		}
 		public function register_block_patterns(): block_patterns{
 			$args	= array(
-				'post_type'				=> 'sv_block_patterns'
+				'post_type'				=> 'sv_block_patterns',
+				'numberposts'			=> -1
 			);
 
 			$patterns	= get_posts($args);
