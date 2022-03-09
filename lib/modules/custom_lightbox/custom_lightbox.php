@@ -45,6 +45,23 @@
 			$this->get_setting( 'lightbox' )
 				->run_type()
 				->add_child()
+				->set_ID( 'enable_background_layer' )
+				->set_title( __( 'Enable Background Layer', 'sv100_premium' ) )
+				->set_is_responsive(true)
+				->load_type( 'checkbox' );
+
+			$this->get_setting( 'lightbox' )
+				->run_type()
+				->add_child()
+				->set_ID( 'background_layer_color' )
+				->set_title( __( 'Background Layer Color', 'sv100_premium' ) )
+				->set_default_value( '0,0,0,0.5' )
+				->set_is_responsive(true)
+				->load_type( 'color' );
+
+			$this->get_setting( 'lightbox' )
+				->run_type()
+				->add_child()
 				->set_ID( 'width' )
 				->set_title( __( 'Lightbox Width', 'sv100_premium' ) )
 				->set_is_responsive(true)
