@@ -12,23 +12,9 @@
 				$this->block_styles()->register_scripts();
 				add_action('wp', array($this, 'enqueue_scripts'));
 			}
-
-			// sv100_premium_custom_lightbox
-			add_shortcode( $this->get_prefix(), array( $this, 'shortcode' ) );
-
+			
 			return $this;
 		}
-		public function load( $settings = array(), $content = '' ) {
-			$settings								= shortcode_atts(
-				array(
-					'post_id'						=> true
-				),
-				$settings,
-				$this->get_module_name()
-			);
-
-		}
-
 		protected function load_settings(): custom_lightbox {
 			$this->get_setting( 'activate' )
 				->set_title( __( 'Enable Custom Lightbox', 'sv100_premium' ) )
