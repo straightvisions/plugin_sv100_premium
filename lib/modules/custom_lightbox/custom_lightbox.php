@@ -12,7 +12,7 @@
 				$this->block_styles()->register_scripts();
 				add_action('wp', array($this, 'enqueue_scripts'));
 			}
-			
+
 			return $this;
 		}
 		protected function load_settings(): custom_lightbox {
