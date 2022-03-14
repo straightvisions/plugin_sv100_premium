@@ -53,7 +53,7 @@
 					'has_archive' => false,
 					'hierarchical' => true,
 					'show_in_rest' => true,
-					'supports' => array('title', 'editor'),
+					'supports' => array('title', 'editor', 'revisions'),
 					'taxonomies' => array('post_tag')
 				)
 			);

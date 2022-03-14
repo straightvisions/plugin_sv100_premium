@@ -17,7 +17,7 @@
 				$this->get_prefix()
 			);
 
-			$post		= get_post( intval( $atts['id'] ) );
+			$post		= get_post(intval( $atts['id']));
 
 			if($post){
 				return do_shortcode($post->post_content);

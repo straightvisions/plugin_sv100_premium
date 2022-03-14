@@ -41,7 +41,7 @@
 			$temp_background_layer_color = clone $module->get_setting($lightbox['entry_id'] . '_background_layer_color');
 
 			echo $_s->build_css(
-				is_admin() ? '' : '.wp-block-group.is-style-sv-hidden.active#' . $lightbox['entry_id'] . '.active:after',
+				is_admin() ? '' : '.wp-block-group.is-style-sv-hidden.active#' . $lightbox['entry_id'] . ':after',
 				array_merge(
 					$properties,
 					$temp_background_layer_color
