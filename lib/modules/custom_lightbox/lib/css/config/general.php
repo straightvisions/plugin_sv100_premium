@@ -33,23 +33,25 @@
 				)
 			);
 
-			$properties = array();
-			$properties['display'] = $_s->prepare_css_property_responsive(array_map(function ($enable_background_layer) {
-				return $enable_background_layer ? 'block' : 'none';
-			}, $lightbox['enable_background_layer']));
+			if(is_array($lightbox['enable_background_layer'])) {
+				$properties = array();
+				$properties['display'] = $_s->prepare_css_property_responsive(array_map(function ($enable_background_layer) {
+					return $enable_background_layer ? 'block' : 'none';
+				}, $lightbox['enable_background_layer']));
 
-			$temp_background_layer_color = clone $module->get_setting($lightbox['entry_id'] . '_background_layer_color');
+				$temp_background_layer_color = clone $module->get_setting($lightbox['entry_id'] . '_background_layer_color');
 
-			echo $_s->build_css(
-				is_admin() ? '' : '.wp-block-group.is-style-sv-hidden.active#' . $lightbox['entry_id'] . ':after',
-				array_merge(
-					$properties,
-					$temp_background_layer_color
-						->set_is_responsive(true)
-						->load_type('color')
-						->set_data($lightbox['background_layer_color'])
-						->get_css_data('background-color')
-				)
-			);
+				echo $_s->build_css(
+					is_admin() ? '' : '.wp-block-group.is-style-sv-hidden.active#' . $lightbox['entry_id'] . ':after',
+					array_merge(
+						$properties,
+						$temp_background_layer_color
+							->set_is_responsive(true)
+							->load_type('color')
+							->set_data($lightbox['background_layer_color'])
+							->get_css_data('background-color')
+					)
+				);
+			}
 		}
 	}
