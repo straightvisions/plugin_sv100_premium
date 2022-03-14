@@ -115,7 +115,7 @@
 		}
 
 		protected function register_scripts(): custom_lightbox {
-			$this->get_script( 'inline_config' )
+			$this->get_script( 'config' )
 				->set_path( 'lib/css/config/init.php' )
 				->set_inline( true );
 
