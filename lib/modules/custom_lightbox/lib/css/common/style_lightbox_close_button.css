@@ -1,6 +1,6 @@
 .wp-block-buttons.is-style-sv-lightbox-close-button{
 	position:absolute;
-	z-index: 10000;
+	z-index: 3001;
 	right: 15px;
 	top: 15px;
 }
