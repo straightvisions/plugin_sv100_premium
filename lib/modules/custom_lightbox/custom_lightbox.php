@@ -150,6 +150,14 @@
 				if(isset($lightbox['element_in_view']) && strlen($lightbox['element_in_view']) > 0){
 					$props['element_in_view']['#'.$lightbox['entry_id']]		= '#'.$lightbox['element_in_view'];
 				}
+				
+				if(isset($lightbox['enable_video_fullscreen'])){
+					$props['enable_video_fullscreen']['#'.$lightbox['entry_id']]		= (int)$lightbox['enable_video_fullscreen'];
+				}
+				
+				if(isset($lightbox['enable_video_autoplay'])){
+					$props['enable_video_autoplay']['#'.$lightbox['entry_id']]		= (int)$lightbox['enable_video_autoplay'];
+				}
 			}
 			$props['selector']	= implode(',',$selectors);
 
