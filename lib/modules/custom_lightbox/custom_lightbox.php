@@ -48,6 +48,22 @@
 				->set_title( __( 'Enable Background Layer', 'sv100_premium' ) )
 				->set_is_responsive(true)
 				->load_type( 'checkbox' );
+			
+			$this->get_setting( 'lightbox' )
+			     ->run_type()
+			     ->add_child()
+			     ->set_ID( 'enable_video_fullscreen' )
+			     ->set_title( __( 'Enable Fullscreen for Videos', 'sv100_premium' ) )
+			     ->set_description( __( 'When a lightbox with video content gets triggered, switch video to fullscreen mode.', 'sv100_premium' ) )
+			     ->load_type( 'checkbox' );
+			
+			$this->get_setting( 'lightbox' )
+			     ->run_type()
+			     ->add_child()
+			     ->set_ID( 'enable_video_autoplay' )
+			     ->set_title( __( 'Enable Video Autoplay', 'sv100_premium' ) )
+			     ->set_description( __( 'When a lightbox with video content gets triggered, autoplay the video.', 'sv100_premium' ) )
+			     ->load_type( 'checkbox' );
 
 			$this->get_setting( 'lightbox' )
 				->run_type()
