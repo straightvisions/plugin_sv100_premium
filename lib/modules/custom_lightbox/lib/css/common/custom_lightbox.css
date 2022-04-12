@@ -14,14 +14,17 @@
 	top: 0;
 	bottom: 0;
 }
+
 .wp-block-group.is-style-sv-hidden.active{
 	max-height: 100%;
-	overflow: visible;
+	overflow:hidden;
 	transform: scaleY(1);
 	height: 100%;
 	opacity: 1;
 	z-index: 3000;
 }
+
+
 .wp-block-group.is-style-sv-hidden.active > .wp-block-group,
 .wp-block-group.is-style-sv-hidden.active > .wp-block-group__inner-container{ /* Fallback */
 	position: fixed;
@@ -32,6 +35,11 @@
 	box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
 	overflow:auto;
 	z-index:3000;
+}
+
+.wp-block-group.is-style-sv-hidden.active > .wp-block-group__inner-container{
+	max-height:calc(100% - 40px);
+	overflow-y: auto;
 }
 
 .wp-block-group.is-style-sv-hidden.active:after{
