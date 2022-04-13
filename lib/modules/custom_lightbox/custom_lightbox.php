@@ -114,6 +114,14 @@
 				->set_description(__('Set an unique ID of an element. If it is in viewport, Lightbox will be shown.', 'sv_tracking_manager'))
 				->load_type('id');
 
+			$this->get_setting('lightbox')
+				->run_type()
+				->add_child()
+				->set_ID('show_when_percent_scrolled')
+				->set_title(__('Show when given % of website body height has been scrolled', 'sv100'))
+				->set_description(__('Set an integer for the % value. If empty, trigger will not be active.', 'sv_tracking_manager'))
+				->load_type('number');
+
 			return $this;
 		}
 
@@ -145,10 +153,10 @@
 			$selectors	= array();
 			$props		= array();
 			foreach($this->get_setting( 'lightbox' )->get_data() as $lightbox){
-				$selectors[$lightbox['entry_id']]	= "a[href='#".$lightbox['entry_id']."']";
+				$selectors[$lightbox['entry_id']]										= "a[href='#".$lightbox['entry_id']."']";
 
 				if(isset($lightbox['element_in_view']) && strlen($lightbox['element_in_view']) > 0){
-					$props['element_in_view']['#'.$lightbox['entry_id']]		= '#'.$lightbox['element_in_view'];
+					$props['element_in_view']['#'.$lightbox['entry_id']]				= '#'.$lightbox['element_in_view'];
 				}
 				
 				if(isset($lightbox['enable_video_fullscreen'])){
@@ -156,21 +164,48 @@
 				}
 				
 				if(isset($lightbox['enable_video_autoplay'])){
-					$props['enable_video_autoplay']['#'.$lightbox['entry_id']]		= (int)$lightbox['enable_video_autoplay'];
+					$props['enable_video_autoplay']['#'.$lightbox['entry_id']]			= (int)$lightbox['enable_video_autoplay'];
+				}
+
+				if(isset($lightbox['show_when_percent_scrolled'])){
+					$props['show_when_percent_scrolled']['#'.$lightbox['entry_id']]	= (int)$lightbox['show_when_percent_scrolled'];
 				}
 			}
 			$props['selector']	= implode(',',$selectors);
-
-			$this->get_module('common')->get_script( 'is_in_viewport_js' )->set_is_enqueued();
-
+			// Common JS
 			$this->get_script( 'custom_lightbox_js' )
 				->set_type('js')
 				->set_path( 'lib/js/frontend/custom_lightbox.js' )
-				->set_deps(array($this->get_module('common')->get_script( 'is_in_viewport_js' )->get_handle()))
 				->set_localized($props);
 
+			// is in view JS
+			$this->get_script( 'is_in_view_js' )
+				->set_type('js')
+				->set_path( 'lib/js/frontend/is_in_view.js' )
+				->set_deps(array(
+					$this->get_script( 'custom_lightbox_js' )->get_handle(),
+					$this->get_module('common')->get_script( 'is_in_viewport_js' )->get_handle()
+				));
+
+
+			// video JS
+			$this->get_script( 'video_js' )
+				->set_type('js')
+				->set_path( 'lib/js/frontend/video.js' )
+				->set_deps(array($this->get_script( 'custom_lightbox_js' )->get_handle()));
+
+			// Show when percentage scrolled JS
+			$this->get_script( 'show_when_percent_scrolled_js' )
+				->set_type('js')
+				->set_path( 'lib/js/frontend/show_when_percent_scrolled.js' )
+				->set_deps(array($this->get_script( 'custom_lightbox_js' )->get_handle()));
+
+			// Prevent lazyload through wp rocket
 			add_filter( 'rocket_delay_js_exclusions', function ( $excluded_files = array() ) {
 				$excluded_files[] = '/lib/js/frontend/custom_lightbox.js';
+				$excluded_files[] = '/lib/js/frontend/is_in_view.js';
+				$excluded_files[] = '/lib/js/frontend/video.js';
+				$excluded_files[] = '/lib/js/frontend/show_when_percent_scrolled.js';
 
 				return $excluded_files;
 			} );
@@ -183,6 +218,7 @@
 				return $this;
 			}
 
+			$this->get_module('common')->get_script( 'is_in_viewport_js' )->set_is_enqueued();
 			foreach($this->get_scripts() as $script){
 				$script->set_is_enqueued();
 			}
