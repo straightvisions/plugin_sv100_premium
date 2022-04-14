@@ -19,20 +19,22 @@ const addCustomControlAttributes = ( settings, name ) => {
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	settings.attributes = assign( settings.attributes, {
-		columnGapDesktop                :{ type: 'integer', default: 0, },
-		columnGapMobile                 :{ type: 'integer', default: 0, },
-		columnGapMobileLandscape        :{ type: 'integer', default: 0, },
-		columnGapTablet                 :{ type: 'integer', default: 0, },
-		columnGapTabletLandscape        :{ type: 'integer', default: 0, },
-		columnGapTabletPro              :{ type: 'integer', default: 0, },
-		columnGapTabletProLandscape     :{ type: 'integer', default: 0, },
-		rowGapDesktop                   :{ type: 'integer', default: 0, },
-		rowGapMobile                    :{ type: 'integer', default: 0, },
-		rowGapMobileLandscape           :{ type: 'integer', default: 0, },
-		rowGapTablet                    :{ type: 'integer', default: 0, },
-		rowGapTabletLandscape           :{ type: 'integer', default: 0, },
-		rowGapTabletPro                 :{ type: 'integer', default: 0, },
-		rowGapTabletProLandscape        :{ type: 'integer', default: 0, },
+		
+		columnGapMobile                 :{ type: 'integer', default: 10, },
+		columnGapMobileLandscape        :{ type: 'integer', default: 10, },
+		columnGapTablet                 :{ type: 'integer', default: 10, },
+		columnGapTabletLandscape        :{ type: 'integer', default: 10, },
+		columnGapTabletPro              :{ type: 'integer', default: 10, },
+		columnGapTabletProLandscape     :{ type: 'integer', default: 10, },
+		columnGapDesktop                :{ type: 'integer', default: 10, },
+		
+		rowGapMobile                    :{ type: 'integer', default: 10, },
+		rowGapMobileLandscape           :{ type: 'integer', default: 10, },
+		rowGapTablet                    :{ type: 'integer', default: 10, },
+		rowGapTabletLandscape           :{ type: 'integer', default: 10, },
+		rowGapTabletPro                 :{ type: 'integer', default: 10, },
+		rowGapTabletProLandscape        :{ type: 'integer', default: 10, },
+		rowGapDesktop                   :{ type: 'integer', default: 10, },
 	} );
 	
 	return settings;

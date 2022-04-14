@@ -3,7 +3,7 @@ import ExtendedControlComponents from './components.jsx';
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { InspectorControls } = wp.editor;
-const { PanelBody, TabPanel, Dashicon, SelectControl } = wp.components;
+const { PanelBody, TabPanel, Dashicon } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
@@ -39,53 +39,53 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 						title={ __( 'SV100 Premium - Extended Controls', 'sv100_premium' ) }
 						initialOpen={ true }
 					>
-						
 						<TabPanel
-							className=" responsive-size-type-field-tabs  responsive-size-type-field__common-tabs  responsive-inline-margin"
-							activeClass="active-tab"
+							className='sv100-premium-panelbody'
 							tabs={[
-								{
-									name: "Desktop",
-									title: <Dashicon icon="desktop" />,
-									className:
-										" responsive-desktop-tab  responsive-responsive-tabs",
-								},
-								{
-									name: "TabletPro",
-									title: <Dashicon icon="tablet" style={{color: 'red'}}/>,
-									className:
-										" responsive-desktop-tab  responsive-responsive-tabs",
-								},
-								{
-									name: "TabletProLandscape",
-									title: <Dashicon icon="tablet" style={{transform: 'rotate(90deg)',color: 'red'}}/>,
-									className:
-										" responsive-desktop-tab  responsive-responsive-tabs",
-								},
-								{
-									name: "Tablet",
-									title: <Dashicon icon="tablet" />,
-									className:
-										" responsive-tablet-tab  responsive-responsive-tabs",
-								},
-								{
-									name: "TabletLandscape",
-									title: <Dashicon icon="tablet" style={{transform: 'rotate(90deg)'}}/>,
-									className:
-										" responsive-tablet-tab  responsive-responsive-tabs",
-								},
+								
 								{
 									name: "Mobile",
 									title: <Dashicon icon="smartphone" />,
-									className:
-										" responsive-mobile-tab  responsive-responsive-tabs",
+									className:'tab-icon',
 								},
+								
 								{
 									name: "MobileLandscape",
 									title: <Dashicon icon="smartphone" style={{transform: 'rotate(90deg)'}}/>,
-									className:
-										" responsive-mobile-tab  responsive-responsive-tabs",
+									className:'tab-icon',
 								},
+								
+								{
+									name: "Tablet",
+									title: <Dashicon icon="tablet" />,
+									className:'tab-icon',
+								},
+								
+								{
+									name: "TabletLandscape",
+									title: <Dashicon icon="tablet" style={{transform: 'rotate(90deg)'}}/>,
+									className:'tab-icon',
+								},
+								
+								{
+									name: "TabletPro",
+									title: <Dashicon icon="tablet" style={{color: 'red'}}/>,
+									className:'tab-icon',
+								},
+								
+								{
+									name: "TabletProLandscape",
+									title: <Dashicon icon="tablet" style={{transform: 'rotate(90deg)',color: 'red'}}/>,
+									className:'tab-icon',
+								},
+								
+								{
+									name: "Desktop",
+									title: <Dashicon icon="desktop" />,
+									className:'tab-icon',
+								}
+								
+								
 							]}
 						>
 							{(tab) => {
@@ -109,6 +109,7 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 
 addFilter( 'editor.BlockEdit', 'sv100-premium/gutenberg-extended-block-controls', withExtendedControl );
 
+// register custom attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
 	if ( ! enableExtendedControlOnBlocks.includes( name ) ) {

@@ -46,6 +46,9 @@
 				     ->set_is_backend()
 				     ->set_deps(array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'))
 				     ->set_is_enqueued();
+				
+				$this->get_script( 'common' )->set_is_gutenberg()->set_path( 'lib/backend/css/common/common.css' );
+				$this->get_script( 'editor_components' )->set_is_gutenberg()->set_path( 'lib/backend/css/common/editor_components.css' );
 			}
 			
 			return $this;
