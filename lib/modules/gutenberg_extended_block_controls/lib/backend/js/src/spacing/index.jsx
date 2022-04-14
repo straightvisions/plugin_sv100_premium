@@ -1,4 +1,5 @@
 import assign from 'lodash.assign';
+import EditorStyles from './editor-styles';
 
 const { Fragment } = wp.element;
 const { RangeControl } = wp.components;
@@ -70,7 +71,25 @@ function Spacing(props){
 	
 	const values = props.attributes;
 	const currentResponsiveTab = props.attributes.currentResponsiveTab;
-console.log(values);
+	
+	const styleID = 'sv100-premium-gutenberg-extended-block-controls-' + props.clientId;
+	
+	const element = document.getElementById(styleID);
+	console.log(element);
+	console.log(EditorStyles(props));
+	if (null !== element && undefined !== element) {
+		element.innerHTML = EditorStyles(props);
+	}else{
+		const $style = document.createElement('style');
+		$style.setAttribute(
+			'id',
+			styleID
+		);
+		document.head.appendChild($style);
+	}
+	
+	
+
 	return(
 		<Fragment>
 			<RangeControl label={__('Gap Column', 'sv100_premium')} value={values['columnGap'+currentResponsiveTab]}

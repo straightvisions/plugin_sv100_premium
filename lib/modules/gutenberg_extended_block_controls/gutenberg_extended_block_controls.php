@@ -38,7 +38,7 @@
 		}
 
 		protected function register_scripts(): gutenberg_extended_block_controls {
-			if($this->get_setting( 'activate' )->get_data() === '1'){
+			if($this->is_active() === true){
 				$this->get_script('controls')
 				     ->set_path('lib/backend/js/dist/index.js')
 				     ->set_type('js')

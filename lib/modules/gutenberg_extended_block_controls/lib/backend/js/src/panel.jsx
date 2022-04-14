@@ -24,10 +24,13 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 
 		const {
 			attributes: {
+				blockId,
 				currentResponsiveTab,
 			},
 			setAttributes,
 			} = props;
+		
+		setAttributes({ blockId: props.clientId });
 		
 		return (
 			<Fragment>
@@ -106,16 +109,65 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 
 addFilter( 'editor.BlockEdit', 'sv100-premium/gutenberg-extended-block-controls', withExtendedControl );
 
-const addSpacingExtraProps = ( saveElementProps, blockType, attributes ) => {
+const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableExtendedControlOnBlocks.includes( blockType.name ) ) {
-		return saveElementProps;
+	if ( ! enableExtendedControlOnBlocks.includes( name ) ) {
+		return settings;
 	}
 	
-	// Use Lodash's assign to gracefully handle if attributes are undefined
-	assign( saveElementProps, { style: { 'gap':attributes.gap } } );
+	settings.attributes = assign( settings.attributes, {
+		blockId:{ type: 'string' },
+	} );
 	
-	return saveElementProps;
+	return settings;
 };
 
-addFilter( 'blocks.getSaveContent.extraProps', 'sv100-premium/gutenberg-extended-block-controls', addSpacingExtraProps );
+addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-controls', addCustomControlAttributes );
+
+// add block id
+const withClientIdClassName  = createHigherOrderComponent(
+	( BlockListBlock ) => {
+		return ( props ) => {
+			
+			if ( ! enableExtendedControlOnBlocks.includes( props.name ) ) {
+				return (
+					<BlockListBlock { ...props } />
+				);
+			}
+			
+			return (
+				<BlockListBlock
+					{ ...props }
+					className={ 'block-'+props.clientId }
+				/>
+			);
+		}
+	},
+	'withCustomClassName'
+);
+
+wp.hooks.addFilter('editor.BlockListBlock', 'sv100-premium/gutenberg-extended-block-controls', withClientIdClassName );
+
+// add blockid-class to props
+const addCustomProps = ( props, blockType, attributes ) => {
+	// Do nothing if it's another block than our defined ones.
+	if ( ! enableExtendedControlOnBlocks.includes( blockType.name ) ) {
+		return props;
+	}
+
+	// Use Lodash's assign to gracefully handle if attributes are undefined
+	assign( props, { className : props.className + ' block-'+attributes.blockId } );
+	
+	return props;
+};
+
+addFilter( 'blocks.getSaveContent.extraProps', 'sv100-premium/gutenberg-extended-block-controls', addCustomProps );
+
+/*
+@todo:
+generateCSS.js überarbeitet, dass alle breakpoints correkt unterstützt werden,
+evtl. die icons umkehren, da wir logisch ja mit 0px min width beginnen -> frage ist, ob das für den nutzer
+auch klar ist???
+
+frontend css output
+ */
