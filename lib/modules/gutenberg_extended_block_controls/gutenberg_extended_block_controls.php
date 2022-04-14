@@ -38,13 +38,15 @@
 		}
 
 		protected function register_scripts(): gutenberg_extended_block_controls {
-			$this->get_script('controls')
-			     ->set_path('lib/backend/js/dist/index.js')
-			     ->set_type('js')
-			     ->set_is_gutenberg()
-			     ->set_is_backend()
-			     ->set_deps(array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'))
-			     ->set_is_enqueued();
+			if($this->get_setting( 'activate' )->get_data() === '1'){
+				$this->get_script('controls')
+				     ->set_path('lib/backend/js/dist/index.js')
+				     ->set_type('js')
+				     ->set_is_gutenberg()
+				     ->set_is_backend()
+				     ->set_deps(array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'))
+				     ->set_is_enqueued();
+			}
 			
 			return $this;
 		}
