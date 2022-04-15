@@ -1,11 +1,12 @@
-import Spacing from './spacing/index.jsx';
-const { Component, Fragment } = wp.element;
+import GapFlex from './gap_flex/index.jsx';
+import StackFlex from './stack_flex/index.jsx';
+const { Fragment } = wp.element;
 
 function ExtendedControlComponents( props ){
-	console.log('Component');
 	return(
 		<Fragment>
-			<Spacing  { ...props }/>
+			<GapFlex { ...props }/>
+			<StackFlex { ...props }/>
 		</Fragment>
 		
 	);

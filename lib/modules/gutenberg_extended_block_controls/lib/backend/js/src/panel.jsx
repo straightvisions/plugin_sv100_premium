@@ -2,7 +2,6 @@ import assign from 'lodash.assign';
 import ExtendedControlComponents from './components.jsx';
 import {getUniqueBlockId, isDuplicate} from './helpers';
 import injectBlockListCSS from "./injectBlockListCSS";
-import EditorStyles from "./spacing/editor-styles";
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { InspectorControls } = wp.editor;
@@ -34,12 +33,13 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 			},
 			setAttributes,
 			} = props;
-	console.log(isDuplicate(props));
+
+		// check and generate unique persistent block id (clientId is not persistent!)
 		if(blockId === '' || typeof blockId === 'undefined' || isDuplicate(props) === true){
 			setAttributes({ blockId: getUniqueBlockId(props) });
 		}
-		
-		console.log('Panel');
+		console.log('panel');
+		console.log(props);
 		// add css to frontend css attribute
 		if(blockId !== '' && typeof blockId !== 'undefined'){
 			injectBlockListCSS(props, setAttributes);

@@ -1,6 +1,5 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import injectBlockListCSS from "../injectBlockListCSS";
 
 const { Fragment } = wp.element;
 const { RangeControl } = wp.components;
@@ -21,13 +20,13 @@ const addCustomControlAttributes = ( settings, name ) => {
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	settings.attributes = assign( settings.attributes, {
 		
-		columnGapMobile                 :{ type: 'integer', default: 10, },
-		columnGapMobileLandscape        :{ type: 'integer', default: 10, },
-		columnGapTablet                 :{ type: 'integer', default: 10, },
-		columnGapTabletLandscape        :{ type: 'integer', default: 10, },
-		columnGapTabletPro              :{ type: 'integer', default: 10, },
-		columnGapTabletProLandscape     :{ type: 'integer', default: 10, },
-		columnGapDesktop                :{ type: 'integer', default: 10, },
+		gapMobile                 :{ type: 'integer', default: 10, },
+		gapMobileLandscape        :{ type: 'integer', default: 10, },
+		gapTablet                 :{ type: 'integer', default: 10, },
+		gapTabletLandscape        :{ type: 'integer', default: 10, },
+		gapTabletPro              :{ type: 'integer', default: 10, },
+		gapTabletProLandscape     :{ type: 'integer', default: 10, },
+		gapDesktop                :{ type: 'integer', default: 10, },
 		
 		rowGapMobile                    :{ type: 'integer', default: 10, },
 		rowGapMobileLandscape           :{ type: 'integer', default: 10, },
@@ -44,8 +43,8 @@ const addCustomControlAttributes = ( settings, name ) => {
 addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-controls', addCustomControlAttributes );
 
 // the component
-function Spacing(props){
-	const _name = 'spacing';
+function GapFlex(props){
+	const _name = 'gapFlex';
 	
 	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
 		return (
@@ -55,20 +54,13 @@ function Spacing(props){
 	
 	const {
 		attributes: {
-			columnGapDesktop,
-			columnGapMobile,
-			columnGapMobileLandscape,
-			columnGapTablet,
-			columnGapTabletLandscape,
-			columnGapTabletPro,
-			columnGapTabletProLandscape,
-			rowGapDesktop,
-			rowGapMobile,
-			rowGapMobileLandscape,
-			rowGapTablet,
-			rowGapTabletLandscape,
-			rowGapTabletPro,
-			rowGapTabletProLandscape,
+			gapDesktop,
+			gapMobile,
+			gapMobileLandscape,
+			gapTablet,
+			gapTabletLandscape,
+			gapTabletPro,
+			gapTabletProLandscape,
 		},
 		setAttributes,
 	} = props;
@@ -81,21 +73,15 @@ function Spacing(props){
 	
 	// add css to frontend css attribute
 	setAttributes( { parsedCSS: parsedCSS } );
-	//injectBlockListCSS(props, setAttributes);
-	
-	console.log('Spacing Setting');
-	
+
 	return(
 		<Fragment>
-			<RangeControl label={__('Gap Column', 'sv100_premium')} value={values['columnGap'+currentResponsiveTab]}
-              onChange={(val) => setAttributes({['columnGap'+currentResponsiveTab]: val})} min={0} max={500}
-			/>
-			<RangeControl label={__('Gap Row', 'sv100_premium')} value={values['rowGap'+currentResponsiveTab]}
-			              onChange={(val) => setAttributes({['rowGap'+currentResponsiveTab]: val})} min={0} max={500}
+			<RangeControl label={__('Gap', 'sv100_premium')} value={values['gap'+currentResponsiveTab]}
+			              onChange={(val) => setAttributes({['gap'+currentResponsiveTab]: val})} min={0} max={500}
 			/>
 		</Fragment>
 	);
 	
 }
 
-export default Spacing;
+export default GapFlex;
