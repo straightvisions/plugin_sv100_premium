@@ -1,5 +1,8 @@
 import assign from 'lodash.assign';
 import ExtendedControlComponents from './components.jsx';
+import {getUniqueBlockId, isDuplicate} from './helpers';
+import injectBlockListCSS from "./injectBlockListCSS";
+import EditorStyles from "./spacing/editor-styles";
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { InspectorControls } = wp.editor;
@@ -26,11 +29,21 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 			attributes: {
 				blockId,
 				currentResponsiveTab,
+				parsedCSSString,
+				parsedCSS,
 			},
 			setAttributes,
 			} = props;
+	console.log(isDuplicate(props));
+		if(blockId === '' || typeof blockId === 'undefined' || isDuplicate(props) === true){
+			setAttributes({ blockId: getUniqueBlockId(props) });
+		}
 		
-		setAttributes({ blockId: props.clientId });
+		console.log('Panel');
+		// add css to frontend css attribute
+		if(blockId !== '' && typeof blockId !== 'undefined'){
+			injectBlockListCSS(props, setAttributes);
+		}
 		
 		return (
 			<Fragment>
@@ -118,6 +131,8 @@ const addCustomControlAttributes = ( settings, name ) => {
 	
 	settings.attributes = assign( settings.attributes, {
 		blockId:{ type: 'string' },
+		parsedCSS:{ type: 'object', default: {} },
+		parsedCSSString:{ type: 'string', default: '' },
 	} );
 	
 	return settings;
@@ -139,7 +154,7 @@ const withClientIdClassName  = createHigherOrderComponent(
 			return (
 				<BlockListBlock
 					{ ...props }
-					className={ 'block-'+props.clientId }
+					className={ 'block-'+props.attributes.blockId }
 				/>
 			);
 		}

@@ -1,5 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
+import injectBlockListCSS from "../injectBlockListCSS";
 
 const { Fragment } = wp.element;
 const { RangeControl } = wp.components;
@@ -44,6 +45,7 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function Spacing(props){
+	const _name = 'spacing';
 	
 	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
 		return (
@@ -74,24 +76,15 @@ function Spacing(props){
 	const values = props.attributes;
 	const currentResponsiveTab = props.attributes.currentResponsiveTab;
 	
-	const styleID = 'sv100-premium-gutenberg-extended-block-controls-' + props.clientId;
+	let parsedCSS = props.attributes.parsedCSS;
+	parsedCSS[_name] = EditorStyles(props);
 	
-	const element = document.getElementById(styleID);
-	console.log(element);
-	console.log(EditorStyles(props));
-	if (null !== element && undefined !== element) {
-		element.innerHTML = EditorStyles(props);
-	}else{
-		const $style = document.createElement('style');
-		$style.setAttribute(
-			'id',
-			styleID
-		);
-		document.head.appendChild($style);
-	}
+	// add css to frontend css attribute
+	setAttributes( { parsedCSS: parsedCSS } );
+	//injectBlockListCSS(props, setAttributes);
 	
+	console.log('Spacing Setting');
 	
-
 	return(
 		<Fragment>
 			<RangeControl label={__('Gap Column', 'sv100_premium')} value={values['columnGap'+currentResponsiveTab]}

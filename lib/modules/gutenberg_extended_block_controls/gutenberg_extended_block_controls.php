@@ -12,6 +12,10 @@
 				$this->register_scripts();
 				add_action('wp', array($this, 'enqueue_scripts'));
 			}
+			
+			if( is_admin() === false ){
+				add_action( 'wp_footer', array( $this, 'get_frontend_block_styles' ), 100 );
+			}
 
 			return $this;
 		}
@@ -65,5 +69,23 @@
 		protected function block_styles(): gutenberg_extended_block_controls {
 	
 			return $this;
+		}
+		
+		public function get_frontend_block_styles(){
+			global $post;
+			$blocks = array();
+			$output = '';
+			if ( is_object( $post ) ) {
+				$blocks = parse_blocks( $post->post_content );
+			}
+			
+			foreach($blocks as $block){
+				if(isset($block['attrs']) === false || isset($block['attrs']['parsedCSSString']) === false){continue;}
+				$output .= $block['attrs']['parsedCSSString'];
+			}
+			
+			$output = str_replace('#block-', '.block-', $output);
+			
+			echo '<style id="sv100_premium_gutenberg_extended_block_control_styles">'.$output.'</style>'; //phpcs:ignore
 		}
 	}
