@@ -1,5 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
+import {updateCSS} from "../helpers";
 
 const { Fragment } = wp.element;
 const { ToggleControl  } = wp.components;
@@ -36,6 +37,7 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 // the component
 function StackFlex(props){
 	const _name = 'StackFlex';
+	const _prefix = 'stack';
 	
 	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
 		return (
@@ -43,32 +45,13 @@ function StackFlex(props){
 		);
 	}
 	
-	const {
-		attributes: {
-			stackDesktop,
-			stackMobile,
-			stackMobileLandscape,
-			stackTablet,
-			stackTabletLandscape,
-			stackTabletPro,
-			stackTabletProLandscape,
-		},
-		setAttributes,
-	} = props;
-	
 	const values = props.attributes;
 	const currentResponsiveTab = props.attributes.currentResponsiveTab;
-	
-	let parsedCSS = props.attributes.parsedCSS;
-	parsedCSS[_name] = EditorStyles(props);
-	
-	// add css to frontend css attribute
-	setAttributes( { parsedCSS: parsedCSS } );
-	
+
 	return(
 		<Fragment>
-			<ToggleControl  label={__('Stack Columns', 'sv100_premium')} value={values['gap'+currentResponsiveTab]}
-			              onChange={(val) => setAttributes({['stack'+currentResponsiveTab]: val})} checked={props.attributes['stack'+currentResponsiveTab]}
+			<ToggleControl  label={__('Stack Columns', 'sv100_premium')} value={values[_prefix+currentResponsiveTab]}
+			              onChange={(val) => updateCSS(val, props, _name, _prefix, EditorStyles) } checked={props.attributes[_prefix+currentResponsiveTab]}
 			/>
 		</Fragment>
 	);

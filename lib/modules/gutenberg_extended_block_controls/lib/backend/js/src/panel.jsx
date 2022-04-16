@@ -36,10 +36,8 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 		// check and generate unique persistent block id (clientId is not persistent!)
 		if(blockId === '' || typeof blockId === 'undefined' || isDuplicate(props) === true){
 			setAttributes({ blockId: getUniqueBlockId(props) });
-		}
-	
-		// add css to frontend css attribute
-		if(blockId !== '' && typeof blockId !== 'undefined'){
+		}else{
+			// inject editor css
 			injectBlockListCSS(props);
 		}
 		
@@ -171,7 +169,7 @@ const addCustomProps = ( props, blockType, attributes ) => {
 
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	if(typeof attributes.blockId !== 'undefined'){
-		assign( props, { className : props.className + ' block-'+attributes.blockId } );
+		assign( props, { className : props.className + ' sv100-premium-block-core-'+attributes.blockId } );
 	}
 	
 	return props;
@@ -181,9 +179,9 @@ addFilter( 'blocks.getSaveContent.extraProps', 'sv100-premium/gutenberg-extended
 
 /*
 @todo:
-generateCSS.js überarbeitet, dass alle breakpoints correkt unterstützt werden,
 evtl. die icons umkehren, da wir logisch ja mit 0px min width beginnen -> frage ist, ob das für den nutzer
 auch klar ist???
 
-frontend css output
+- stack -> margin: left colum raus when stacked -> extra css not in generation for reasons!!!
+- setting optin!!! -> prevent incompatibilites e.g. flex stack margin top with ordinary margins
  */

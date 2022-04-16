@@ -1,5 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
+import {updateCSS} from '../helpers';
 const { Fragment } = wp.element;
 const { RangeControl } = wp.components;
 const { addFilter } = wp.hooks;
@@ -35,6 +36,7 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 // the component
 function GapFlex(props){
 	const _name = 'gapFlex';
+	const _prefix = 'gap';
 	
 	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
 		return (
@@ -42,32 +44,13 @@ function GapFlex(props){
 		);
 	}
 	
-	const {
-		attributes: {
-			gapDesktop,
-			gapMobile,
-			gapMobileLandscape,
-			gapTablet,
-			gapTabletLandscape,
-			gapTabletPro,
-			gapTabletProLandscape,
-		},
-		setAttributes,
-	} = props;
-	
 	const values = props.attributes;
 	const currentResponsiveTab = props.attributes.currentResponsiveTab;
 	
-	let parsedCSS = props.attributes.parsedCSS;
-	parsedCSS[_name] = EditorStyles(props);
-	
-	// add css to frontend css attribute
-	setAttributes( { parsedCSS: parsedCSS } );
-
 	return(
 		<Fragment>
-			<RangeControl label={__('Gap', 'sv100_premium')} value={values['gap'+currentResponsiveTab]}
-			              onChange={(val) => setAttributes({['gap'+currentResponsiveTab]: val})} min={0} max={500}
+			<RangeControl label={__('Gap', 'sv100_premium')} value={values[_prefix+currentResponsiveTab]}
+			              onChange={(val) => updateCSS(val, props, _name, _prefix, EditorStyles) } min={0} max={500}
 			/>
 		</Fragment>
 	);
