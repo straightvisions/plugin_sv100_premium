@@ -38,8 +38,7 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 		if(blockId === '' || typeof blockId === 'undefined' || isDuplicate(props) === true){
 			setAttributes({ blockId: getUniqueBlockId(props) });
 		}
-		console.log('panel');
-		console.log(props);
+	
 		// add css to frontend css attribute
 		if(blockId !== '' && typeof blockId !== 'undefined'){
 			injectBlockListCSS(props, setAttributes);
@@ -154,7 +153,7 @@ const withClientIdClassName  = createHigherOrderComponent(
 			return (
 				<BlockListBlock
 					{ ...props }
-					className={ 'block-'+props.attributes.blockId }
+					className={ 'sv100-premium-block-core-'+props.attributes.blockId }
 				/>
 			);
 		}
