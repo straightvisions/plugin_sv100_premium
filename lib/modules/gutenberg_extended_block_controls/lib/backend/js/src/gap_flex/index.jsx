@@ -1,6 +1,5 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-
 const { Fragment } = wp.element;
 const { RangeControl } = wp.components;
 const { addFilter } = wp.hooks;
@@ -19,7 +18,6 @@ const addCustomControlAttributes = ( settings, name ) => {
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	settings.attributes = assign( settings.attributes, {
-		
 		gapMobile                 :{ type: 'integer', default: 10, },
 		gapMobileLandscape        :{ type: 'integer', default: 10, },
 		gapTablet                 :{ type: 'integer', default: 10, },
@@ -27,14 +25,6 @@ const addCustomControlAttributes = ( settings, name ) => {
 		gapTabletPro              :{ type: 'integer', default: 10, },
 		gapTabletProLandscape     :{ type: 'integer', default: 10, },
 		gapDesktop                :{ type: 'integer', default: 10, },
-		
-		rowGapMobile                    :{ type: 'integer', default: 10, },
-		rowGapMobileLandscape           :{ type: 'integer', default: 10, },
-		rowGapTablet                    :{ type: 'integer', default: 10, },
-		rowGapTabletLandscape           :{ type: 'integer', default: 10, },
-		rowGapTabletPro                 :{ type: 'integer', default: 10, },
-		rowGapTabletProLandscape        :{ type: 'integer', default: 10, },
-		rowGapDesktop                   :{ type: 'integer', default: 10, },
 	} );
 	
 	return settings;

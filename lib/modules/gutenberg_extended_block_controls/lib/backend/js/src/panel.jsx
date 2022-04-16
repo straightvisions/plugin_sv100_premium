@@ -1,7 +1,6 @@
 import assign from 'lodash.assign';
 import ExtendedControlComponents from './components.jsx';
-import {getUniqueBlockId, isDuplicate} from './helpers';
-import injectBlockListCSS from "./injectBlockListCSS";
+import {getUniqueBlockId, isDuplicate, injectBlockListCSS} from './helpers';
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { InspectorControls } = wp.editor;
@@ -41,7 +40,7 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 	
 		// add css to frontend css attribute
 		if(blockId !== '' && typeof blockId !== 'undefined'){
-			injectBlockListCSS(props, setAttributes);
+			injectBlockListCSS(props);
 		}
 		
 		return (
@@ -171,7 +170,9 @@ const addCustomProps = ( props, blockType, attributes ) => {
 	}
 
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	assign( props, { className : props.className + ' block-'+attributes.blockId } );
+	if(typeof attributes.blockId !== 'undefined'){
+		assign( props, { className : props.className + ' block-'+attributes.blockId } );
+	}
 	
 	return props;
 };
