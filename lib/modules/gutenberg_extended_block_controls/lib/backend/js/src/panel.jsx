@@ -8,9 +8,51 @@ const { PanelBody, TabPanel, Dashicon } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-// whitelist blocks
+// whitelist blocks (could be replace by a generation function
 const enableExtendedControlOnBlocks = [
+	'core/paragraph',
+	'core/image',
+	'core/heading',
+	'core/gallery',
+	'core/list',
+	'core/quote',
+	'core/shortcode',
+	'core/archives',
+	'core/audio',
+	'core/button',
+	'core/buttons',
+	'core/calendar',
+	'core/categories',
+	'core/code',
 	'core/columns',
+	'core/column',
+	'core/cover',
+	'core/embed',
+	'core/file',
+	'core/group',
+	'core/freeform',
+	'core/html',
+	'core/media-text',
+	'core/latest-comments',
+	'core/latest-posts',
+	'core/missing',
+	'core/more',
+	'core/nextpage',
+	'core/preformatted',
+	'core/pullquote',
+	'core/rss',
+	'core/search',
+	'core/separator',
+	'core/block',
+	'core/social-links',
+	'core/social-link',
+	'core/spacer',
+	'core/subhead',
+	'core/table',
+	'core/tag-cloud',
+	'core/text-columns',
+	'core/verse',
+	'core/video'
 ];
 
 // register control panel
@@ -169,19 +211,13 @@ const addCustomProps = ( props, blockType, attributes ) => {
 
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	if(typeof attributes.blockId !== 'undefined'){
-		assign( props, { className : props.className + ' sv100-premium-block-core-'+attributes.blockId } );
+		let classNames = typeof props.className === 'undefined' ? '' : props.className; // paragraphs, list, headings
+		classNames = 'sv100-premium-block-core-'+attributes.blockId + classNames;
+		
+		assign( props, { className : classNames  } );
 	}
 	
 	return props;
 };
 
 addFilter( 'blocks.getSaveContent.extraProps', 'sv100-premium/gutenberg-extended-block-controls', addCustomProps );
-
-/*
-@todo:
-evtl. die icons umkehren, da wir logisch ja mit 0px min width beginnen -> frage ist, ob das für den nutzer
-auch klar ist???
-
-- stack -> margin: left colum raus when stacked -> extra css not in generation for reasons!!!
-- setting optin!!! -> prevent incompatibilites e.g. flex stack margin top with ordinary margins
- */
