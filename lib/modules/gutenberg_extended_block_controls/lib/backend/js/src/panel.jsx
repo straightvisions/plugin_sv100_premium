@@ -212,7 +212,8 @@ const addCustomProps = ( props, blockType, attributes ) => {
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	if(typeof attributes.blockId !== 'undefined'){
 		let classNames = typeof props.className === 'undefined' ? '' : props.className; // paragraphs, list, headings
-		classNames = 'sv100-premium-block-core-'+attributes.blockId + classNames;
+		const blockClass = 'sv100-premium-block-core-'+attributes.blockId;
+		classNames = classNames !== '' ? blockClass + ' ' +classNames : blockClass;
 		
 		assign( props, { className : classNames  } );
 	}
