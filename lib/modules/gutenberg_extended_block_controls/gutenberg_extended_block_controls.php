@@ -71,14 +71,35 @@
 			return $this;
 		}
 		
+		function get_block_children( $blocks ) {
+			$list = array();
+			
+			foreach ( $blocks as $block ) {
+				if ( 'core/heading' === $block['blockName'] ) {
+					// add current item, if it's a heading block
+					
+					$list[] = $block;
+				} elseif ( ! empty( $block['innerBlocks'] ) ) {
+					// or call the function recursively, to find heading blocks in inner blocks
+					$list = array_merge( $list, $this->get_block_children( $block['innerBlocks'] ) );
+				}
+			}
+			
+			return array_merge($list, $blocks);
+		}
+		
 		public function get_frontend_block_styles(){
 			global $post;
 			$blocks = array();
 			$output = '';
+			
 			if ( is_object( $post ) ) {
 				$blocks = parse_blocks( $post->post_content );
 			}
 			
+			// get inner blocks
+			$blocks = $this->get_block_children($blocks);
+		
 			foreach($blocks as $block){
 				if(isset($block['attrs']) === false || isset($block['attrs']['parsedCSSString']) === false){continue;}
 				$output .= $block['attrs']['parsedCSSString'];
