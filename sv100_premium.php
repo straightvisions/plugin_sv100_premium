@@ -1,6 +1,6 @@
 <?php
 /*
-Version: 1.8.00
+Version: 1.8.02
 Plugin Name: SV100 Premium
 Text Domain: sv100_premium
 Description: Outstanding Premium Features for SV100 Theme
