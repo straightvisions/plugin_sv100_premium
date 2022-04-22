@@ -3,7 +3,8 @@ import EditorStyles from './editor-styles';
 import {updateCSS} from "../helpers";
 
 const { Fragment } = wp.element;
-const { RangeControl, ToggleControl } = wp.components;
+const { __experimentalNumberControl, ToggleControl } = wp.components;
+const NumberControl = __experimentalNumberControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
@@ -59,42 +60,42 @@ const addCustomControlAttributes = ( settings, name ) => {
 	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
 		return settings;
 	}
-	console.log(typeof settings.attributes.borderRadiusTopLeftMobile);
+	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	settings.attributes = assign( settings.attributes, {
 		borderRadiusActive                    :{ type: 'boolean', default: false },
 	
-		borderRadiusTopLeftMobileValue                 :{ type: 'integer', default: ''},
-		borderRadiusTopLeftMobileLandscapeValue        :{ type: 'integer', default: ''},
-		borderRadiusTopLeftTabletValue                :{ type: 'integer', default: ''},
-		borderRadiusTopLeftTabletLandscapeValue        :{ type: 'integer', default: ''},
-		borderRadiusTopLeftTabletProValue              :{ type: 'integer', default: ''},
-		borderRadiusTopLeftTabletProLandscapeValue     :{ type: 'integer', default: ''},
-		borderRadiusTopLeftDesktopValue                :{ type: 'integer', default: ''},
+		borderRadiusTopLeftMobileValue                 :{ type: 'integer'},
+		borderRadiusTopLeftMobileLandscapeValue        :{ type: 'integer'},
+		borderRadiusTopLeftTabletValue                :{ type: 'integer'},
+		borderRadiusTopLeftTabletLandscapeValue        :{ type: 'integer'},
+		borderRadiusTopLeftTabletProValue              :{ type: 'integer'},
+		borderRadiusTopLeftTabletProLandscapeValue     :{ type: 'integer'},
+		borderRadiusTopLeftDesktopValue                :{ type: 'integer'},
 		
-		borderRadiusTopRightMobileValue                 :{ type: 'integer', default: ''},
-		borderRadiusTopRightMobileLandscapeValue        :{ type: 'integer', default: ''},
-		borderRadiusTopRightTabletValue                :{ type: 'integer', default: ''},
-		borderRadiusTopRightTabletLandscapeValue        :{ type: 'integer', default: ''},
-		borderRadiusTopRightTabletProValue              :{ type: 'integer', default: ''},
-		borderRadiusTopRightTabletProLandscapeValue     :{ type: 'integer', default: ''},
-		borderRadiusTopRightDesktopValue                :{ type: 'integer', default: ''},
+		borderRadiusTopRightMobileValue                 :{ type: 'integer'},
+		borderRadiusTopRightMobileLandscapeValue        :{ type: 'integer'},
+		borderRadiusTopRightTabletValue                :{ type: 'integer'},
+		borderRadiusTopRightTabletLandscapeValue        :{ type: 'integer'},
+		borderRadiusTopRightTabletProValue              :{ type: 'integer'},
+		borderRadiusTopRightTabletProLandscapeValue     :{ type: 'integer'},
+		borderRadiusTopRightDesktopValue                :{ type: 'integer'},
 		
-		borderRadiusBottomLeftMobileValue                 :{ type: 'integer', default: ''},
-		borderRadiusBottomLeftMobileLandscapeValue        :{ type: 'integer', default: ''},
-		borderRadiusBottomLeftTabletValue                 :{ type: 'integer', default: ''},
-		borderRadiusBottomLeftTabletLandscapeValue        :{ type: 'integer', default: ''},
-		borderRadiusBottomLeftTabletProValue              :{ type: 'integer', default: ''},
-		borderRadiusBottomLeftTabletProLandscapeValue     :{ type: 'integer', default: ''},
-		borderRadiusBottomLeftDesktopValue                :{ type: 'integer', default: ''},
+		borderRadiusBottomLeftMobileValue                 :{ type: 'integer'},
+		borderRadiusBottomLeftMobileLandscapeValue        :{ type: 'integer'},
+		borderRadiusBottomLeftTabletValue                 :{ type: 'integer'},
+		borderRadiusBottomLeftTabletLandscapeValue        :{ type: 'integer'},
+		borderRadiusBottomLeftTabletProValue              :{ type: 'integer'},
+		borderRadiusBottomLeftTabletProLandscapeValue     :{ type: 'integer'},
+		borderRadiusBottomLeftDesktopValue                :{ type: 'integer'},
 		
-		borderRadiusBottomRightMobileValue                 :{ type: 'integer', default: ''},
-		borderRadiusBottomRightMobileLandscapeValue        :{ type: 'integer', default: ''},
-		borderRadiusBottomRightTabletValue                 :{ type: 'integer', default: ''},
-		borderRadiusBottomRightTabletLandscapeValue        :{ type: 'integer', default: ''},
-		borderRadiusBottomRightTabletProValue              :{ type: 'integer', default: ''},
-		borderRadiusBottomRightTabletProLandscapeValue     :{ type: 'integer', default: ''},
-		borderRadiusBottomRightDesktopValue                :{ type: 'integer', default: ''},
+		borderRadiusBottomRightMobileValue                 :{ type: 'integer'},
+		borderRadiusBottomRightMobileLandscapeValue        :{ type: 'integer'},
+		borderRadiusBottomRightTabletValue                 :{ type: 'integer'},
+		borderRadiusBottomRightTabletLandscapeValue        :{ type: 'integer'},
+		borderRadiusBottomRightTabletProValue              :{ type: 'integer'},
+		borderRadiusBottomRightTabletProLandscapeValue     :{ type: 'integer'},
+		borderRadiusBottomRightDesktopValue                :{ type: 'integer'},
 		
 		
 		borderRadiusTopLeftMobileUnit                 :{ type: 'string', default: 'px'},
@@ -145,7 +146,7 @@ function BorderRadius(props){
 			<Fragment></Fragment>
 		);
 	}
-	console.log(props);
+
 	const values = props.attributes;
 	const currentResponsiveTab = typeof props.attributes.currentResponsiveTab !== 'undefined' ? props.attributes.currentResponsiveTab : 'Mobile';
 
@@ -157,25 +158,25 @@ function BorderRadius(props){
 					checked={values[_prefix+'Active']}
 					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
 				/>
-				<RangeControl
+				<NumberControl
 					label={__('Top-Left', 'sv100_premium')}
-					value={parseInt(values[_prefix+'TopLeft'+currentResponsiveTab]+'Value')}
+					value={values[_prefix+'TopLeft'+currentResponsiveTab+'Value']}
 					onChange={(val) => updateCSS(val, props, _name, _prefix+'TopLeft', EditorStyles, 'Value') }
 				/>
-				<RangeControl
+				<NumberControl
 					label={__('Top-Right', 'sv100_premium')}
-					value={values[_prefix+'TopRight'+currentResponsiveTab]+'Value'}
+					value={values[_prefix+'TopRight'+currentResponsiveTab+'Value']}
 					onChange={(val) => updateCSS(val, props, _name, _prefix+'TopRight', EditorStyles, 'Value') }
 				/>
-				<RangeControl
+				<NumberControl
 					label={__('Bottom-Left', 'sv100_premium')}
-					value={values[_prefix+'BottomLeft'+currentResponsiveTab]+'Value'}
+					value={values[_prefix+'BottomLeft'+currentResponsiveTab+'Value']}
 					onChange={(val) => updateCSS(val, props, _name, _prefix+'BottomLeft', EditorStyles, 'Value') }
 				/>
-				<RangeControl
+				<NumberControl
 					label={__('Bottom-Right', 'sv100_premium')}
-					value={values[_prefix+'BottomRight'+currentResponsiveTab]+'Value'}
-					onChange={(val) => updateCSSe(val, props, _name, _prefix+'BottomRight', EditorStyles, 'Value') }
+					value={values[_prefix+'BottomRight'+currentResponsiveTab+'Value']}
+					onChange={(val) => updateCSS(val, props, _name, _prefix+'BottomRight', EditorStyles, 'Value') }
 				/>
 				
 				
