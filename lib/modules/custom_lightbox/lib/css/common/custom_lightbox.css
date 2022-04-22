@@ -55,4 +55,5 @@
 .wp-block-group.is-style-sv-hidden.active > .wp-block-group__inner-container > * /* Fallback */
 {
 	margin:auto;
+	overflow:hidden;
 }
