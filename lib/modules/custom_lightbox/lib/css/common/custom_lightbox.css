@@ -51,8 +51,8 @@
 	height:100%;
 	z-index:10;
 }
-.wp-block-group.is-style-sv-hidden.active > .wp-block-group > *,
-.wp-block-group.is-style-sv-hidden.active > .wp-block-group__inner-container > * /* Fallback */
+.wp-block-group.is-style-sv-hidden.active > .wp-block-group > *:not(.is-style-sv-lightbox-close-button),
+.wp-block-group.is-style-sv-hidden.active > .wp-block-group__inner-container > *:not(.is-style-sv-lightbox-close-button) /* Fallback */
 {
 	margin:auto;
 	overflow:hidden;
