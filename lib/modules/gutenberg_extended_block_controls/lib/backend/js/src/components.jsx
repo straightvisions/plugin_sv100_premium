@@ -9,12 +9,12 @@ const { Fragment } = wp.element;
 function ExtendedControlComponents( props ){
 	return(
 		<Fragment>
-			<Margin {...props}/>
-			<Padding {...props}/>
 			<GapFlex { ...props }/>
 			<StackFlex { ...props }/>
-			<Hide { ...props }/>
+			<Margin {...props}/>
+			<Padding {...props}/>
 			<BorderRadius { ...props }/>
+			<Hide { ...props }/>
 		</Fragment>
 		
 	);

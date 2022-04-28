@@ -79,16 +79,18 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 		if(blockId === '' || typeof blockId === 'undefined' || isDuplicate(props) === true){
 			setAttributes({ blockId: getUniqueBlockId(props) });
 		}else{
+			console.log('inject css');
+			console.log(props);
 			// inject editor css
 			injectBlockListCSS(props);
 		}
-		
 		return (
 			<Fragment>
 				<InspectorControls>
 					<PanelBody
 						title={ __( 'SV100 Premium - Extended Controls', 'sv100_premium' ) }
 						initialOpen={ true }
+						className={'sv100-premium-extended-controls-panel'}
 					>
 						<TabPanel
 							className='sv100-premium-panelbody'

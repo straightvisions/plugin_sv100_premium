@@ -3,8 +3,9 @@ import EditorStyles from './editor-styles';
 import {updateCSS} from "../helpers";
 
 const { Fragment } = wp.element;
-const { __experimentalNumberControl, ToggleControl } = wp.components;
+const { __experimentalNumberControl,__experimentalUnitControl , ToggleControl, PanelRow } = wp.components;
 const NumberControl = __experimentalNumberControl;
+const UnitControl = __experimentalUnitControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
@@ -65,70 +66,37 @@ const addCustomControlAttributes = ( settings, name ) => {
 	settings.attributes = assign( settings.attributes, {
 		borderRadiusActive                    :{ type: 'boolean', default: false },
 	
-		borderRadiusTopLeftMobileValue                 :{ type: 'integer'},
-		borderRadiusTopLeftMobileLandscapeValue        :{ type: 'integer'},
-		borderRadiusTopLeftTabletValue                :{ type: 'integer'},
-		borderRadiusTopLeftTabletLandscapeValue        :{ type: 'integer'},
-		borderRadiusTopLeftTabletProValue              :{ type: 'integer'},
-		borderRadiusTopLeftTabletProLandscapeValue     :{ type: 'integer'},
-		borderRadiusTopLeftDesktopValue                :{ type: 'integer'},
+		borderRadiusTopLeftMobile                 :{ type: 'string'},
+		borderRadiusTopLeftMobileLandscape        :{ type: 'string'},
+		borderRadiusTopLeftTablet                :{ type: 'string'},
+		borderRadiusTopLeftTabletLandscape        :{ type: 'string'},
+		borderRadiusTopLeftTabletPro              :{ type: 'string'},
+		borderRadiusTopLeftTabletProLandscape     :{ type: 'string'},
+		borderRadiusTopLeftDesktop                :{ type: 'string'},
 		
-		borderRadiusTopRightMobileValue                 :{ type: 'integer'},
-		borderRadiusTopRightMobileLandscapeValue        :{ type: 'integer'},
-		borderRadiusTopRightTabletValue                :{ type: 'integer'},
-		borderRadiusTopRightTabletLandscapeValue        :{ type: 'integer'},
-		borderRadiusTopRightTabletProValue              :{ type: 'integer'},
-		borderRadiusTopRightTabletProLandscapeValue     :{ type: 'integer'},
-		borderRadiusTopRightDesktopValue                :{ type: 'integer'},
+		borderRadiusTopRightMobile                 :{ type: 'string'},
+		borderRadiusTopRightMobileLandscape        :{ type: 'string'},
+		borderRadiusTopRightTablet                :{ type: 'string'},
+		borderRadiusTopRightTabletLandscape        :{ type: 'string'},
+		borderRadiusTopRightTabletPro              :{ type: 'string'},
+		borderRadiusTopRightTabletProLandscape     :{ type: 'string'},
+		borderRadiusTopRightDesktop                :{ type: 'string'},
 		
-		borderRadiusBottomLeftMobileValue                 :{ type: 'integer'},
-		borderRadiusBottomLeftMobileLandscapeValue        :{ type: 'integer'},
-		borderRadiusBottomLeftTabletValue                 :{ type: 'integer'},
-		borderRadiusBottomLeftTabletLandscapeValue        :{ type: 'integer'},
-		borderRadiusBottomLeftTabletProValue              :{ type: 'integer'},
-		borderRadiusBottomLeftTabletProLandscapeValue     :{ type: 'integer'},
-		borderRadiusBottomLeftDesktopValue                :{ type: 'integer'},
+		borderRadiusBottomLeftMobile                 :{ type: 'string'},
+		borderRadiusBottomLeftMobileLandscape        :{ type: 'string'},
+		borderRadiusBottomLeftTablet                 :{ type: 'string'},
+		borderRadiusBottomLeftTabletLandscape        :{ type: 'string'},
+		borderRadiusBottomLeftTabletPro              :{ type: 'string'},
+		borderRadiusBottomLeftTabletProLandscape     :{ type: 'string'},
+		borderRadiusBottomLeftDesktop                :{ type: 'string'},
 		
-		borderRadiusBottomRightMobileValue                 :{ type: 'integer'},
-		borderRadiusBottomRightMobileLandscapeValue        :{ type: 'integer'},
-		borderRadiusBottomRightTabletValue                 :{ type: 'integer'},
-		borderRadiusBottomRightTabletLandscapeValue        :{ type: 'integer'},
-		borderRadiusBottomRightTabletProValue              :{ type: 'integer'},
-		borderRadiusBottomRightTabletProLandscapeValue     :{ type: 'integer'},
-		borderRadiusBottomRightDesktopValue                :{ type: 'integer'},
-		
-		
-		borderRadiusTopLeftMobileUnit                 :{ type: 'string', default: 'px'},
-		borderRadiusTopLeftMobileLandscapeUnit        :{ type: 'string', default: 'px'},
-		borderRadiusTopLeftTabletUnit                :{ type: 'string', default: 'px'},
-		borderRadiusTopLeftTabletLandscapeUnit        :{ type: 'string', default: 'px'},
-		borderRadiusTopLeftTabletProUnit              :{ type: 'string', default: 'px'},
-		borderRadiusTopLeftTabletProLandscapeUnit     :{ type: 'string', default: 'px'},
-		borderRadiusTopLeftDesktopUnit                :{ type: 'string', default: 'px'},
-		
-		borderRadiusTopRightMobileUnit                 :{ type: 'string', default: 'px'},
-		borderRadiusTopRightMobileLandscapeUnit        :{ type: 'string', default: 'px'},
-		borderRadiusTopRightTabletUnit                :{ type: 'string', default: 'px'},
-		borderRadiusTopRightTabletLandscapeUnit        :{ type: 'string', default: 'px'},
-		borderRadiusTopRightTabletProUnit              :{ type: 'string', default: 'px'},
-		borderRadiusTopRightTabletProLandscapeUnit     :{ type: 'string', default: 'px'},
-		borderRadiusTopRightDesktopUnit                :{ type: 'string', default: 'px'},
-		
-		borderRadiusBottomLeftMobileUnit                 :{ type: 'string', default: 'px'},
-		borderRadiusBottomLeftMobileLandscapeUnit        :{ type: 'string', default: 'px'},
-		borderRadiusBottomLeftTabletUnit                 :{ type: 'string', default: 'px'},
-		borderRadiusBottomLeftTabletLandscapeUnit        :{ type: 'string', default: 'px'},
-		borderRadiusBottomLeftTabletProUnit              :{ type: 'string', default: 'px'},
-		borderRadiusBottomLeftTabletProLandscapeUnit     :{ type: 'string', default: 'px'},
-		borderRadiusBottomLeftDesktopUnit                :{ type: 'string', default: 'px'},
-		
-		borderRadiusBottomRightMobileUnit                 :{ type: 'string', default: 'px'},
-		borderRadiusBottomRightMobileLandscapeUnit        :{ type: 'string', default: 'px'},
-		borderRadiusBottomRightTabletUnit                 :{ type: 'string', default: 'px'},
-		borderRadiusBottomRightTabletLandscapeUnit        :{ type: 'string', default: 'px'},
-		borderRadiusBottomRightTabletProUnit              :{ type: 'string', default: 'px'},
-		borderRadiusBottomRightTabletProLandscapeUnit     :{ type: 'string', default: 'px'},
-		borderRadiusBottomRightDesktopUnit                :{ type: 'string', default: 'px'},
+		borderRadiusBottomRightMobile                 :{ type: 'string'},
+		borderRadiusBottomRightMobileLandscape        :{ type: 'string'},
+		borderRadiusBottomRightTablet                 :{ type: 'string'},
+		borderRadiusBottomRightTabletLandscape        :{ type: 'string'},
+		borderRadiusBottomRightTabletPro              :{ type: 'string'},
+		borderRadiusBottomRightTabletProLandscape     :{ type: 'string'},
+		borderRadiusBottomRightDesktop                :{ type: 'string'},
 	} );
 	
 	return settings;
@@ -150,6 +118,11 @@ function BorderRadius(props){
 	const values = props.attributes;
 	const currentResponsiveTab = typeof props.attributes.currentResponsiveTab !== 'undefined' ? props.attributes.currentResponsiveTab : 'Mobile';
 
+	const topLeftValue =  (typeof values[_prefix+'TopLeft'+currentResponsiveTab] === 'undefined') ? '' : values[_prefix+'TopLeft'+currentResponsiveTab];
+	const topRightValue =  (typeof values[_prefix+'TopRight'+currentResponsiveTab] === 'undefined') ? '' : values[_prefix+'TopRight'+currentResponsiveTab];
+	const bottomLeftValue =  (typeof values[_prefix+'BottomLeft'+currentResponsiveTab] === 'undefined') ? '' : values[_prefix+'BottomLeft'+currentResponsiveTab];
+	const bottomRightValue =  (typeof values[_prefix+'BottomRight'+currentResponsiveTab] === 'undefined') ? '' : values[_prefix+'BottomRight'+currentResponsiveTab];
+	
 	if(values[_prefix+'Active'] === true){
 		return(
 			<Fragment>
@@ -158,35 +131,37 @@ function BorderRadius(props){
 					checked={values[_prefix+'Active']}
 					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
 				/>
-				<NumberControl
-					label={__('Top-Left', 'sv100_premium')}
-					value={values[_prefix+'TopLeft'+currentResponsiveTab+'Value']}
-					onChange={(val) => updateCSS(val, props, _name, _prefix+'TopLeft', EditorStyles, 'Value') }
-				/>
-				<NumberControl
-					label={__('Top-Right', 'sv100_premium')}
-					value={values[_prefix+'TopRight'+currentResponsiveTab+'Value']}
-					onChange={(val) => updateCSS(val, props, _name, _prefix+'TopRight', EditorStyles, 'Value') }
-				/>
-				<NumberControl
-					label={__('Bottom-Left', 'sv100_premium')}
-					value={values[_prefix+'BottomLeft'+currentResponsiveTab+'Value']}
-					onChange={(val) => updateCSS(val, props, _name, _prefix+'BottomLeft', EditorStyles, 'Value') }
-				/>
-				<NumberControl
-					label={__('Bottom-Right', 'sv100_premium')}
-					value={values[_prefix+'BottomRight'+currentResponsiveTab+'Value']}
-					onChange={(val) => updateCSS(val, props, _name, _prefix+'BottomRight', EditorStyles, 'Value') }
-				/>
-				
-				
+				<PanelRow>
+					<UnitControl
+						value={topLeftValue}
+						onChange={(val) => updateCSS(val, props, _name, _prefix+'TopLeft', EditorStyles) }
+						onUnitChange={(val) => updateCSS(val, props, _name, _prefix+'TopLeft', EditorStyles) }
+					/>
+					<UnitControl
+						value={topRightValue}
+						onChange={(val) => updateCSS(val, props, _name, _prefix+'TopRight', EditorStyles) }
+						onUnitChange={(val) => updateCSS(val, props, _name, _prefix+'TopRight', EditorStyles) }
+					/>
+					<UnitControl
+						value={bottomLeftValue}
+						onChange={(val) => updateCSS(val, props, _name, _prefix+'BottomLeft', EditorStyles) }
+						onUnitChange={(val) => updateCSS(val, props, _name, _prefix+'BottomLeft', EditorStyles) }
+					/>
+					<UnitControl
+						value={bottomRightValue}
+						onChange={(val) => updateCSS(val, props, _name, _prefix+'BottomRight', EditorStyles) }
+						onUnitChange={(val) => updateCSS(val, props, _name, _prefix+'BottomRight', EditorStyles) }
+					/>
+					<br/>
+				</PanelRow>
 			</Fragment>
+	
 		);
 	}else{
 		return(
 			<Fragment>
 				<ToggleControl
-					label={__('BorderRadius', 'sv100_premium')}
+					label={__('Border Radius', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
 					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
 				/>
