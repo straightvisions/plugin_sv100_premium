@@ -64,7 +64,7 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 				<BlockEdit { ...props } />
 			);
 		}
-
+		
 		const {
 			attributes: {
 				blockId,
@@ -74,7 +74,7 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 			},
 			setAttributes,
 			} = props;
-
+	
 		// check and generate unique persistent block id (clientId is not persistent!)
 		if(blockId === '' || typeof blockId === 'undefined' || isDuplicate(props) === true){
 			setAttributes({ blockId: getUniqueBlockId(props) });
@@ -169,7 +169,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	
 	settings.attributes = assign( settings.attributes, {
 		blockId:{ type: 'string' },
-		parsedCSS:{ type: 'object', default: {} },
+		parsedCSS:{ type: 'string', default: '{}' },
 		parsedCSSString:{ type: 'string', default: '' },
 	} );
 	
