@@ -26,7 +26,7 @@
 
 
 .wp-block-group.is-style-sv-hidden.active > .wp-block-group,
-.wp-block-group.is-style-sv-hidden.active > .wp-block-group__inner-container{ /* Fallback */
+.wp-block-group.is-style-sv-hidden.active > .wp-block-group__inner-container > .wp-block-group{ /* Fallback */
 	position: fixed;
 	left: 0;
 	right: 0;

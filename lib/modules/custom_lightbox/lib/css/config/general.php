@@ -13,7 +13,7 @@
 					is_admin() ? '' :
 						(
 							'.wp-block-group.is-style-sv-hidden.active#' . $lightbox['entry_id'] . ' > .wp-block-group,' .
-							'.wp-block-group.is-style-sv-hidden.active#' . $lightbox['entry_id'] . ' > .wp-block-group__inner-container' // Fallback
+							'.wp-block-group.is-style-sv-hidden.active#' . $lightbox['entry_id'] . ' > .wp-block-group__inner-container > .wp-block-group' // Fallback
 						),
 					array_merge(
 						$temp_width
