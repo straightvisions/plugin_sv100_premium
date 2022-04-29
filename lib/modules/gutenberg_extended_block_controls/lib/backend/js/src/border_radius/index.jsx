@@ -1,10 +1,10 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSS} from "../helpers";
+import {updateCSSWithDimensionsCorners} from "../helpers";
 
 const { Fragment } = wp.element;
-const { __experimentalUnitControl , ToggleControl, PanelRow } = wp.components;
-const UnitControl = __experimentalUnitControl;
+const { PanelRow, ToggleControl, __experimentalBoxControl } = wp.components;
+const BoxControl = __experimentalBoxControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
@@ -116,11 +116,13 @@ function BorderRadius(props){
 
 	const values = props.attributes;
 	const currentResponsiveTab = typeof props.attributes.currentResponsiveTab !== 'undefined' ? props.attributes.currentResponsiveTab : 'Mobile';
-
-	const topLeftValue =  (typeof values[_prefix+'TopLeft'+currentResponsiveTab] === 'undefined') ? '' : values[_prefix+'TopLeft'+currentResponsiveTab];
-	const topRightValue =  (typeof values[_prefix+'TopRight'+currentResponsiveTab] === 'undefined') ? '' : values[_prefix+'TopRight'+currentResponsiveTab];
-	const bottomLeftValue =  (typeof values[_prefix+'BottomLeft'+currentResponsiveTab] === 'undefined') ? '' : values[_prefix+'BottomLeft'+currentResponsiveTab];
-	const bottomRightValue =  (typeof values[_prefix+'BottomRight'+currentResponsiveTab] === 'undefined') ? '' : values[_prefix+'BottomRight'+currentResponsiveTab];
+	
+	const boxValues = {
+		top:values[_prefix+'TopLeft'+currentResponsiveTab],
+		right:values[_prefix+'TopRight'+currentResponsiveTab],
+		bottom:values[_prefix+'BottomLeft'+currentResponsiveTab],
+		left:values[_prefix+'BottomRight'+currentResponsiveTab],
+	};
 	
 	if(values[_prefix+'Active'] === true){
 		return(
@@ -131,30 +133,14 @@ function BorderRadius(props){
 					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
 				/>
 				<PanelRow>
-					<UnitControl
-						value={topLeftValue}
-						onChange={(val) => updateCSS(val, props, _name, _prefix+'TopLeft', EditorStyles) }
-						onUnitChange={(val) => updateCSS(val, props, _name, _prefix+'TopLeft', EditorStyles) }
+					<BoxControl values={boxValues}
+					            onChange={(values) => updateCSSWithDimensionsCorners(values, props, _name, _prefix, EditorStyles) }
+					            onUnitChange={(values) => updateCSSWithDimensionsCorners(values, props, _name, _prefix, EditorStyles) }
+					            allowReset={false}
+					            label={''}
 					/>
-					<UnitControl
-						value={topRightValue}
-						onChange={(val) => updateCSS(val, props, _name, _prefix+'TopRight', EditorStyles) }
-						onUnitChange={(val) => updateCSS(val, props, _name, _prefix+'TopRight', EditorStyles) }
-					/>
-					<UnitControl
-						value={bottomLeftValue}
-						onChange={(val) => updateCSS(val, props, _name, _prefix+'BottomLeft', EditorStyles) }
-						onUnitChange={(val) => updateCSS(val, props, _name, _prefix+'BottomLeft', EditorStyles) }
-					/>
-					<UnitControl
-						value={bottomRightValue}
-						onChange={(val) => updateCSS(val, props, _name, _prefix+'BottomRight', EditorStyles) }
-						onUnitChange={(val) => updateCSS(val, props, _name, _prefix+'BottomRight', EditorStyles) }
-					/>
-					<br/>
 				</PanelRow>
 			</Fragment>
-	
 		);
 	}else{
 		return(
@@ -167,7 +153,6 @@ function BorderRadius(props){
 			</Fragment>
 		);
 	}
-	
 	
 }
 
