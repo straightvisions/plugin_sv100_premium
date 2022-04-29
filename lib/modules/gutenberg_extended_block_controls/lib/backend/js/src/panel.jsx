@@ -79,8 +79,6 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 		if(blockId === '' || typeof blockId === 'undefined' || isDuplicate(props) === true){
 			setAttributes({ blockId: getUniqueBlockId(props) });
 		}else{
-			console.log('inject css');
-			console.log(props);
 			// inject editor css
 			injectBlockListCSS(props);
 		}

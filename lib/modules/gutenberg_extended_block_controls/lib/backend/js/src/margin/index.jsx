@@ -1,10 +1,10 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSS} from "../helpers";
+import {updateCSSWithDimensions} from "../helpers";
 
 const { Fragment } = wp.element;
-const { PanelRow,__experimentalUnitControl, ToggleControl } = wp.components;
-const UnitControl = __experimentalUnitControl;
+const { PanelRow,__experimentalUnitControl, ToggleControl, __experimentalBoxControl } = wp.components;
+const BoxControl = __experimentalBoxControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
@@ -116,6 +116,13 @@ function Margin(props){
 	
 	const values = props.attributes;
 	const currentResponsiveTab = props.attributes.currentResponsiveTab;
+	
+	const boxValues = {
+		top:values[_prefix+'Top'+currentResponsiveTab],
+		right:values[_prefix+'Right'+currentResponsiveTab],
+		bottom:values[_prefix+'Bottom'+currentResponsiveTab],
+		left:values[_prefix+'Left'+currentResponsiveTab],
+	};
 
 	if(values[_prefix+'Active'] === true){
 		return(
@@ -126,18 +133,11 @@ function Margin(props){
 					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
 				/>
 				<PanelRow>
-					<UnitControl value={values[_prefix+'Top'+currentResponsiveTab]}
-					             onChange={(val) => updateCSS(val, props, _name, _prefix+'Top', EditorStyles) }
-					             onUnitChange={(val) => updateCSS(val, props, _name, _prefix+'Top', EditorStyles) }
-					/>
-					<UnitControl value={values[_prefix+'Right'+currentResponsiveTab]}
-					             onChange={(val) => updateCSS(val, props, _name, _prefix+'Right', EditorStyles) }
-					/>
-					<UnitControl value={values[_prefix+'Bottom'+currentResponsiveTab]}
-					             onChange={(val) => updateCSS(val, props, _name, _prefix+'Bottom', EditorStyles) }
-					/>
-					<UnitControl  value={values[_prefix+'Left'+currentResponsiveTab]}
-					              onChange={(val) => updateCSS(val, props, _name, _prefix+'Left', EditorStyles) }
+					<BoxControl values={boxValues}
+					             onChange={(values) => updateCSSWithDimensions(values, props, _name, _prefix, EditorStyles) }
+					             onUnitChange={(values) => updateCSSWithDimensions(values, props, _name, _prefix, EditorStyles) }
+					            allowReset={false}
+					            label={''}
 					/>
 				</PanelRow>
 			</Fragment>
