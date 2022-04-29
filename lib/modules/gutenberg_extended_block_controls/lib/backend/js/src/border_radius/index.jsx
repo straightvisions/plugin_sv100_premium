@@ -3,8 +3,7 @@ import EditorStyles from './editor-styles';
 import {updateCSS} from "../helpers";
 
 const { Fragment } = wp.element;
-const { __experimentalNumberControl,__experimentalUnitControl , ToggleControl, PanelRow } = wp.components;
-const NumberControl = __experimentalNumberControl;
+const { __experimentalUnitControl , ToggleControl, PanelRow } = wp.components;
 const UnitControl = __experimentalUnitControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;

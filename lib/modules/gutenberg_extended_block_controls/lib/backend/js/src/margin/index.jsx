@@ -3,7 +3,8 @@ import EditorStyles from './editor-styles';
 import {updateCSS} from "../helpers";
 
 const { Fragment } = wp.element;
-const { TextControl, ToggleControl } = wp.components;
+const { PanelRow,__experimentalUnitControl, ToggleControl } = wp.components;
+const UnitControl = __experimentalUnitControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
@@ -124,22 +125,21 @@ function Margin(props){
 					checked={values[_prefix+'Active']}
 					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
 				/>
-				<TextControl label={__('Top', 'sv100_premium')} value={values[_prefix+'Top'+currentResponsiveTab]}
-				             placeholder={'+/-[0-9]|px|em|rem|vh|vw'}
-				             onChange={(val) => updateCSS(val, props, _name, _prefix+'Top', EditorStyles) }
-				/>
-				<TextControl label={__('Bottom', 'sv100_premium')} value={values[_prefix+'Bottom'+currentResponsiveTab]}
-				             placeholder={'+/-[0-9]|px|em|rem|vh|vw'}
-				             onChange={(val) => updateCSS(val, props, _name, _prefix+'Bottom', EditorStyles) }
-				/>
-				<TextControl  label={__('Left', 'sv100_premium')} value={values[_prefix+'Left'+currentResponsiveTab]}
-				              placeholder={'+/-[0-9]|px|em|rem|vh|vw'}
-				              onChange={(val) => updateCSS(val, props, _name, _prefix+'Left', EditorStyles) }
-				/>
-				<TextControl label={__('Right', 'sv100_premium')} value={values[_prefix+'Right'+currentResponsiveTab]}
-				             placeholder={'+/-[0-9]|px|em|rem|vh|vw'}
-				             onChange={(val) => updateCSS(val, props, _name, _prefix+'Right', EditorStyles) }
-				/>
+				<PanelRow>
+					<UnitControl value={values[_prefix+'Top'+currentResponsiveTab]}
+					             onChange={(val) => updateCSS(val, props, _name, _prefix+'Top', EditorStyles) }
+					             onUnitChange={(val) => updateCSS(val, props, _name, _prefix+'Top', EditorStyles) }
+					/>
+					<UnitControl value={values[_prefix+'Right'+currentResponsiveTab]}
+					             onChange={(val) => updateCSS(val, props, _name, _prefix+'Right', EditorStyles) }
+					/>
+					<UnitControl value={values[_prefix+'Bottom'+currentResponsiveTab]}
+					             onChange={(val) => updateCSS(val, props, _name, _prefix+'Bottom', EditorStyles) }
+					/>
+					<UnitControl  value={values[_prefix+'Left'+currentResponsiveTab]}
+					              onChange={(val) => updateCSS(val, props, _name, _prefix+'Left', EditorStyles) }
+					/>
+				</PanelRow>
 			</Fragment>
 		);
 	}else{
