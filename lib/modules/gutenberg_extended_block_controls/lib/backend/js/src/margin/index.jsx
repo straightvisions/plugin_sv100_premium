@@ -3,7 +3,7 @@ import EditorStyles from './editor-styles';
 import {updateCSSWithDimensions} from "../helpers";
 
 const { Fragment } = wp.element;
-const { PanelRow,__experimentalUnitControl, ToggleControl, __experimentalBoxControl } = wp.components;
+const { PanelRow, ToggleControl, __experimentalBoxControl } = wp.components;
 const BoxControl = __experimentalBoxControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;

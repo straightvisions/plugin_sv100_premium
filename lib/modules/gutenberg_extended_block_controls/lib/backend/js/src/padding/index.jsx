@@ -1,9 +1,10 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSS} from "../helpers";
+import {updateCSSWithDimensions} from "../helpers";
 
 const { Fragment } = wp.element;
-const { TextControl, ToggleControl } = wp.components;
+const { PanelRow, ToggleControl, __experimentalBoxControl } = wp.components;
+const BoxControl = __experimentalBoxControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
@@ -116,6 +117,13 @@ function Padding(props){
 	const values = props.attributes;
 	const currentResponsiveTab = props.attributes.currentResponsiveTab;
 	
+	const boxValues = {
+		top:values[_prefix+'Top'+currentResponsiveTab],
+		right:values[_prefix+'Right'+currentResponsiveTab],
+		bottom:values[_prefix+'Bottom'+currentResponsiveTab],
+		left:values[_prefix+'Left'+currentResponsiveTab],
+	};
+	
 	if(values[_prefix+'Active'] === true){
 		return(
 			<Fragment>
@@ -124,22 +132,14 @@ function Padding(props){
 					checked={values[_prefix+'Active']}
 					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
 				/>
-				<TextControl label={__('Top', 'sv100_premium')} value={values[_prefix+'Top'+currentResponsiveTab]}
-				             placeholder={'+/-[0-9]|px|em|rem|vh|vw'}
-				             onChange={(val) => updateCSS(val, props, _name, _prefix+'Top', EditorStyles) }
-				/>
-				<TextControl label={__('Bottom', 'sv100_premium')} value={values[_prefix+'Bottom'+currentResponsiveTab]}
-				             placeholder={'+/-[0-9]|px|em|rem|vh|vw'}
-				             onChange={(val) => updateCSS(val, props, _name, _prefix+'Bottom', EditorStyles) }
-				/>
-				<TextControl  label={__('Left', 'sv100_premium')} value={values[_prefix+'Left'+currentResponsiveTab]}
-				              placeholder={'+/-[0-9]|px|em|rem|vh|vw'}
-				              onChange={(val) => updateCSS(val, props, _name, _prefix+'Left', EditorStyles) }
-				/>
-				<TextControl label={__('Right', 'sv100_premium')} value={values[_prefix+'Right'+currentResponsiveTab]}
-				             placeholder={'+/-[0-9]|px|em|rem|vh|vw'}
-				             onChange={(val) => updateCSS(val, props, _name, _prefix+'Right', EditorStyles) }
-				/>
+				<PanelRow>
+					<BoxControl values={boxValues}
+					            onChange={(values) => updateCSSWithDimensions(values, props, _name, _prefix, EditorStyles) }
+					            onUnitChange={(values) => updateCSSWithDimensions(values, props, _name, _prefix, EditorStyles) }
+					            allowReset={false}
+					            label={''}
+					/>
+				</PanelRow>
 			</Fragment>
 		);
 	}else{
