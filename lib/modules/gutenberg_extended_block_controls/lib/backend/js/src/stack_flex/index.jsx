@@ -27,6 +27,14 @@ const addCustomControlAttributes = ( settings, name ) => {
 		stackTabletPro              :{ type: 'boolean', default: false, },
 		stackTabletProLandscape     :{ type: 'boolean', default: false, },
 		stackDesktop                :{ type: 'boolean', default: false, },
+		
+		stackReverseMobile                 :{ type: 'boolean', default: false, },
+		stackReverseMobileLandscape        :{ type: 'boolean', default: false, },
+		stackReverseTablet                 :{ type: 'boolean', default: false, },
+		stackReverseTabletLandscape        :{ type: 'boolean', default: false, },
+		stackReverseTabletPro              :{ type: 'boolean', default: false, },
+		stackReverseTabletProLandscape     :{ type: 'boolean', default: false, },
+		stackReverseDesktop                :{ type: 'boolean', default: false, },
 	} );
 	
 	return settings;
@@ -52,6 +60,9 @@ function StackFlex(props){
 		<Fragment>
 			<ToggleControl  label={__('Stack Columns', 'sv100_premium')} value={values[_prefix+currentResponsiveTab]}
 			              onChange={(val) => updateCSS(val, props, _name, _prefix, EditorStyles) } checked={props.attributes[_prefix+currentResponsiveTab]}
+			/>
+			<ToggleControl  label={__('Reverse Order', 'sv100_premium')} value={values[_prefix+'Reverse'+currentResponsiveTab]}
+			                onChange={(val) => updateCSS(val, props, _name, _prefix+'Reverse', EditorStyles) } checked={props.attributes[_prefix+'Reverse'+currentResponsiveTab]}
 			/>
 		</Fragment>
 	);
