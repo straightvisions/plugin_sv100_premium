@@ -5,6 +5,7 @@ import Padding from './padding/index.jsx';
 import Hide from './hide/index.jsx';
 import BorderRadius from './border_radius/index.jsx';
 import TextAlign from './text_align/index.jsx';
+import FontSize from './font_size/index.jsx';
 const { Fragment } = wp.element;
 
 function ExtendedControlComponents( props ){
@@ -13,6 +14,7 @@ function ExtendedControlComponents( props ){
 			<GapFlex { ...props }/>
 			<StackFlex { ...props }/>
 			<TextAlign { ...props }/>
+			<FontSize { ...props }/>
 			<Margin {...props}/>
 			<Padding {...props}/>
 			<BorderRadius { ...props }/>
