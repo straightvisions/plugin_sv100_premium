@@ -22,9 +22,9 @@ function ExtendedControlComponents( props ){
 			<Margin {...props}/>
 			<Padding {...props}/>
 			<BorderRadius { ...props }/>
-			<Hide { ...props }/>
 			<Height { ...props }/>
 			<Width { ...props }/>
+			<Hide { ...props }/>
 		</Fragment>
 		
 	);
