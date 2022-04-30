@@ -8,6 +8,7 @@ import TextAlign from './text_align/index.jsx';
 import FontSize from './font_size/index.jsx';
 import LineHeight from './line_height/index.jsx';
 import Height from './height/index.jsx';
+import Width from './width/index.jsx';
 const { Fragment } = wp.element;
 
 function ExtendedControlComponents( props ){
@@ -23,7 +24,7 @@ function ExtendedControlComponents( props ){
 			<BorderRadius { ...props }/>
 			<Hide { ...props }/>
 			<Height { ...props }/>
-			
+			<Width { ...props }/>
 		</Fragment>
 		
 	);
