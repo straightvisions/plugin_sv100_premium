@@ -1,0 +1,12 @@
+.sv100-premium-extended-controls-panel .sv100-premium-panelbody > .components-tab-panel__tabs{
+	margin-bottom:10px;
+}
+
+.sv100-premium-extended-controls-panel .sv100-premium-panelbody .components-tab-panel__tabs-item.tab-icon{
+	padding:3px;
+	height:34px;
+}
+
+.sv100-premium-extended-controls-panel .components-panel__row{
+	margin-bottom:20px;
+}
