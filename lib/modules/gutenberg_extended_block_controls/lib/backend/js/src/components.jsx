@@ -9,6 +9,7 @@ import FontSize from './font_size/index.jsx';
 import LineHeight from './line_height/index.jsx';
 import Height from './height/index.jsx';
 import Width from './width/index.jsx';
+import StretchLink from './stretch_link/index.jsx';
 const { Fragment } = wp.element;
 
 function ExtendedControlComponents( props ){

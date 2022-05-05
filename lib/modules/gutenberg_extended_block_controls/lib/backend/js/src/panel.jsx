@@ -170,7 +170,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	settings.attributes = assign( settings.attributes, {
 		blockId:{ type: 'string' },
 		parsedCSS:{ type: 'string', default: '{}' },
-		parsedCSSString:{ type: 'string', default: '' },
+		parsedCSSString:{ type: 'string', default: '' }
 	} );
 	
 	return settings;
@@ -189,10 +189,16 @@ const withClientIdClassName  = createHigherOrderComponent(
 				);
 			}
 			
+			let classNames = 'sv100-premium-block-core-'+props.attributes.blockId;
+
+			if(typeof props.attributes.stretchLink !== 'undefined' && props.attributes.stretchLink === true){
+				classNames += ' sv100-premium-extended-controls-stretch-link';
+			}
+			
 			return (
 				<BlockListBlock
 					{ ...props }
-					className={ 'sv100-premium-block-core-'+props.attributes.blockId }
+					className={ classNames }
 				/>
 			);
 		}
@@ -212,9 +218,17 @@ const addCustomProps = ( props, blockType, attributes ) => {
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	if(typeof attributes.blockId !== 'undefined'){
 		let classNames = typeof props.className === 'undefined' ? '' : props.className; // paragraphs, list, headings
-		const blockClass = 'sv100-premium-block-core-'+attributes.blockId;
-		classNames = classNames !== '' ? blockClass + ' ' +classNames : blockClass;
 		
+		if(classNames === ''){
+			classNames += 'sv100-premium-block-core-'+attributes.blockId;
+		}else{
+			classNames += ' sv100-premium-block-core-'+attributes.blockId;
+		}
+		
+		if(typeof attributes.stretchLink !== 'undefined' && attributes.stretchLink === true){
+			classNames += ' sv100-premium-extended-controls-stretch-link';
+		}
+	
 		assign( props, { className : classNames  } );
 	}
 	

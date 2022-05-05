@@ -13,8 +13,9 @@
 				add_action('wp', array($this, 'enqueue_scripts'));
 			}
 			
-			if( is_admin() === false ){
-				add_action( 'wp_footer', array( $this, 'get_frontend_block_styles' ), 100 );
+			if( is_admin() === false && wp_is_json_request() === false){
+				add_action( 'wp_footer', array( $this, 'get_frontend_block_styles' ), 1 );
+				add_filter('render_block', array($this, 'render_block_overwrite'), null, 2);
 			}
 
 			return $this;
@@ -99,14 +100,41 @@
 			
 			// get inner blocks
 			$blocks = $this->get_block_children($blocks);
-		
+			
 			foreach($blocks as $block){
 				if(isset($block['attrs']) === false || isset($block['attrs']['parsedCSSString']) === false){continue;}
 				$output .= $block['attrs']['parsedCSSString'];
+
+				// load scripts based on attributes
+				if(isset($block['attrs']['stretchLink']) && $block['attrs']['stretchLink'] === true){
+					$this->get_script( 'stretch_link' )->set_path( 'lib/frontend/css/common/stretch_link.css' )->set_is_enqueued();
+				}
 			}
 			
 			$output = str_replace('#block-', '.block-', $output);
 			
 			echo '<style id="sv100_premium_gutenberg_extended_block_control_styles">'.$output.'</style>'; //phpcs:ignore
+		}
+		
+		public function render_block_overwrite(string $block_content, array $block): string{
+			$html = $block_content;
+			$attrs = $block['attrs'];
+			
+			// overwrites
+			include($this->get_path('lib/frontend/tpl/stretch_link.php'));
+			
+			return $html;
+		}
+		
+		/* experimental */
+		private function HTML_append(string $html, string $element){
+			$html = rtrim($html);
+	
+			// simple detection
+			if(strpos($html, '</div>', -6) !== false){
+				$html = substr_replace($html, $element . '</div>', -6);
+			}
+			
+			return $html;
 		}
 	}
