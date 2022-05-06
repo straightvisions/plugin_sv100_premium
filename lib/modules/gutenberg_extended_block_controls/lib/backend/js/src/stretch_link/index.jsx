@@ -9,11 +9,10 @@ const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
 const enableCustomControlOnBlocks = [
-	'core/paragraph',
-	'core/image',
-	'core/column',
-	'core/cover',
 	'core/group',
+	'core/column',
+	'core/image',
+	'core/cover',
 	'core/media-text',
 ];
 
