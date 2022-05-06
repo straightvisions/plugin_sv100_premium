@@ -9,48 +9,7 @@ const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
 const enableCustomControlOnBlocks = [
-	'core/paragraph',
-	'core/image',
-	'core/heading',
-	'core/gallery',
-	'core/list',
-	'core/quote',
-	'core/shortcode',
-	'core/archives',
-	'core/audio',
-	'core/buttons',
-	'core/calendar',
-	'core/categories',
-	'core/code',
-	'core/columns',
-	'core/column',
-	'core/cover',
-	'core/embed',
-	'core/file',
-	'core/group',
-	'core/freeform',
-	'core/html',
-	'core/media-text',
-	'core/latest-comments',
-	'core/latest-posts',
-	'core/missing',
-	'core/more',
-	'core/nextpage',
-	'core/preformatted',
-	'core/pullquote',
-	'core/rss',
-	'core/search',
-	'core/separator',
-	'core/block',
-	'core/social-links',
-	'core/social-link',
-	'core/spacer',
-	'core/subhead',
-	'core/table',
-	'core/tag-cloud',
-	'core/text-columns',
-	'core/verse',
-	'core/video'
+	'core/button',
 ];
 
 // register attributes
@@ -103,7 +62,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-controls', addCustomControlAttributes );
 
 // the component
-function Padding(props){
+function PaddingCoreButton(props){
 	const _name = 'Padding';
 	const _prefix = 'padding';
 	
@@ -156,4 +115,4 @@ function Padding(props){
 	
 }
 
-export default Padding;
+export default PaddingCoreButton;
