@@ -104,11 +104,6 @@
 			foreach($blocks as $block){
 				if(isset($block['attrs']) === false || isset($block['attrs']['parsedCSSString']) === false){continue;}
 				$output .= $block['attrs']['parsedCSSString'];
-
-				// load scripts based on attributes
-				if(isset($block['attrs']['stretchLink']) && $block['attrs']['stretchLink'] === true){
-					$this->get_script( 'stretch_link' )->set_path( 'lib/frontend/css/common/stretch_link.css' )->set_is_enqueued();
-				}
 			}
 			
 			$output = str_replace('#block-', '.block-', $output);
@@ -127,12 +122,18 @@
 		}
 		
 		/* experimental */
-		private function HTML_append(string $html, string $element){
+		private function HTML_append(string $html, string $element, array $block){
 			$html = rtrim($html);
-	
-			// simple detection
+			$name = $block['blockName'];
+			
+			// div based wrappers
 			if(strpos($html, '</div>', -6) !== false){
 				$html = substr_replace($html, $element . '</div>', -6);
+			}
+			
+			// image based wrappers
+			if(strpos($html, '</figure>', -9) !== false){
+				$html = substr_replace($html, $element . '</figure>', -9);
 			}
 			
 			return $html;

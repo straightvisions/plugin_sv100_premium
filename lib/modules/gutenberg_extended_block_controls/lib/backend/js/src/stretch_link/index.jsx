@@ -3,55 +3,18 @@ import {getUniqueBlockId, updateCSS, updateCSSWithDimensions} from "../helpers";
 import EditorStyles from "../margin/editor-styles";
 
 const { Fragment } = wp.element;
-const { ToggleControl, __experimentalLinkControl , PanelRow, Popover} = wp.components;
-const LinkControl = __experimentalLinkControl;
+const { ToggleControl , PanelRow, __experimentalInputControl: InputControl } = wp.components;
+const {__experimentalLinkControl: LinkControl } = wp.blockEditor;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
 const enableCustomControlOnBlocks = [
 	'core/paragraph',
 	'core/image',
-	'core/heading',
-	'core/gallery',
-	'core/list',
-	'core/quote',
-	'core/shortcode',
-	'core/archives',
-	'core/audio',
-	'core/button',
-	'core/buttons',
-	'core/calendar',
-	'core/categories',
-	'core/code',
-	'core/columns',
 	'core/column',
 	'core/cover',
-	'core/embed',
-	'core/file',
 	'core/group',
-	'core/freeform',
-	'core/html',
 	'core/media-text',
-	'core/latest-comments',
-	'core/latest-posts',
-	'core/missing',
-	'core/more',
-	'core/nextpage',
-	'core/preformatted',
-	'core/pullquote',
-	'core/rss',
-	'core/search',
-	'core/separator',
-	'core/block',
-	'core/social-links',
-	'core/social-link',
-	'core/spacer',
-	'core/subhead',
-	'core/table',
-	'core/tag-cloud',
-	'core/text-columns',
-	'core/verse',
-	'core/video'
 ];
 
 // register attributes
@@ -63,9 +26,11 @@ const addCustomControlAttributes = ( settings, name ) => {
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	settings.attributes = assign( settings.attributes, {
-		stretchLink :{ type: 'boolean', default: false, },
-		stretchLinkURL :{ type: 'string', default: '', },
-		stretchLinkText :{ type: 'string', default: '', },
+		stretchLink         :{ type: 'boolean', default: false, },
+		stretchLinkURL      :{ type: 'string', default: '', },
+		stretchLinkTitle    :{ type: 'string', default: '', },
+		stretchLinkNewTab   :{ type: 'boolean', default: false, },
+		stretchLinkID       :{ type: 'string', default: '', },
 	} );
 	
 	return settings;
@@ -85,10 +50,12 @@ function StretchLink(props){
 	}
 	
 	const values = props.attributes;
-	if(typeof values[_prefix + 'URL'] === 'undefined'){
-		values[_prefix + 'URL'] = 'https://google.com';
-	}
-console.log(<LinkControl/>);
+	let linkControlValues = {
+		url: values.stretchLinkURL,
+		title: values.stretchLinkTitle,
+		opensInNewTab: values.stretchLinkNewTab,
+	};
+	
 	if(values[_prefix] === true){
 		return(
 			<Fragment>
@@ -97,13 +64,31 @@ console.log(<LinkControl/>);
 				                onChange={ (val) => props.setAttributes({ stretchLink: val }) }
 				/>
 				<PanelRow>
-					<Popover
-						position="bottom center"
-					>
-						<LinkControl
-						
-						/>
-					</Popover>
+					<LinkControl value={linkControlValues}
+					             onChange={(val) =>
+						             props.setAttributes({
+							             stretchLinkURL: val.url,
+							             stretchLinkTitle: val.title,
+							             stretchLinkNewTab: val.opensInNewTab,
+					                })
+					             }
+					             onRemove={(val) =>
+						             props.setAttributes({
+							             stretchLinkURL: '',
+							             stretchLinkTitle: '',
+							             stretchLinkNewTab: val.opensInNewTab,
+						             })
+					             }
+					/>
+				</PanelRow>
+				<PanelRow>
+					<InputControl label={__('Link HTML-Anchor', 'sv100_premium')}
+					              onChange={(val) =>
+						              props.setAttributes({
+							              stretchLinkID: val,
+						              })
+					              }
+					/>
 				</PanelRow>
 			</Fragment>
 		);

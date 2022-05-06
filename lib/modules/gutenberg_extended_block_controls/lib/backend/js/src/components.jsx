@@ -25,6 +25,7 @@ function ExtendedControlComponents( props ){
 			<BorderRadius { ...props }/>
 			<Height { ...props }/>
 			<Width { ...props }/>
+			<StretchLink { ...props }/>
 			<Hide { ...props }/>
 		</Fragment>
 		
