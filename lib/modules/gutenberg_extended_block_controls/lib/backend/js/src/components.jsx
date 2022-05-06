@@ -10,6 +10,7 @@ import LineHeight from './line_height/index.jsx';
 import Height from './height/index.jsx';
 import Width from './width/index.jsx';
 import StretchLink from './stretch_link/index.jsx';
+import PosterImage from './poster_image/index.jsx';
 const { Fragment } = wp.element;
 
 function ExtendedControlComponents( props ){
@@ -26,6 +27,7 @@ function ExtendedControlComponents( props ){
 			<Height { ...props }/>
 			<Width { ...props }/>
 			<StretchLink { ...props }/>
+			<PosterImage { ...props }/>
 			<Hide { ...props }/>
 		</Fragment>
 		

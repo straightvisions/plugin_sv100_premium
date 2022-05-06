@@ -117,6 +117,7 @@
 			
 			// overwrites
 			include($this->get_path('lib/frontend/tpl/stretch_link.php'));
+			include($this->get_path('lib/frontend/tpl/poster_image.php'));
 			
 			return $html;
 		}
