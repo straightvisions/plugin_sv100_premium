@@ -97,10 +97,17 @@
 			if ( is_object( $post ) ) {
 				$blocks = parse_blocks( $post->post_content );
 			}
-			
+
+			// get sidebar blocks
+			// @todo: get blocks from active sidebars only
+			$widget_blocks = get_option( 'widget_block' );
+			foreach($widget_blocks as $widget){
+				$blocks	= array_merge($blocks, parse_blocks($widget['content']));
+			}
+
 			// get inner blocks
 			$blocks = $this->get_block_children($blocks);
-			
+
 			foreach($blocks as $block){
 				if(isset($block['attrs']) === false || isset($block['attrs']['parsedCSSString']) === false){continue;}
 				$output .= $block['attrs']['parsedCSSString'];
