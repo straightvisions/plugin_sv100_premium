@@ -105,6 +105,10 @@
 				$blocks	= array_merge($blocks, parse_blocks($widget['content']));
 			}
 
+			// get blocks from third party features
+			// filter_name: sv100_premium_gutenberg_extended_block_controls_third_party
+			$blocks		= apply_filters($this->get_prefix('third_party'), $blocks);
+
 			// get inner blocks
 			$blocks = $this->get_block_children($blocks);
 
