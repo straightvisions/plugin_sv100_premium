@@ -4,6 +4,7 @@ import Margin from './margin/index.jsx';
 import Padding from './padding/index.jsx';
 import PaddingCoreButton from './padding_core_button/index.jsx';
 import Hide from './hide/index.jsx';
+import Border from './border/index.jsx';
 import BorderRadius from './border_radius/index.jsx';
 import TextAlign from './text_align/index.jsx';
 import FontSize from './font_size/index.jsx';
@@ -26,6 +27,7 @@ function ExtendedControlComponents( props ){
 			<Padding {...props}/>
 			<PaddingCoreButton {...props}/>
 			<BorderRadius { ...props }/>
+			<Border { ...props }/>
 			<Height { ...props }/>
 			<Width { ...props }/>
 			<StretchLink { ...props }/>
