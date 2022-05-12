@@ -102,7 +102,9 @@
 			// @todo: get blocks from active sidebars only
 			$widget_blocks = get_option( 'widget_block' );
 			foreach($widget_blocks as $widget){
-				$blocks	= array_merge($blocks, parse_blocks($widget['content']));
+				if(isset($widget['content'])) {
+					$blocks	= array_merge($blocks, parse_blocks($widget['content']));
+				}
 			}
 
 			// get blocks from third party features
