@@ -26,8 +26,8 @@ function ExtendedControlComponents( props ){
 			<Margin {...props}/>
 			<Padding {...props}/>
 			<PaddingCoreButton {...props}/>
-			<BorderRadius { ...props }/>
 			<Border { ...props }/>
+			<BorderRadius { ...props }/>
 			<Height { ...props }/>
 			<Width { ...props }/>
 			<StretchLink { ...props }/>

@@ -13,7 +13,9 @@ const {
 	FlexItem,
 	ColorIndicator,
 	ColorPicker,
-	SelectControl
+	ColorPalette,
+	SelectControl,
+	Popover
 } = wp.components;
 
 const UnitControl = __experimentalUnitControl;
@@ -79,103 +81,107 @@ const addCustomControlAttributes = ( settings, name ) => {
 		borderMoreActive                :{ type: 'boolean', default: false },
 	
 		// border width
-		borderWidthTopMobile                 :{ type: 'string'},
-		borderWidthTopMobileLandscape        :{ type: 'string'},
-		borderWidthTopTablet                 :{ type: 'string'},
-		borderWidthTopTabletLandscape        :{ type: 'string'},
-		borderWidthTopTabletPro              :{ type: 'string'},
-		borderWidthTopTabletProLandscape     :{ type: 'string'},
-		borderWidthTopDesktop                :{ type: 'string'},
+		borderWidthTopMobile                 :{ type: 'string', default: ''},
+		borderWidthTopMobileLandscape        :{ type: 'string', default: ''},
+		borderWidthTopTablet                 :{ type: 'string', default: ''},
+		borderWidthTopTabletLandscape        :{ type: 'string', default: ''},
+		borderWidthTopTabletPro              :{ type: 'string', default: ''},
+		borderWidthTopTabletProLandscape     :{ type: 'string', default: ''},
+		borderWidthTopDesktop                :{ type: 'string', default: ''},
 		
-		borderWidthRightMobile                 :{ type: 'string'},
-		borderWidthRightMobileLandscape        :{ type: 'string'},
-		borderWidthRightTablet                 :{ type: 'string'},
-		borderWidthRightTabletLandscape        :{ type: 'string'},
-		borderWidthRightTabletPro              :{ type: 'string'},
-		borderWidthRightTabletProLandscape     :{ type: 'string'},
-		borderWidthRightDesktop                :{ type: 'string'},
+		borderWidthRightMobile                 :{ type: 'string', default: ''},
+		borderWidthRightMobileLandscape        :{ type: 'string', default: ''},
+		borderWidthRightTablet                 :{ type: 'string', default: ''},
+		borderWidthRightTabletLandscape        :{ type: 'string', default: ''},
+		borderWidthRightTabletPro              :{ type: 'string', default: ''},
+		borderWidthRightTabletProLandscape     :{ type: 'string', default: ''},
+		borderWidthRightDesktop                :{ type: 'string', default: ''},
 		
-		borderWidthBottomMobile                 :{ type: 'string'},
-		borderWidthBottomMobileLandscape        :{ type: 'string'},
-		borderWidthBottomTablet                 :{ type: 'string'},
-		borderWidthBottomTabletLandscape        :{ type: 'string'},
-		borderWidthBottomTabletPro              :{ type: 'string'},
-		borderWidthBottomTabletProLandscape     :{ type: 'string'},
-		borderWidthBottomDesktop                :{ type: 'string'},
+		borderWidthBottomMobile                 :{ type: 'string', default: ''},
+		borderWidthBottomMobileLandscape        :{ type: 'string', default: ''},
+		borderWidthBottomTablet                 :{ type: 'string', default: ''},
+		borderWidthBottomTabletLandscape        :{ type: 'string', default: ''},
+		borderWidthBottomTabletPro              :{ type: 'string', default: ''},
+		borderWidthBottomTabletProLandscape     :{ type: 'string', default: ''},
+		borderWidthBottomDesktop                :{ type: 'string', default: ''},
 		
-		borderWidthLeftMobile                 :{ type: 'string'},
-		borderWidthLeftMobileLandscape        :{ type: 'string'},
-		borderWidthLeftTablet                 :{ type: 'string'},
-		borderWidthLeftTabletLandscape        :{ type: 'string'},
-		borderWidthLeftTabletPro              :{ type: 'string'},
-		borderWidthLeftTabletProLandscape     :{ type: 'string'},
-		borderWidthLeftDesktop                :{ type: 'string'},
+		borderWidthLeftMobile                 :{ type: 'string', default: ''},
+		borderWidthLeftMobileLandscape        :{ type: 'string', default: ''},
+		borderWidthLeftTablet                 :{ type: 'string', default: ''},
+		borderWidthLeftTabletLandscape        :{ type: 'string', default: ''},
+		borderWidthLeftTabletPro              :{ type: 'string', default: ''},
+		borderWidthLeftTabletProLandscape     :{ type: 'string', default: ''},
+		borderWidthLeftDesktop                :{ type: 'string', default: ''},
 		
 		// color
-		borderColorTopMobile                 :{ type: 'string'},
-		borderColorTopMobileLandscape        :{ type: 'string'},
-		borderColorTopTablet                 :{ type: 'string'},
-		borderColorTopTabletLandscape        :{ type: 'string'},
-		borderColorTopTabletPro              :{ type: 'string'},
-		borderColorTopTabletProLandscape     :{ type: 'string'},
-		borderColorTopDesktop                :{ type: 'string'},
+		borderColorTopMobile                 :{ type: 'string', default: '#00000'},
+		borderColorTopMobileLandscape        :{ type: 'string', default: '#00000'},
+		borderColorTopTablet                 :{ type: 'string', default: '#00000'},
+		borderColorTopTabletLandscape        :{ type: 'string', default: '#00000'},
+		borderColorTopTabletPro              :{ type: 'string', default: '#00000'},
+		borderColorTopTabletProLandscape     :{ type: 'string', default: '#00000'},
+		borderColorTopDesktop                :{ type: 'string', default: '#00000'},
 		
-		borderColorRightMobile                 :{ type: 'string'},
-		borderColorRightMobileLandscape        :{ type: 'string'},
-		borderColorRightTablet                 :{ type: 'string'},
-		borderColorRightTabletLandscape        :{ type: 'string'},
-		borderColorRightTabletPro              :{ type: 'string'},
-		borderColorRightTabletProLandscape     :{ type: 'string'},
-		borderColorRightDesktop                :{ type: 'string'},
+		borderColorRightMobile                 :{ type: 'string', default: '#00000'},
+		borderColorRightMobileLandscape        :{ type: 'string', default: '#00000'},
+		borderColorRightTablet                 :{ type: 'string', default: '#00000'},
+		borderColorRightTabletLandscape        :{ type: 'string', default: '#00000'},
+		borderColorRightTabletPro              :{ type: 'string', default: '#00000'},
+		borderColorRightTabletProLandscape     :{ type: 'string', default: '#00000'},
+		borderColorRightDesktop                :{ type: 'string', default: '#00000'},
 		
-		borderColorBottomMobile                 :{ type: 'string'},
-		borderColorBottomMobileLandscape        :{ type: 'string'},
-		borderColorBottomTablet                 :{ type: 'string'},
-		borderColorBottomTabletLandscape        :{ type: 'string'},
-		borderColorBottomTabletPro              :{ type: 'string'},
-		borderColorBottomTabletProLandscape     :{ type: 'string'},
-		borderColorBottomDesktop                :{ type: 'string'},
+		borderColorBottomMobile                 :{ type: 'string', default: '#00000'},
+		borderColorBottomMobileLandscape        :{ type: 'string', default: '#00000'},
+		borderColorBottomTablet                 :{ type: 'string', default: '#00000'},
+		borderColorBottomTabletLandscape        :{ type: 'string', default: '#00000'},
+		borderColorBottomTabletPro              :{ type: 'string', default: '#00000'},
+		borderColorBottomTabletProLandscape     :{ type: 'string', default: '#00000'},
+		borderColorBottomDesktop                :{ type: 'string', default: '#00000'},
 		
-		borderColorLeftMobile                 :{ type: 'string'},
-		borderColorLeftMobileLandscape        :{ type: 'string'},
-		borderColorLeftTablet                 :{ type: 'string'},
-		borderColorLeftTabletLandscape        :{ type: 'string'},
-		borderColorLeftTabletPro              :{ type: 'string'},
-		borderColorLeftTabletProLandscape     :{ type: 'string'},
-		borderColorLeftDesktop                :{ type: 'string'},
+		borderColorLeftMobile                 :{ type: 'string', default: '#00000'},
+		borderColorLeftMobileLandscape        :{ type: 'string', default: '#00000'},
+		borderColorLeftTablet                 :{ type: 'string', default: '#00000'},
+		borderColorLeftTabletLandscape        :{ type: 'string', default: '#00000'},
+		borderColorLeftTabletPro              :{ type: 'string', default: '#00000'},
+		borderColorLeftTabletProLandscape     :{ type: 'string', default: '#00000'},
+		borderColorLeftDesktop                :{ type: 'string', default: '#00000'},
 		
 		// style
-		borderStyleTopMobile                 :{ type: 'string'},
-		borderStyleTopMobileLandscape        :{ type: 'string'},
-		borderStyleTopTablet                 :{ type: 'string'},
-		borderStyleTopTabletLandscape        :{ type: 'string'},
-		borderStyleTopTabletPro              :{ type: 'string'},
-		borderStyleTopTabletProLandscape     :{ type: 'string'},
-		borderStyleTopDesktop                :{ type: 'string'},
+		borderStyleTopMobile                 :{ type: 'string', default: 'solid'},
+		borderStyleTopMobileLandscape        :{ type: 'string', default: 'solid'},
+		borderStyleTopTablet                 :{ type: 'string', default: 'solid'},
+		borderStyleTopTabletLandscape        :{ type: 'string', default: 'solid'},
+		borderStyleTopTabletPro              :{ type: 'string', default: 'solid'},
+		borderStyleTopTabletProLandscape     :{ type: 'string', default: 'solid'},
+		borderStyleTopDesktop                :{ type: 'string', default: 'solid'},
 		
-		borderStyleRightMobile                 :{ type: 'string'},
-		borderStyleRightMobileLandscape        :{ type: 'string'},
-		borderStyleRightTablet                 :{ type: 'string'},
-		borderStyleRightTabletLandscape        :{ type: 'string'},
-		borderStyleRightTabletPro              :{ type: 'string'},
-		borderStyleRightTabletProLandscape     :{ type: 'string'},
-		borderStyleRightDesktop                :{ type: 'string'},
+		borderStyleRightMobile                 :{ type: 'string', default: 'solid'},
+		borderStyleRightMobileLandscape        :{ type: 'string', default: 'solid'},
+		borderStyleRightTablet                 :{ type: 'string', default: 'solid'},
+		borderStyleRightTabletLandscape        :{ type: 'string', default: 'solid'},
+		borderStyleRightTabletPro              :{ type: 'string', default: 'solid'},
+		borderStyleRightTabletProLandscape     :{ type: 'string', default: 'solid'},
+		borderStyleRightDesktop                :{ type: 'string', default: 'solid'},
 		
-		borderStyleBottomMobile                 :{ type: 'string'},
-		borderStyleBottomMobileLandscape        :{ type: 'string'},
-		borderStyleBottomTablet                 :{ type: 'string'},
-		borderStyleBottomTabletLandscape        :{ type: 'string'},
-		borderStyleBottomTabletPro              :{ type: 'string'},
-		borderStyleBottomTabletProLandscape     :{ type: 'string'},
-		borderStyleBottomDesktop                :{ type: 'string'},
+		borderStyleBottomMobile                 :{ type: 'string', default: 'solid'},
+		borderStyleBottomMobileLandscape        :{ type: 'string', default: 'solid'},
+		borderStyleBottomTablet                 :{ type: 'string', default: 'solid'},
+		borderStyleBottomTabletLandscape        :{ type: 'string', default: 'solid'},
+		borderStyleBottomTabletPro              :{ type: 'string', default: 'solid'},
+		borderStyleBottomTabletProLandscape     :{ type: 'string', default: 'solid'},
+		borderStyleBottomDesktop                :{ type: 'string', default: 'solid'},
 		
-		borderStyleLeftMobile                 :{ type: 'string'},
-		borderStyleLeftMobileLandscape        :{ type: 'string'},
-		borderStyleLeftTablet                 :{ type: 'string'},
-		borderStyleLeftTabletLandscape        :{ type: 'string'},
-		borderStyleLeftTabletPro              :{ type: 'string'},
-		borderStyleLeftTabletProLandscape     :{ type: 'string'},
-		borderStyleLeftDesktop                :{ type: 'string'},
+		borderStyleLeftMobile                 :{ type: 'string', default: 'solid'},
+		borderStyleLeftMobileLandscape        :{ type: 'string', default: 'solid'},
+		borderStyleLeftTablet                 :{ type: 'string', default: 'solid'},
+		borderStyleLeftTabletLandscape        :{ type: 'string', default: 'solid'},
+		borderStyleLeftTabletPro              :{ type: 'string', default: 'solid'},
+		borderStyleLeftTabletProLandscape     :{ type: 'string', default: 'solid'},
+		borderStyleLeftDesktop                :{ type: 'string', default: 'solid'},
+		
+		// utils
+		_borderColorPopover                :{ type: 'boolean', default: false },
+		_borderColorPopoverCallback        :{ type: 'object', default: {} },
 	} );
 	
 	return settings;
@@ -197,7 +203,15 @@ function Border(props){
 	const values = props.attributes;
 	const currentResponsiveTab = typeof props.attributes.currentResponsiveTab !== 'undefined' ? props.attributes.currentResponsiveTab : 'Mobile';
 	console.log(values);
-	console.log(values[_prefix+'WidthTop'+currentResponsiveTab]);
+	console.log(wp.components);
+	
+	const settings = wp.data.select( 'core/block-editor' ).getSettings();
+	let themeColors = [];
+	
+	if ( settings && settings.colors ) {
+		themeColors = settings.colors;
+	}
+	
 	if(values[_prefix+'Active'] === true){
 		return(
 			<Fragment>
@@ -209,18 +223,16 @@ function Border(props){
 				<PanelRow>
 					<Flex>
 						<FlexItem>
-								<UnitControl values={ values[_prefix+'WidthTop'+currentResponsiveTab] }
+								<UnitControl value={ values[_prefix+'WidthTop'+currentResponsiveTab] }
 								            onChange={(val) => updateCSS(val, props, _name, _prefix + 'WidthTop', EditorStyles) }
 								            onUnitChange={(val) => updateCSS(val, props, _name, _prefix + 'WidthTop', EditorStyles) }
 								            allowReset={false}
-								            label={'Border Width'}
 								/>
 						</FlexItem>
 						<FlexItem>
 							<SelectControl
-								label={__('Style', 'sv100_premium')}
-								color={ values[_prefix+'StyleTop'+currentResponsiveTab] }
-								onChangeComplete={(val) => updateCSS(val.hex, props, _name, _prefix + 'StyleTop', EditorStyles)}
+								value={ values[_prefix+'StyleTop'+currentResponsiveTab] }
+								onChange={(val) => updateCSS(val, props, _name, _prefix + 'StyleTop', EditorStyles)}
 								options={[
 									{ label: __('Solid', 'sv100_premium'), value: 'solid' },
 									{ label: __('Dashed', 'sv100_premium'), value: 'dashed' },
@@ -234,10 +246,21 @@ function Border(props){
 							/>
 						</FlexItem>
 						<FlexItem>
-							<Label>Color</Label>
 							<ColorIndicator
+										className={'clickable'}
 										colorValue={values[_prefix+'ColorTop'+currentResponsiveTab]}
+										onClick={()=>props.setAttributes({_borderColorPopover: true})}
 										/>
+							{ values._borderColorPopover === true &&
+							<Popover position='left' onClose={()=>props.setAttributes({_borderColorPopover: false})}>
+								<ColorPalette
+									colors={ themeColors }
+									value={ values[_prefix+'ColorTop'+currentResponsiveTab] }
+									onChange={ ( val ) => updateCSS(val, props, _name, _prefix + 'ColorTop', EditorStyles) }
+								/>
+							</Popover>
+							}
+							
 						</FlexItem>
 					</Flex>
 				</PanelRow>

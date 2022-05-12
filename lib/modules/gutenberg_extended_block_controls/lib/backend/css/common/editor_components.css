@@ -1,3 +1,7 @@
+.sv100-premium-extended-controls-panel .clickable,
+.sv100-premium-extended-controls-panel .clickable:hover{
+	cursor:pointer;
+}
 .sv100-premium-extended-controls-panel .sv100-premium-panelbody > .components-tab-panel__tabs{
 	margin-bottom:10px;
 }
