@@ -202,8 +202,6 @@ function Border(props){
 
 	const values = props.attributes;
 	const currentResponsiveTab = typeof props.attributes.currentResponsiveTab !== 'undefined' ? props.attributes.currentResponsiveTab : 'Mobile';
-	console.log(values);
-	console.log(wp.components);
 	
 	const settings = wp.data.select( 'core/block-editor' ).getSettings();
 	let themeColors = [];
