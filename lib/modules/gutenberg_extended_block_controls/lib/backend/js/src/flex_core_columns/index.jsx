@@ -43,7 +43,7 @@ function FlexCoreColumns(props){
 	
 	const values = props.attributes;
 	const currentResponsiveTab = props.attributes.currentResponsiveTab;
-	console.log(values);
+
 	if(values[_prefix+'Active'] === true){
 		
 		return(
