@@ -15,7 +15,7 @@ import PosterImage from './poster_image/index.jsx';
 const { Fragment } = wp.element;
 
 function ExtendedControlComponents( props ){
-	return(
+	let input =
 		<Fragment>
 			<FlexCoreColumns { ...props }/>
 			<TextAlign { ...props }/>
@@ -32,8 +32,13 @@ function ExtendedControlComponents( props ){
 			<PosterImage { ...props }/>
 			<Hide { ...props }/>
 		</Fragment>
-		
-	);
+	;
+	
+	if(props.attributes._regenerateCSS){
+		input = <Disabled>{input}</Disabled>;
+	}
+	
+	return(<Fragment>{input}</Fragment>);
 }
 
 export default ExtendedControlComponents;

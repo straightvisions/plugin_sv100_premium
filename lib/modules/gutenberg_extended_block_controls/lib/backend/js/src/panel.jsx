@@ -4,7 +4,7 @@ import {getUniqueBlockId, isDuplicate, injectBlockListCSS} from './helpers';
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { InspectorControls } = wp.editor;
-const { PanelBody, TabPanel, Dashicon } = wp.components;
+const { PanelBody, TabPanel, Dashicon, Button } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
@@ -82,6 +82,7 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 			// inject editor css
 			injectBlockListCSS(props);
 		}
+		
 		return (
 			<Fragment>
 				<InspectorControls>
@@ -149,6 +150,14 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 						</TabPanel>
 						<Fragment>
 							<ExtendedControlComponents { ...props }/>
+							{/*
+							<Button variant='secondary' isSmall={true} text={'Rebuild CSS'}
+							        onClick={() => props.setAttributes({_regenerateCSS: true})}
+							        isBusy={props.attributes._regenerateCSS}
+							        isDisabled={props.attributes._regenerateCSS}
+							/>
+							*/}
+							
 						</Fragment>
 					</PanelBody>
 				</InspectorControls>
@@ -172,6 +181,8 @@ const addCustomControlAttributes = ( settings, name ) => {
 		parsedCSS:{ type: 'string', default: '{}' },
 		parsedCSSString:{ type: 'string', default: '' },
 		_classNamesList: {type: 'array', default: []},
+		_regenerateCSS: {type: 'boolean', default: false},
+		_regenerateCSSList: {type: 'array', default: []},
 	} );
 	
 	return settings;
