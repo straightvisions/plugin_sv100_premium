@@ -77,7 +77,26 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 	
 		// check and generate unique persistent block id (clientId is not persistent!)
 		if(blockId === '' || typeof blockId === 'undefined' || isDuplicate(props) === true){
-			setAttributes({ blockId: getUniqueBlockId(props) });
+			// replace old block ID with new one if block is a duplicate
+			const newBlockId = getUniqueBlockId(props);
+			
+			// also do this for the parsed css
+			let _parsedCSSString = parsedCSSString;
+			let _parsedCSS = JSON.parse(parsedCSS);
+		
+			if(isDuplicate(props)){
+				console.log('duplicate');
+				_parsedCSSString = parsedCSSString.replaceAll(blockId, newBlockId);
+				
+				Object.entries(_parsedCSS).forEach(([key, value]) => {
+					_parsedCSS[key] = value.replaceAll(blockId, newBlockId);
+				});
+				
+			}
+			
+			_parsedCSS = JSON.stringify(_parsedCSS);
+			
+			setAttributes({ blockId: newBlockId, parsedCSSString: _parsedCSSString, parsedCSS: _parsedCSS });
 		}else{
 			// inject editor css
 			injectBlockListCSS(props);
