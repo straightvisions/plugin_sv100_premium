@@ -1,6 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSS} from '../helpers';
+import {updateCSS} from '../../../helpers';
 const { Fragment } = wp.element;
 const { RangeControl } = wp.components;
 const { addFilter } = wp.hooks;

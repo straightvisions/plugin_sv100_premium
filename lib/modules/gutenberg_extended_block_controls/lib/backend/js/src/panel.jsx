@@ -170,7 +170,8 @@ const addCustomControlAttributes = ( settings, name ) => {
 	settings.attributes = assign( settings.attributes, {
 		blockId:{ type: 'string' },
 		parsedCSS:{ type: 'string', default: '{}' },
-		parsedCSSString:{ type: 'string', default: '' }
+		parsedCSSString:{ type: 'string', default: '' },
+		_classNamesList: {type: 'array', default: []},
 	} );
 	
 	return settings;
@@ -189,10 +190,18 @@ const withClientIdClassName  = createHigherOrderComponent(
 				);
 			}
 			
+			// old way
 			let classNames = 'sv100-premium-block-core-'+props.attributes.blockId;
 
 			if(typeof props.attributes.stretchLink !== 'undefined' && props.attributes.stretchLink === true){
 				classNames += ' sv100-premium-extended-controls-stretch-link';
+			}
+			
+			// new way
+			const _classNamesList = typeof props.attributes._classNamesList !== 'undefined' ? props.attributes._classNamesList : [];
+			
+			for(let i = 0; i < _classNamesList.length; i++){
+				classNames += ' ' + _classNamesList[i];
 			}
 			
 			return (
@@ -219,6 +228,7 @@ const addCustomProps = ( props, blockType, attributes ) => {
 	if(typeof attributes.blockId !== 'undefined'){
 		let classNames = typeof props.className === 'undefined' ? '' : props.className; // paragraphs, list, headings
 		
+		// old way
 		if(classNames === ''){
 			classNames += 'sv100-premium-block-core-'+attributes.blockId;
 		}else{
@@ -227,6 +237,13 @@ const addCustomProps = ( props, blockType, attributes ) => {
 		
 		if(typeof attributes.stretchLink !== 'undefined' && attributes.stretchLink === true){
 			classNames += ' sv100-premium-extended-controls-stretch-link';
+		}
+		
+		// new way
+		const _classNamesList = typeof attributes._classNamesList !== 'undefined' ? attributes._classNamesList : [];
+		
+		for(let i = 0; i < _classNamesList.length; i++){
+			classNames += ' ' + _classNamesList[i];
 		}
 	
 		assign( props, { className : classNames  } );

@@ -53,7 +53,12 @@
 				     ->set_is_enqueued();
 				
 				$this->get_script( 'common' )->set_is_gutenberg()->set_path( 'lib/backend/css/common/common.css' );
-				$this->get_script( 'editor_components' )->set_is_gutenberg()->set_path( 'lib/backend/css/common/editor_components.css' );
+		
+					$this->get_script( 'editor_components' )
+					     ->set_is_backend()->set_is_gutenberg()->set_path( 'lib/backend/css/common/editor_components.css' );
+					$this->get_script( 'sv100-premium-block-core-mod-flex' )
+					     ->set_is_backend()->set_is_gutenberg()->set_path( 'lib/backend/css/common/style_mod_flex.css' );
+			
 			}
 			
 			return $this;
@@ -131,6 +136,11 @@
 			// overwrites
 			include($this->get_path('lib/frontend/tpl/stretch_link.php'));
 			include($this->get_path('lib/frontend/tpl/poster_image.php'));
+			
+			// mod css
+			if(isset($block['attrs']['_classNamesList']) && in_array('sv100-premium-block-core-mod-flex', $block['attrs']['_classNamesList']) === true){
+				$this->get_script( 'sv100-premium-block-core-mod-flex-frontend' )->set_path( 'lib/backend/css/common/style_mod_flex.css' )->set_is_enqueued();
+			}
 			
 			return $html;
 		}

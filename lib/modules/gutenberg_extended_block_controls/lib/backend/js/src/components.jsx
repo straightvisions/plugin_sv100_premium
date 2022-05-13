@@ -1,5 +1,4 @@
-import GapFlex from './gap_flex/index.jsx';
-import StackFlex from './stack_flex/index.jsx';
+import FlexCoreColumns from './flex_core_columns/index.jsx';
 import Margin from './margin/index.jsx';
 import Padding from './padding/index.jsx';
 import PaddingCoreButton from './padding_core_button/index.jsx';
@@ -18,8 +17,7 @@ const { Fragment } = wp.element;
 function ExtendedControlComponents( props ){
 	return(
 		<Fragment>
-			<GapFlex { ...props }/>
-			<StackFlex { ...props }/>
+			<FlexCoreColumns { ...props }/>
 			<TextAlign { ...props }/>
 			<FontSize { ...props }/>
 			<LineHeight { ...props }/>
