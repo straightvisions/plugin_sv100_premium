@@ -138,6 +138,7 @@ function Margin(props){
 					             onUnitChange={(values) => updateCSSWithDimensions(values, props, _name, _prefix, EditorStyles) }
 					            allowReset={false}
 					            label={''}
+					            inputProps={{ min: -99999 }}
 					/>
 				</PanelRow>
 			</Fragment>
