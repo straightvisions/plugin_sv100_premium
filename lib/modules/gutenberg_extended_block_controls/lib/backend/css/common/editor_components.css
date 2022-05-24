@@ -15,6 +15,10 @@
 	margin-bottom:20px;
 }
 
+.sv100-premium-extended-controls-panel .no-margin-bottom{
+	margin-bottom:0 !important;
+}
+
 .sv100-premium-extended-controls-panel .components-panel__row .block-editor-link-control{
 	max-width:100%;
 	min-width:100%;
