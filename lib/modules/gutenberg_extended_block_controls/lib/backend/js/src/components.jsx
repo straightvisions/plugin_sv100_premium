@@ -3,6 +3,7 @@ import Margin from './margin/index.jsx';
 import Padding from './padding/index.jsx';
 import PaddingCoreButton from './padding_core_button/index.jsx';
 import Hide from './hide/index.jsx';
+import Position from './position/index.jsx';
 import Border from './border/index.jsx';
 import BorderRadius from './border_radius/index.jsx';
 import TextAlign from './text_align/index.jsx';
@@ -30,6 +31,7 @@ function ExtendedControlComponents( props ){
 			<Width { ...props }/>
 			<StretchLink { ...props }/>
 			<PosterImage { ...props }/>
+			<Position { ...props }/>
 			<Hide { ...props }/>
 		</Fragment>
 	;
