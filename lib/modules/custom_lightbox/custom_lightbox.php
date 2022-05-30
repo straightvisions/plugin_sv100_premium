@@ -152,6 +152,7 @@
 
 			$selectors	= array();
 			$props		= array();
+			
 			foreach($this->get_setting( 'lightbox' )->get_data() as $lightbox){
 				$selectors[$lightbox['entry_id']]										= "a[href='#".$lightbox['entry_id']."']";
 
@@ -171,6 +172,7 @@
 					$props['show_when_percent_scrolled']['#'.$lightbox['entry_id']]	= (int)$lightbox['show_when_percent_scrolled'];
 				}
 			}
+			
 			$props['selector']	= implode(',',$selectors);
 			// Common JS
 			$this->get_script( 'custom_lightbox_js' )
