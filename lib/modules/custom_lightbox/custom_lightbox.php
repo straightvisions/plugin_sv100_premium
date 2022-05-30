@@ -52,6 +52,15 @@
 			$this->get_setting( 'lightbox' )
 			     ->run_type()
 			     ->add_child()
+			     ->set_ID( 'prevent_background_scrolling' )
+			     ->set_title( __( 'Prevent Background Scrolling', 'sv100_premium' ) )
+			     ->set_description( __( 'Prevent background scrolling while popup is visible. Useful for fullscreen popups.', 'sv100_premium' ) )
+			     ->set_is_responsive(true)
+			     ->load_type( 'checkbox' );
+			
+			$this->get_setting( 'lightbox' )
+			     ->run_type()
+			     ->add_child()
 			     ->set_ID( 'enable_video_fullscreen' )
 			     ->set_title( __( 'Enable Fullscreen for Videos', 'sv100_premium' ) )
 			     ->set_description( __( 'When a lightbox with video content gets triggered, switch video to fullscreen mode.', 'sv100_premium' ) )

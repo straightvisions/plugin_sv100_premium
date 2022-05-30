@@ -35,6 +35,7 @@
 				);
 			}
 
+			// --------------------------------------------------
 			if(is_array($lightbox['enable_background_layer'])) {
 				$properties = array();
 				$properties['display'] = $_s->prepare_css_property_responsive(array_map(function ($enable_background_layer) {
@@ -53,6 +54,19 @@
 							->set_data($lightbox['background_layer_color'])
 							->get_css_data('background-color')
 					)
+				);
+			}
+			// --------------------------------------------------
+			// --------------------------------------------------
+			if(is_array($lightbox['prevent_background_scrolling'])) {
+				$properties = array();
+				$properties['overflow'] = $_s->prepare_css_property_responsive(array_map(function ($prevent_background_scrolling) {
+					return $prevent_background_scrolling ? 'hidden' : 'revert';
+				}, $lightbox['prevent_background_scrolling']));
+		
+				echo $_s->build_css(
+					is_admin() ? '' : 'body',
+					$properties
 				);
 			}
 		}
