@@ -58,6 +58,7 @@
 			}
 			// --------------------------------------------------
 			// --------------------------------------------------
+			
 			if(is_array($lightbox['prevent_background_scrolling'])) {
 				$properties = array();
 				$properties['overflow'] = $_s->prepare_css_property_responsive(array_map(function ($prevent_background_scrolling) {
@@ -65,7 +66,7 @@
 				}, $lightbox['prevent_background_scrolling']));
 		
 				echo $_s->build_css(
-					is_admin() ? '' : 'body',
+					is_admin() ? '' : 'body.'.$lightbox['entry_id'].'_is_active',
 					$properties
 				);
 			}
