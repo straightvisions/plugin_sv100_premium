@@ -15,6 +15,7 @@ const enableCustomControlOnBlocks = [
 	'core/button',
 	'core/subhead',
 	'core/verse',
+	'core/list',
 ];
 
 // register attributes
