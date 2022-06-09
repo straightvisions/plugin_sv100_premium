@@ -126,8 +126,6 @@
 			if(isset($attrs['blockId']) && empty($attrs['blockId']) === false) {
 				$this->rendered_blocks[ $attrs['blockId'] ] = $block;
 			}
-		
-			$this->rendered_blocks[] = $block;
 			
 			// overwrites
 			include($this->get_path('lib/frontend/tpl/stretch_link.php'));
