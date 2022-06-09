@@ -2,6 +2,9 @@
 	namespace sv100_premium;
 
 	class gutenberg_extended_block_controls extends modules {
+		private $rendered_blocks = array();
+		
+		
 		public function init(): gutenberg_extended_block_controls {
 			$this->set_section_title( __( 'Gutenberg Extended Block Controls', 'sv100_premium' ) )
 				->set_section_type( 'settings' )
@@ -14,8 +17,8 @@
 			}
 			
 			if( is_admin() === false && wp_is_json_request() === false){
-				add_action( 'wp_footer', array( $this, 'get_frontend_block_styles' ), 1 );
-				add_filter('render_block', array($this, 'render_block_overwrite'), null, 2);
+				add_action( 'wp_footer', array( $this, 'get_frontend_block_styles' ), 99, 1 );
+				add_filter('render_block', array($this, 'render_block_overwrite'), 99, 2);
 			}
 
 			return $this;
@@ -94,44 +97,37 @@
 			return array_merge($list, $blocks);
 		}
 		
+		/*
+		 * load parsedCSSString from blocks within content
+		 * inject the parsed CSS into the page
+		 */
 		public function get_frontend_block_styles(){
 			global $post;
 			$blocks = array();
 			$output = '';
+		
+			$blocks = $this->rendered_blocks;
 			
-			if ( is_object( $post ) ) {
-				$blocks = parse_blocks( $post->post_content );
-			}
-
-			// get sidebar blocks
-			// @todo: get blocks from active sidebars only
-			$widget_blocks = get_option( 'widget_block' );
-			foreach($widget_blocks as $widget){
-				if(isset($widget['content'])) {
-					$blocks	= array_merge($blocks, parse_blocks($widget['content']));
-				}
-			}
-
-			// get blocks from third party features
-			// filter_name: sv100_premium_gutenberg_extended_block_controls_third_party
-			$blocks		= apply_filters($this->get_prefix('third_party'), $blocks);
-
-			// get inner blocks
-			$blocks = $this->get_block_children($blocks);
-
 			foreach($blocks as $block){
 				if(isset($block['attrs']) === false || isset($block['attrs']['parsedCSSString']) === false){continue;}
 				$output .= $block['attrs']['parsedCSSString'];
 			}
 			
 			$output = str_replace('#block-', '.block-', $output);
-			
+		
 			echo '<style id="sv100_premium_gutenberg_extended_block_control_styles">'.$output.'</style>'; //phpcs:ignore
 		}
 		
 		public function render_block_overwrite(string $block_content, array $block): string{
 			$html = $block_content;
 			$attrs = $block['attrs'];
+			
+			// add block for later css output in get_frontend_block_styles()
+			if(isset($attrs['blockId']) && empty($attrs['blockId']) === false) {
+				$this->rendered_blocks[ $attrs['blockId'] ] = $block;
+			}
+		
+			$this->rendered_blocks[] = $block;
 			
 			// overwrites
 			include($this->get_path('lib/frontend/tpl/stretch_link.php'));
