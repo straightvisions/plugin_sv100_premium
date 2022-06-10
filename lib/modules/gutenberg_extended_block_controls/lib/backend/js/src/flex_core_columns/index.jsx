@@ -10,7 +10,8 @@ import {
 	updateCSS,
 	updateCSSWithDimensionsCorners
 } from "../helpers";
-import EditorStyles from "./components/gap/editor-styles";
+import gapEditorStyles from "./components/gap/editor-styles";
+import stackEditorStyles from "./components/stack/editor-styles";
 
 const { Fragment } = wp.element;
 const { ToggleControl, PanelRow, Tooltip  } = wp.components;
@@ -55,11 +56,14 @@ function FlexCoreColumns(props){
 	const currentResponsiveTab = props.attributes.currentResponsiveTab;
 	
 	// initialise default values -------------------------------------------------
-	if(values.flexCoreColumnsInit === false){
+	if(values[_prefix+'Active'] === true && values.flexCoreColumnsInit === false){
 		// move this later to a global function
 		const attr = props.attributes;
+		
 		attr.parsedCSS = JSON.parse(attr.parsedCSS);
-		attr.parsedCSS[_name] = EditorStyles(attr, props.name);
+		// parse sub module CSS
+		attr.parsedCSS['GapFlex'] = gapEditorStyles(attr, props.name);
+		attr.parsedCSS['StackFlex'] = stackEditorStyles(attr, props.name);
 		//collapse css objects
 		let css = '';
 		Object.keys( attr.parsedCSS ).map(function(key, index) {

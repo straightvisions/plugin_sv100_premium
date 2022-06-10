@@ -69,6 +69,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 		hideTabletPro              :{ type: 'boolean', default: false, },
 		hideTabletProLandscape     :{ type: 'boolean', default: false, },
 		hideDesktop                :{ type: 'boolean', default: false, },
+		hideActive                 :{ type: 'boolean', default: true, }, // fake opt-in
 	} );
 	
 	return settings;
