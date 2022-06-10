@@ -148,8 +148,6 @@ function Position(props){
 		bottom:values[_prefix+'Bottom'+currentResponsiveTab],
 		left:values[_prefix+'Left'+currentResponsiveTab],
 	};
-	
-	console.log(values);
 
 	if(values[_prefix+'Active'] === true){
 		return(

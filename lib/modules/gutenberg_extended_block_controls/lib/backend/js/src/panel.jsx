@@ -85,7 +85,6 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 			let _parsedCSS = JSON.parse(parsedCSS);
 		
 			if(isDuplicate(props)){
-				console.log('duplicate');
 				_parsedCSSString = parsedCSSString.replaceAll(blockId, newBlockId);
 				
 				Object.entries(_parsedCSS).forEach(([key, value]) => {
