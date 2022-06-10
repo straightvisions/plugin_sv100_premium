@@ -1,7 +1,7 @@
 import assign from 'lodash.assign';
 import GapFlex from './components/gap';
 import StackFlex from './components/stack';
-import {addClassNames, removeClassNames, updateCSS, updateCSSWithDimensionsCorners} from "../helpers";
+import {addClassNames, optIn, optOut, removeClassNames, updateCSS, updateCSSWithDimensionsCorners} from "../helpers";
 
 const { Fragment } = wp.element;
 const { ToggleControl, PanelRow, Tooltip  } = wp.components;
@@ -53,7 +53,7 @@ function FlexCoreColumns(props){
 					checked={values[_prefix+'Active']}
 					onChange={(val) => {
 						const list = removeClassNames(props, ['sv100-premium-block-core-mod-flex']);
-						props.setAttributes({
+						optOut(props, {
 							[_prefix+'Active']: val,
 							['gapFlexActive']: val, // fake opt-in for sub modules
 							['stackFlexActive']: val, // fake opt-in for sub modules
@@ -74,13 +74,12 @@ function FlexCoreColumns(props){
 					checked={values[_prefix+'Active']}
 					onChange={(val) => {
 						const list = addClassNames(props, ['sv100-premium-block-core-mod-flex']);
-						props.setAttributes(
-							{
-								[_prefix+'Active']: val,
-								['gapFlexActive']: val, // fake opt-in for sub modules
-								['stackFlexActive']: val, // fake opt-in for sub modules
-								_classNamesList: list
-							});
+						optIn(props, {
+							[_prefix+'Active']: val,
+							['gapFlexActive']: val, // fake opt-in for sub modules
+							['stackFlexActive']: val, // fake opt-in for sub modules
+							_classNamesList: list
+						});
 					}}
 				/>
 				
