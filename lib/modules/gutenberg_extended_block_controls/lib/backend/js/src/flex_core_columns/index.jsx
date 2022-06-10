@@ -53,7 +53,12 @@ function FlexCoreColumns(props){
 					checked={values[_prefix+'Active']}
 					onChange={(val) => {
 						const list = removeClassNames(props, ['sv100-premium-block-core-mod-flex']);
-						props.setAttributes({[_prefix+'Active']: val, _classNamesList: list});
+						props.setAttributes({
+							[_prefix+'Active']: val,
+							['gapFlexActive']: val, // fake opt-in for sub modules
+							['stackFlexActive']: val, // fake opt-in for sub modules
+							_classNamesList: list
+						});
 					}}
 					help={__('This option forces flex behaviour on the selected columns block and only works if enabled constantly. Native stacking will not work with this option enabled.', 'sv100_premium')}
 				/>
@@ -69,7 +74,13 @@ function FlexCoreColumns(props){
 					checked={values[_prefix+'Active']}
 					onChange={(val) => {
 						const list = addClassNames(props, ['sv100-premium-block-core-mod-flex']);
-						props.setAttributes({[_prefix+'Active']: val, _classNamesList: list});
+						props.setAttributes(
+							{
+								[_prefix+'Active']: val,
+								['gapFlexActive']: val, // fake opt-in for sub modules
+								['stackFlexActive']: val, // fake opt-in for sub modules
+								_classNamesList: list
+							});
 					}}
 				/>
 				
