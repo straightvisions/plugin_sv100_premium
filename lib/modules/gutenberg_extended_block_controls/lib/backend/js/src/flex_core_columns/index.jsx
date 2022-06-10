@@ -1,7 +1,16 @@
 import assign from 'lodash.assign';
 import GapFlex from './components/gap';
 import StackFlex from './components/stack';
-import {addClassNames, optIn, optOut, removeClassNames, updateCSS, updateCSSWithDimensionsCorners} from "../helpers";
+import {
+	addClassNames,
+	lowercase,
+	optIn,
+	optOut,
+	removeClassNames,
+	updateCSS,
+	updateCSSWithDimensionsCorners
+} from "../helpers";
+import EditorStyles from "./components/gap/editor-styles";
 
 const { Fragment } = wp.element;
 const { ToggleControl, PanelRow, Tooltip  } = wp.components;
@@ -22,6 +31,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	settings.attributes = assign( settings.attributes, {
 		flexCoreColumnsActive  :{ type: 'boolean', default: false, },
+		flexCoreColumnsInit  :{ type: 'boolean', default: false, },
 
 	} );
 	
@@ -43,7 +53,30 @@ function FlexCoreColumns(props){
 	
 	const values = props.attributes;
 	const currentResponsiveTab = props.attributes.currentResponsiveTab;
-
+	
+	// initialise default values -------------------------------------------------
+	if(values.flexCoreColumnsInit === false){
+		// move this later to a global function
+		const attr = props.attributes;
+		attr.parsedCSS = JSON.parse(attr.parsedCSS);
+		attr.parsedCSS[_name] = EditorStyles(attr, props.name);
+		//collapse css objects
+		let css = '';
+		Object.keys( attr.parsedCSS ).map(function(key, index) {
+			if(attr[lowercase(key) + 'Active'] === true){
+				css += attr.parsedCSS[key];
+			}
+		});
+		
+		// update properties for rerender and injection
+		props.setAttributes({
+			parsedCSS: JSON.stringify(attr.parsedCSS),
+			parsedCSSString: css, // this gets injected
+			flexCoreColumnsInit: true,
+		});
+	}
+	// initialise default values -------------------------------------------------
+	
 	if(values[_prefix+'Active'] === true){
 		
 		return(
