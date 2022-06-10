@@ -35,7 +35,7 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function GapFlex(props){
-	const _name = 'gapFlex';
+	const _name = 'GapFlex';
 	const _prefix = 'gap';
 	
 	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
