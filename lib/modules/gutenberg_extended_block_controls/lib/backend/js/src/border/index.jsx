@@ -1,6 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSS} from "../helpers";
+import {updateCSS,cleanUpCSS} from "../helpers";
 
 const { Fragment } = wp.element;
 const {
@@ -216,7 +216,9 @@ function Border(props){
 				<ToggleControl
 					label={__('Border', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
-					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
+					onChange={(val) => {
+						cleanUpCSS(props, _name, {[_prefix+'Active']: val});
+					}}
 				/>
 				<PanelRow>
 					<Flex>
