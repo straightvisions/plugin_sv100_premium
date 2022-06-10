@@ -111,9 +111,7 @@ function Border(props){
 				<ToggleControl
 					label={__('Border', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
-					onChange={(val) => {
-						optOut(props, {[_prefix+'Active']: val});
-					}}
+					onChange={(val) => optOut(props, {[_prefix+'Active']: val})}
 				/>
 				<PanelRow>
 					<Flex>

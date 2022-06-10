@@ -1,6 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSSWithDimensions} from "../helpers";
+import {updateCSSWithDimensions, optIn, optOut} from "../helpers";
 
 const { Fragment } = wp.element;
 const { PanelRow, ToggleControl, __experimentalBoxControl } = wp.components;
@@ -129,7 +129,7 @@ function Padding(props){
 				<ToggleControl
 					label={__('Paddings', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
-					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
+					onChange={(val) => optOut(props, {[_prefix+'Active']: val})}
 				/>
 				<PanelRow>
 					<BoxControl values={boxValues}
@@ -147,7 +147,7 @@ function Padding(props){
 				<ToggleControl
 					label={__('Paddings', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
-					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
+					onChange={(val) => optIn(props, {[_prefix+'Active']: val})}
 				/>
 			</Fragment>
 		);
