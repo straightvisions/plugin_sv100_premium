@@ -9,6 +9,7 @@ import BorderRadius from './border_radius/index.jsx';
 import TextAlign from './text_align/index.jsx';
 import FontSize from './font_size/index.jsx';
 import LineHeight from './line_height/index.jsx';
+import Hyphens from './hyphens/index.jsx';
 import Height from './height/index.jsx';
 import Width from './width/index.jsx';
 import StretchLink from './stretch_link/index.jsx';
@@ -22,6 +23,7 @@ function ExtendedControlComponents( props ){
 			<TextAlign { ...props }/>
 			<FontSize { ...props }/>
 			<LineHeight { ...props }/>
+			<Hyphens { ...props }/>
 			<Margin {...props}/>
 			<Padding {...props}/>
 			<PaddingCoreButton {...props}/>
