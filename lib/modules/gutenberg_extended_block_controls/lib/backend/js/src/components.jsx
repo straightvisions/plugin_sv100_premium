@@ -14,6 +14,7 @@ import Height from './height/index.jsx';
 import Width from './width/index.jsx';
 import StretchLink from './stretch_link/index.jsx';
 import PosterImage from './poster_image/index.jsx';
+import BoxShadow from './box_shadow/index.jsx';
 const { Fragment } = wp.element;
 
 function ExtendedControlComponents( props ){
@@ -29,6 +30,7 @@ function ExtendedControlComponents( props ){
 			<PaddingCoreButton {...props}/>
 			<Border { ...props }/>
 			<BorderRadius { ...props }/>
+			<BoxShadow { ...props }/>
 			<Height { ...props }/>
 			<Width { ...props }/>
 			<StretchLink { ...props }/>
