@@ -6,9 +6,8 @@ const { RangeControl } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const enableCustomControlOnBlocks = [
-	'core/columns',
-];
+const Config = js_sv100_premium_gutenberg_extended_block_controls_scripts_controls.config;
+const enableCustomControlOnBlocks = Config.gapGrid.blocks;
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {

@@ -8,15 +8,8 @@ const UnitControl =  __experimentalUnitControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const enableCustomControlOnBlocks = [
-	'core/paragraph',
-	'core/heading',
-	'core/quote',
-	'core/button',
-	'core/subhead',
-	'core/verse',
-	'core/list',
-];
+const Config = js_sv100_premium_gutenberg_extended_block_controls_scripts_controls.config;
+const enableCustomControlOnBlocks = Config.fontSize.blocks;
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
