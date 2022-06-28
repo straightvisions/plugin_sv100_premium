@@ -1,6 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSSWithDimensionsCorners} from "../helpers";
+import {updateCSSWithDimensionsCorners, optIn, optOut} from "../helpers";
 
 const { Fragment } = wp.element;
 const { PanelRow, ToggleControl, __experimentalBoxControl } = wp.components;
@@ -130,7 +130,7 @@ function BorderRadius(props){
 				<ToggleControl
 					label={__('Border Radius', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
-					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
+					onChange={(val) => optOut(props, {[_prefix+'Active']: val})}
 				/>
 				<PanelRow>
 					<BoxControl values={boxValues}
@@ -148,7 +148,7 @@ function BorderRadius(props){
 				<ToggleControl
 					label={__('Border Radius', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
-					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
+					onChange={(val) => optIn(props, {[_prefix+'Active']: val})}
 				/>
 			</Fragment>
 		);

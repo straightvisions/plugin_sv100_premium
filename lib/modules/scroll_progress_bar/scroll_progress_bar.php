@@ -30,13 +30,15 @@
 				'0' => __('Disabled', 'sv100'),
 				'1' => __('Enabled', 'sv100')
 			);
-
-			$this->get_instance('sv100')->get_module('sv_metabox')->get_setting( $this->get_prefix('activate') )
-				->set_title( __('Progress Bar', 'sv100') )
-				->set_description( __('Overwrite Global Setting for this post.', 'sv100') )
-				->set_default_value('0')
-				->load_type( 'select' )
-				->set_options($states);
+			
+			if($this->is_instance_active('sv100') !== false){
+				$this->get_instance('sv100')->get_module('sv_metabox')->get_setting( $this->get_prefix('activate') )
+				     ->set_title( __('Progress Bar', 'sv100') )
+				     ->set_description( __('Overwrite Global Setting for this post.', 'sv100') )
+				     ->set_default_value('0')
+				     ->load_type( 'select' )
+				     ->set_options($states);
+			}
 
 			return $this;
 		}
@@ -98,6 +100,7 @@
 		}
 		public function is_active($post_type = false): bool{
 			global $post;
+			$setting = false;
 
 			if (!$post) {
 				return false;
@@ -106,9 +109,11 @@
 			if(!$post_type){
 				$post_type	= get_post_type();
 			}
+			
+			if($this->is_instance_active('sv100') !== false) {
+				$setting = boolval( $this->get_instance('sv100')->get_module( 'sv_metabox' )->get_data( $post->ID, $this->get_prefix( 'activate' ), $this->get_setting( 'activate_' . $post_type )->get_data() ) );
+			}
 
-			$setting = $this->get_instance('sv100')->get_module('sv_metabox')->get_data($post->ID, $this->get_prefix('activate'), $this->get_setting('activate_'.$post_type)->get_data());
-
-			return boolval($setting);
+			return $setting;
 		}
 	}

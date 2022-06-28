@@ -1,6 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSS} from '../../../helpers';
+import {lowercase, updateCSS} from '../../../helpers';
 const { Fragment } = wp.element;
 const { RangeControl } = wp.components;
 const { addFilter } = wp.hooks;
@@ -35,7 +35,7 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function GapFlex(props){
-	const _name = 'gapFlex';
+	const _name = 'GapFlex';
 	const _prefix = 'gap';
 	
 	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {

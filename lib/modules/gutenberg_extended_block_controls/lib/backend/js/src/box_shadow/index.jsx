@@ -1,9 +1,13 @@
 import assign from 'lodash.assign';
-import EditorStyles from './editor-styles';
-import {updateCSS} from "../helpers";
+import {optIn, optOut} from "../helpers";
+import attributes from "./attributes.js";
+import BoxShadowFragment from "./components/box_shadow";
 
 const { Fragment } = wp.element;
-const { ToggleControl  } = wp.components;
+const {
+	ToggleControl,
+} = wp.components;
+
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
@@ -61,16 +65,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
-		hideMobile                 :{ type: 'boolean', default: false, },
-		hideMobileLandscape        :{ type: 'boolean', default: false, },
-		hideTablet                 :{ type: 'boolean', default: false, },
-		hideTabletLandscape        :{ type: 'boolean', default: false, },
-		hideTabletPro              :{ type: 'boolean', default: false, },
-		hideTabletProLandscape     :{ type: 'boolean', default: false, },
-		hideDesktop                :{ type: 'boolean', default: false, },
-		hideActive                 :{ type: 'boolean', default: true, }, // fake opt-in
-	} );
+	settings.attributes = assign( settings.attributes, attributes );
 	
 	return settings;
 };
@@ -78,9 +73,9 @@ const addCustomControlAttributes = ( settings, name ) => {
 addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-controls', addCustomControlAttributes );
 
 // the component
-function Hide(props){
-	const _name = 'Hide';
-	const _prefix = 'hide';
+function BoxShadow(props){
+	const _name = 'BoxShadow';
+	const _prefix = 'boxShadow';
 	
 	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
 		return (
@@ -89,16 +84,32 @@ function Hide(props){
 	}
 	
 	const values = props.attributes;
-	const currentResponsiveTab = props.attributes.currentResponsiveTab;
-
-	return(
-		<Fragment>
-			<ToggleControl  label={__('Hide', 'sv100_premium')} value={values[_prefix+currentResponsiveTab]}
-			              onChange={(val) => updateCSS(val, props, _name, _prefix, EditorStyles) } checked={props.attributes[_prefix+currentResponsiveTab]}
-			/>
-		</Fragment>
-	);
+	
+	if(values[_prefix+'Active'] === true){
+		return(
+			<Fragment>
+				<ToggleControl
+					label={__('Box Shadow', 'sv100_premium')}
+					checked={values[_prefix+'Active']}
+					onChange={(val) => optOut(props, {[_prefix+'Active']: val})}
+				/>
+				<BoxShadowFragment {...props} num={1} />
+				<BoxShadowFragment {...props} num={2} />
+				
+			</Fragment>
+		);
+	}else{
+		return(
+			<Fragment>
+				<ToggleControl
+					label={__('Box Shadow', 'sv100_premium')}
+					checked={values[_prefix+'Active']}
+					onChange={(val) => optIn(props, {[_prefix+'Active']: val})}
+				/>
+			</Fragment>
+		);
+	}
 	
 }
 
-export default Hide;
+export default BoxShadow;

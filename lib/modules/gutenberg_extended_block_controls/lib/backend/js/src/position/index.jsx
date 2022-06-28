@@ -1,6 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSS, updateCSSWithDimensions} from "../helpers";
+import {updateCSS, updateCSSWithDimensions, optIn, optOut} from "../helpers";
 
 const { Fragment } = wp.element;
 const {
@@ -148,8 +148,6 @@ function Position(props){
 		bottom:values[_prefix+'Bottom'+currentResponsiveTab],
 		left:values[_prefix+'Left'+currentResponsiveTab],
 	};
-	
-	console.log(values);
 
 	if(values[_prefix+'Active'] === true){
 		return(
@@ -157,7 +155,7 @@ function Position(props){
 				<ToggleControl
 					label={__('Position', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
-					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
+					onChange={(val) => optOut(props, {[_prefix+'Active']: val})}
 					help={__('For absolute, fixed positioning etc. you should set position relative on a parent element like a group block. Positioning is only applied on frontend output, not within Gutenberg.', 'sv100_premium')}
 				/>
 				<PanelRow className={'no-margin-bottom'}>
@@ -207,7 +205,7 @@ function Position(props){
 				<ToggleControl
 					label={__('Position', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
-					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
+					onChange={(val) => optIn(props, {[_prefix+'Active']: val})}
 				/>
 			</Fragment>
 		);

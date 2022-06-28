@@ -1,6 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSS} from "../helpers";
+import {updateCSS, optIn, optOut} from "../helpers";
 
 const { Fragment } = wp.element;
 const { PanelRow, ToggleControl,  __experimentalUnitControl } = wp.components;
@@ -62,7 +62,7 @@ function LineHeight(props){
 				<ToggleControl
 					label={__('Line Height', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
-					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
+					onChange={(val) => optOut(props, {[_prefix+'Active']: val})}
 				/>
 				<PanelRow>
 					<UnitControl
@@ -79,7 +79,7 @@ function LineHeight(props){
 				<ToggleControl
 					label={__('Line Height', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
-					onChange={(val) => props.setAttributes({[_prefix+'Active']: val})}
+					onChange={(val) => optIn(props, {[_prefix+'Active']: val})}
 				/>
 			</Fragment>
 		);

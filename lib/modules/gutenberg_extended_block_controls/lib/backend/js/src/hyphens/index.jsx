@@ -3,8 +3,7 @@ import EditorStyles from './editor-styles';
 import {updateCSS, optIn, optOut} from "../helpers";
 
 const { Fragment } = wp.element;
-const { PanelRow, ToggleControl,  __experimentalUnitControl } = wp.components;
-const UnitControl =  __experimentalUnitControl;
+const { PanelRow, ToggleControl, SelectControl } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
@@ -15,7 +14,6 @@ const enableCustomControlOnBlocks = [
 	'core/button',
 	'core/subhead',
 	'core/verse',
-	'core/list',
 ];
 
 // register attributes
@@ -27,14 +25,14 @@ const addCustomControlAttributes = ( settings, name ) => {
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	settings.attributes = assign( settings.attributes, {
-		fontSizeActive                 :{ type: 'boolean', default: false },
-		fontSizeMobile                 :{ type: 'string', default: '' },
-		fontSizeMobileLandscape        :{ type: 'string', default: '' },
-		fontSizeTablet                 :{ type: 'string', default: '' },
-		fontSizeTabletLandscape        :{ type: 'string', default: '' },
-		fontSizeTabletPro              :{ type: 'string', default: '' },
-		fontSizeTabletProLandscape     :{ type: 'string', default: '' },
-		fontSizeDesktop                :{ type: 'string', default: '' },
+		hyphensActive                 :{ type: 'boolean', default: false },
+		hyphensMobile                 :{ type: 'string', default: '' },
+		hyphensMobileLandscape        :{ type: 'string', default: '' },
+		hyphensTablet                 :{ type: 'string', default: '' },
+		hyphensTabletLandscape        :{ type: 'string', default: '' },
+		hyphensTabletPro              :{ type: 'string', default: '' },
+		hyphensTabletProLandscape     :{ type: 'string', default: '' },
+		hyphensDesktop                :{ type: 'string', default: '' },
 		
 	} );
 	
@@ -44,9 +42,9 @@ const addCustomControlAttributes = ( settings, name ) => {
 addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-controls', addCustomControlAttributes );
 
 // the component
-function FontSize(props){
-	const _name = 'FontSize';
-	const _prefix = 'fontSize';
+function Hyphens(props){
+	const _name = 'Hyphens';
+	const _prefix = 'hyphens';
 	
 	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
 		return (
@@ -61,15 +59,21 @@ function FontSize(props){
 		return(
 			<Fragment>
 				<ToggleControl
-					label={__('Font Size', 'sv100_premium')}
+					label={__('Hyphens', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
 					onChange={(val) => optOut(props, {[_prefix+'Active']: val})}
 				/>
 				<PanelRow>
-					<UnitControl
+					<SelectControl
 						value={ values[_prefix+currentResponsiveTab] }
 						onChange={ ( val ) => { updateCSS(val, props, _name, _prefix, EditorStyles) } }
-						onUnitChange={ ( val ) => { updateCSS(val, props, _name, _prefix, EditorStyles) } }
+						options={ [
+							{ value: '', label: 'Select'},
+							{ value: 'none', label: 'None' },
+							{ value: 'manual', label: 'Manual' },
+							{ value: 'auto', label: 'Auto' },
+							{ value: 'inherit', label: 'Inherit' },
+						] }
 					/>
 				</PanelRow>
 			</Fragment>
@@ -78,7 +82,7 @@ function FontSize(props){
 		return(
 			<Fragment>
 				<ToggleControl
-					label={__('Font Size', 'sv100_premium')}
+					label={__('Hyphens', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
 					onChange={(val) => optIn(props, {[_prefix+'Active']: val})}
 				/>
@@ -89,4 +93,4 @@ function FontSize(props){
 	
 }
 
-export default FontSize;
+export default Hyphens;
