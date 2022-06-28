@@ -7,6 +7,8 @@ const { useRef, useEffect } = wp.element;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
+import {getBlockDocumentRoot} from '../helpers.js';
+
 const enableCustomControlOnBlocks = [
 	'core/media-text',
 ];
@@ -44,7 +46,10 @@ function PosterImage(props){
 	
 	const posterImageButton = useRef();
 	const videoPosterDescription = `video-block__poster-image-description-${ values.blockId }`;
-	const videoChild = document.querySelector('.sv100-premium-block-core-'+values.blockId+' video');
+	
+	const _document = getBlockDocumentRoot(props);
+	
+	const videoChild = _document.querySelector('.sv100-premium-block-core-'+values.blockId+' video');
 
 	// set / remove poster from block editor video block
 	if(videoChild !== null && values.posterImageURL !== ''){
