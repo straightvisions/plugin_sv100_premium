@@ -8,52 +8,10 @@ const { PanelBody, TabPanel, Dashicon, Button } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-// whitelist blocks (could be replace by a generation function
-const enableExtendedControlOnBlocks = [
-	'core/paragraph',
-	'core/image',
-	'core/heading',
-	'core/gallery',
-	'core/list',
-	'core/quote',
-	'core/shortcode',
-	'core/archives',
-	'core/audio',
-	'core/button',
-	'core/buttons',
-	'core/calendar',
-	'core/categories',
-	'core/code',
-	'core/columns',
-	'core/column',
-	'core/cover',
-	'core/embed',
-	'core/file',
-	'core/group',
-	'core/freeform',
-	'core/html',
-	'core/media-text',
-	'core/latest-comments',
-	'core/latest-posts',
-	'core/missing',
-	'core/more',
-	'core/nextpage',
-	'core/preformatted',
-	'core/pullquote',
-	'core/rss',
-	'core/search',
-	'core/separator',
-	'core/block',
-	'core/social-links',
-	'core/social-link',
-	'core/spacer',
-	'core/subhead',
-	'core/table',
-	'core/tag-cloud',
-	'core/text-columns',
-	'core/verse',
-	'core/video'
-];
+const Config = js_sv100_premium_gutenberg_extended_block_controls_scripts_controls.config;
+
+// whitelist blocks
+const enableExtendedControlOnBlocks = Config.global.blocks;
 
 // register control panel
 const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {

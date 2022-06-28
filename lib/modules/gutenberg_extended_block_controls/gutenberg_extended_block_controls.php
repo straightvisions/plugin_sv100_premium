@@ -47,12 +47,23 @@
 
 		protected function register_scripts(): gutenberg_extended_block_controls {
 			if($this->is_active() === true){
+				
+				ob_start();
+				require($this->get_path('lib/backend/js/config.json'));
+				$config = json_decode(ob_get_clean());
+				
 				$this->get_script('controls')
 				     ->set_path('lib/backend/js/dist/index.js')
 				     ->set_type('js')
 				     ->set_is_gutenberg()
 				     ->set_is_backend()
 				     ->set_deps(array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'))
+				     ->set_localized(
+				     	array_merge(
+				     		$this->get_script('controls')->get_localized(),
+				     	    array('config' => $config)
+				        )
+				     )
 				     ->set_is_enqueued();
 				
 				$this->get_script( 'editor_components' )

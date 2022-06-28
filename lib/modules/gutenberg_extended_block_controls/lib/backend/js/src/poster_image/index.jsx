@@ -9,9 +9,8 @@ const { __ } = wp.i18n;
 
 import {getBlockDocumentRoot} from '../helpers.js';
 
-const enableCustomControlOnBlocks = [
-	'core/media-text',
-];
+const Config = js_sv100_premium_gutenberg_extended_block_controls_scripts_controls.config;
+const enableCustomControlOnBlocks = Config.posterImage.blocks;
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
