@@ -97,7 +97,6 @@
 			foreach ( $blocks as $block ) {
 				if ( 'core/heading' === $block['blockName'] ) {
 					// add current item, if it's a heading block
-					
 					$list[] = $block;
 				} elseif ( ! empty( $block['innerBlocks'] ) ) {
 					// or call the function recursively, to find heading blocks in inner blocks
@@ -137,7 +136,7 @@
 			if(isset($attrs['blockId']) && empty($attrs['blockId']) === false) {
 				$this->rendered_blocks[ $attrs['blockId'] ] = $block;
 			}
-			
+		
 			// overwrites
 			include($this->get_path('lib/frontend/tpl/stretch_link.php'));
 			include($this->get_path('lib/frontend/tpl/poster_image.php'));
@@ -146,6 +145,24 @@
 			if(isset($block['attrs']['_classNamesList']) && in_array('sv100-premium-block-core-mod-flex', $block['attrs']['_classNamesList']) === true){
 				$this->get_script( 'sv100-premium-block-core-mod-flex-frontend' )->set_path( 'lib/backend/css/common/style_mod_flex.css' )->set_is_enqueued();
 			}
+			
+			// add extra props to dynamic blocks
+			if ( $block_content && isset( $block['attrs']['blockId'] ) ) {
+				// add blockId class
+				$injected_class = 'sv100-premium-block-core-' . $block['attrs']['blockId'];
+				
+				if(strpos($html, $injected_class) === false){ // prevent duplicates
+					$html = preg_replace(
+						'/' . preg_quote( 'class="', '/' ) . '/',
+						'class="' . esc_attr( $injected_class ) . ' ',
+						$block_content,
+						1
+					);
+				}
+				
+			}
+			
+			
 			
 			return $html;
 		}
@@ -167,4 +184,21 @@
 			
 			return $html;
 		}
+		
+		/* add custom props to dynamic blocks which are not affected by blocks.getSaveContent.extraProps */
+		public function add_block_extra_props( $block_content, $block ) {
+			if ( ! $block_content || ! isset( $block['attrs']['foo'] ) ) {
+				return $block_content;
+			}
+			
+			$injected_class = 'foo-' . $block['attrs']['foo'];
+			return preg_replace(
+				'/' . preg_quote( 'class="', '/' ) . '/',
+				'class="' . esc_attr( $injected_class ) . ' ',
+				$block_content,
+				1
+			);
+		}
+	
+	
 	}
