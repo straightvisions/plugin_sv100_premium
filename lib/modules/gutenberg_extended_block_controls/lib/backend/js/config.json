@@ -141,7 +141,9 @@
 			"core/tag-cloud",
 			"core/text-columns",
 			"core/verse",
-			"core/video"
+			"core/video",
+			"core/site-logo",
+			"core/site-title"
 		]
 	},
 	"boxShadow": {
@@ -188,7 +190,9 @@
 			"core/tag-cloud",
 			"core/text-columns",
 			"core/verse",
-			"core/video"
+			"core/video",
+			"core/site-logo",
+			"core/site-title"
 		]
 	},
 	"flexCoreColumns": {
@@ -204,7 +208,8 @@
 			"core/button",
 			"core/subhead",
 			"core/verse",
-			"core/list"
+			"core/list",
+			"core/site-title"
 		]
 	},
 	"textAlign": {
@@ -214,7 +219,9 @@
 			"core/quote",
 			"core/button",
 			"core/subhead",
-			"core/verse"
+			"core/verse",
+			"core/site-logo",
+			"core/site-title"
 		]
 	},
 	"lineHeight": {
@@ -224,7 +231,8 @@
 			"core/quote",
 			"core/button",
 			"core/subhead",
-			"core/verse"
+			"core/verse",
+			"core/site-title"
 		]
 	},
 	"hyphens": {
@@ -234,7 +242,8 @@
 			"core/quote",
 			"core/button",
 			"core/subhead",
-			"core/verse"
+			"core/verse",
+			"core/site-title"
 		]
 	},
 	"gapGrid": {
@@ -286,7 +295,9 @@
 			"core/tag-cloud",
 			"core/text-columns",
 			"core/verse",
-			"core/video"
+			"core/video",
+			"core/site-logo",
+			"core/site-title"
 		]
 	},
 	"width": {
@@ -332,7 +343,9 @@
 			"core/tag-cloud",
 			"core/text-columns",
 			"core/verse",
-			"core/video"
+			"core/video",
+			"core/site-logo",
+			"core/site-title"
 		]
 	},
 	"margin": {
@@ -379,7 +392,9 @@
 			"core/tag-cloud",
 			"core/text-columns",
 			"core/verse",
-			"core/video"
+			"core/video",
+			"core/site-logo",
+			"core/site-title"
 		]
 	},
 	"padding": {
@@ -425,7 +440,9 @@
 			"core/tag-cloud",
 			"core/text-columns",
 			"core/verse",
-			"core/video"
+			"core/video",
+			"core/site-logo",
+			"core/site-title"
 		]
 	},
 	"paddingCoreButton": {
@@ -477,7 +494,9 @@
 			"core/tag-cloud",
 			"core/text-columns",
 			"core/verse",
-			"core/video"
+			"core/video",
+			"core/site-logo",
+			"core/site-title"
 		]
 	},
 	"posterImage": {
@@ -538,7 +557,9 @@
 			"core/tag-cloud",
 			"core/text-columns",
 			"core/verse",
-			"core/video"
+			"core/video",
+			"core/site-logo",
+			"core/site-title"
 		]
 	}
 }
