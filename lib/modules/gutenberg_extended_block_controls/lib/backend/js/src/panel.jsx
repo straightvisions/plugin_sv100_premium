@@ -205,6 +205,7 @@ const withClientIdClassName  = createHigherOrderComponent(
 wp.hooks.addFilter('editor.BlockListBlock', 'sv100-premium/gutenberg-extended-block-controls', withClientIdClassName );
 
 // add blockid-class to props
+//@todo move this function completely to the php block render function
 const addCustomProps = ( props, blockType, attributes ) => {
 	// Do nothing if it's another block than our defined ones.
 	if ( ! enableExtendedControlOnBlocks.includes( blockType.name ) ) {
