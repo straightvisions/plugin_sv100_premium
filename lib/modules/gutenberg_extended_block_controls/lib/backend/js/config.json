@@ -46,7 +46,9 @@
 			"core/verse",
 			"core/video",
 			"core/site-logo",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation",
+			"core/navigation-link"
 		]
 	},
 	"border": {
@@ -94,7 +96,9 @@
 			"core/text-columns",
 			"core/verse",
 			"core/video",
-			"core/site-logo"
+			"core/site-logo",
+			"core/navigation",
+			"core/navigation-link"
 		]
 	},
 	"borderRadius": {
@@ -143,7 +147,9 @@
 			"core/verse",
 			"core/video",
 			"core/site-logo",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation",
+			"core/navigation-link"
 		]
 	},
 	"boxShadow": {
@@ -192,12 +198,15 @@
 			"core/verse",
 			"core/video",
 			"core/site-logo",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation",
+			"core/navigation-link"
 		]
 	},
 	"flexCoreColumns": {
 		"blocks": [
-			"core/columns"
+			"core/columns",
+			"core/navigation"
 		]
 	},
 	"fontSize": {
@@ -209,7 +218,8 @@
 			"core/subhead",
 			"core/verse",
 			"core/list",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation-link"
 		]
 	},
 	"textAlign": {
@@ -221,7 +231,8 @@
 			"core/subhead",
 			"core/verse",
 			"core/site-logo",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation-link"
 		]
 	},
 	"lineHeight": {
@@ -232,7 +243,8 @@
 			"core/button",
 			"core/subhead",
 			"core/verse",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation-link"
 		]
 	},
 	"hyphens": {
@@ -243,12 +255,14 @@
 			"core/button",
 			"core/subhead",
 			"core/verse",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation-link"
 		]
 	},
 	"gapGrid": {
 		"blocks": [
-			"core/columns"
+			"core/columns",
+			"core/navigation"
 		],
 		"note": "Currently deactivated on code level."
 	},
@@ -297,7 +311,9 @@
 			"core/verse",
 			"core/video",
 			"core/site-logo",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation",
+			"core/navigation-link"
 		]
 	},
 	"width": {
@@ -345,7 +361,9 @@
 			"core/verse",
 			"core/video",
 			"core/site-logo",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation",
+			"core/navigation-link"
 		]
 	},
 	"margin": {
@@ -394,7 +412,9 @@
 			"core/verse",
 			"core/video",
 			"core/site-logo",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation",
+			"core/navigation-link"
 		]
 	},
 	"padding": {
@@ -442,7 +462,9 @@
 			"core/verse",
 			"core/video",
 			"core/site-logo",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation",
+			"core/navigation-link"
 		]
 	},
 	"paddingCoreButton": {
@@ -496,7 +518,9 @@
 			"core/verse",
 			"core/video",
 			"core/site-logo",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation",
+			"core/navigation-link"
 		]
 	},
 	"posterImage": {
@@ -559,7 +583,9 @@
 			"core/verse",
 			"core/video",
 			"core/site-logo",
-			"core/site-title"
+			"core/site-title",
+			"core/navigation",
+			"core/navigation-link"
 		]
 	}
 }
