@@ -230,6 +230,7 @@
 			"core/button",
 			"core/subhead",
 			"core/verse",
+			"core/image",
 			"core/site-logo",
 			"core/site-title",
 			"core/navigation-link"
