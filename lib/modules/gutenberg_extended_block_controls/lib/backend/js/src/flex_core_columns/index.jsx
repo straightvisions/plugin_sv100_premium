@@ -8,7 +8,8 @@ import {
 	optOut,
 	removeClassNames,
 	updateCSS,
-	updateCSSWithDimensionsCorners
+	updateCSSWithDimensionsCorners,
+	isSupported
 } from "../helpers";
 import gapEditorStyles from "./components/gap/editor-styles";
 import stackEditorStyles from "./components/stack/editor-styles";
@@ -18,13 +19,13 @@ const { ToggleControl, PanelRow, Tooltip  } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const Config = js_sv100_premium_gutenberg_extended_block_controls_scripts_controls.config;
-const enableCustomControlOnBlocks = Config.flexCoreColumns.blocks;
+const _name = 'flexCoreColumns';
+const _prefix = 'flexCoreColumns';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported(name, _name) ) {
 		return settings;
 	}
 	
@@ -42,10 +43,8 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function FlexCoreColumns(props){
-	const _name = 'flexCoreColumns';
-	const _prefix = 'flexCoreColumns';
 	
-	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
+	if ( ! isSupported(props.name, _name) ) {
 		return (
 			<Fragment></Fragment>
 		);

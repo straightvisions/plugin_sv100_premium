@@ -1,6 +1,6 @@
 import assign from 'lodash.assign';
 import ExtendedControlComponents from './components.jsx';
-import {getUniqueBlockId, isDuplicate, injectBlockListCSS} from './helpers';
+import {getUniqueBlockId, isDuplicate, injectBlockListCSS, isSupported} from './helpers';
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { InspectorControls } = wp.editor;
@@ -8,16 +8,11 @@ const { PanelBody, TabPanel, Dashicon, Button } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const Config = js_sv100_premium_gutenberg_extended_block_controls_scripts_controls.config;
-
-// whitelist blocks
-const enableExtendedControlOnBlocks = Config.global.blocks;
-
 // register control panel
 const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
 		// Do nothing if it's another block than our defined ones.
-		if ( ! enableExtendedControlOnBlocks.includes( props.name ) ) {
+		if ( ! isSupported( props.name ) ) {
 			return (
 				<BlockEdit { ...props } />
 			);
@@ -148,7 +143,7 @@ addFilter( 'editor.BlockEdit', 'sv100-premium/gutenberg-extended-block-controls'
 // register custom attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableExtendedControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported( name ) ) {
 		return settings;
 	}
 	
@@ -171,7 +166,7 @@ const withClientIdClassName  = createHigherOrderComponent(
 	( BlockListBlock ) => {
 		return ( props ) => {
 			
-			if ( ! enableExtendedControlOnBlocks.includes( props.name ) ) {
+			if ( ! isSupported( props.name ) ) {
 				return (
 					<BlockListBlock { ...props } />
 				);
@@ -208,7 +203,7 @@ wp.hooks.addFilter('editor.BlockListBlock', 'sv100-premium/gutenberg-extended-bl
 //@todo move this function completely to the php block render function
 const addCustomProps = ( props, blockType, attributes ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableExtendedControlOnBlocks.includes( blockType.name ) ) {
+	if ( ! isSupported( blockType.name ) ) {
 		return props;
 	}
 

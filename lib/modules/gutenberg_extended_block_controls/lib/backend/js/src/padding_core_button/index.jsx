@@ -1,6 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSSWithDimensions, optIn, optOut} from "../helpers";
+import {updateCSSWithDimensions, optIn, optOut, isSupported} from "../helpers";
 
 const { Fragment } = wp.element;
 const { PanelRow, ToggleControl, __experimentalBoxControl } = wp.components;
@@ -8,13 +8,13 @@ const BoxControl = __experimentalBoxControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const Config = js_sv100_premium_gutenberg_extended_block_controls_scripts_controls.config;
-const enableCustomControlOnBlocks = Config.paddingCoreButton.blocks;
+const _name = 'Padding';
+const _prefix = 'padding';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported(name, _name) ) {
 		return settings;
 	}
 	
@@ -62,10 +62,8 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function PaddingCoreButton(props){
-	const _name = 'Padding';
-	const _prefix = 'padding';
 	
-	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
+	if ( ! isSupported(props.name, _name) ) {
 		return (
 			<Fragment></Fragment>
 		);

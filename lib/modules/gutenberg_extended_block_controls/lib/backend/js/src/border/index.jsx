@@ -1,6 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSS, optIn, optOut} from "../helpers";
+import {updateCSS, optIn, optOut, isSupported} from "../helpers";
 import attributes from "./attributes.js";
 
 const { Fragment } = wp.element;
@@ -23,13 +23,12 @@ const UnitControl = __experimentalUnitControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const Config = js_sv100_premium_gutenberg_extended_block_controls_scripts_controls.config;
-const enableCustomControlOnBlocks = Config.border.blocks;
-
+const _name = 'Border';
+const _prefix = 'border';
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported(name, _name) ) {
 		return settings;
 	}
 
@@ -43,10 +42,8 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function Border(props){
-	const _name = 'Border';
-	const _prefix = 'border';
 	
-	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
+	if ( ! isSupported(props.name, _name) ) {
 		return (
 			<Fragment></Fragment>
 		);

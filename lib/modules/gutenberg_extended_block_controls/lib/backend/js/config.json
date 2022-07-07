@@ -1,565 +1,140 @@
 {
 	"owner": "straightvisions",
-	"global": {
-		"blocks": [
-			"core/paragraph",
-			"core/image",
-			"core/heading",
-			"core/gallery",
-			"core/list",
-			"core/quote",
-			"core/shortcode",
-			"core/archives",
-			"core/audio",
-			"core/button",
-			"core/buttons",
-			"core/calendar",
-			"core/categories",
-			"core/code",
-			"core/columns",
-			"core/column",
-			"core/cover",
-			"core/embed",
-			"core/file",
-			"core/group",
-			"core/freeform",
-			"core/html",
-			"core/media-text",
-			"core/latest-comments",
-			"core/latest-posts",
-			"core/missing",
-			"core/more",
-			"core/nextpage",
-			"core/preformatted",
-			"core/pullquote",
-			"core/rss",
-			"core/search",
-			"core/separator",
-			"core/block",
-			"core/social-links",
-			"core/social-link",
-			"core/spacer",
-			"core/subhead",
-			"core/table",
-			"core/tag-cloud",
-			"core/text-columns",
-			"core/verse",
-			"core/video",
-			"core/site-logo",
-			"core/site-title"
-		]
-	},
-	"border": {
-		"blocks": [
-			"core/paragraph",
-			"core/image",
-			"core/heading",
-			"core/gallery",
-			"core/list",
-			"core/quote",
-			"core/shortcode",
-			"core/archives",
-			"core/audio",
-			"core/button",
-			"core/buttons",
-			"core/calendar",
-			"core/categories",
-			"core/code",
-			"core/columns",
-			"core/column",
-			"core/cover",
-			"core/embed",
-			"core/file",
-			"core/group",
-			"core/freeform",
-			"core/html",
-			"core/media-text",
-			"core/latest-comments",
-			"core/latest-posts",
-			"core/missing",
-			"core/more",
-			"core/nextpage",
-			"core/preformatted",
-			"core/pullquote",
-			"core/rss",
-			"core/search",
-			"core/separator",
-			"core/block",
-			"core/social-links",
-			"core/social-link",
-			"core/spacer",
-			"core/subhead",
-			"core/table",
-			"core/tag-cloud",
-			"core/text-columns",
-			"core/verse",
-			"core/video",
-			"core/site-logo"
-		]
-	},
-	"borderRadius": {
-		"blocks": [
-			"core/paragraph",
-			"core/image",
-			"core/heading",
-			"core/gallery",
-			"core/list",
-			"core/quote",
-			"core/shortcode",
-			"core/archives",
-			"core/audio",
-			"core/button",
-			"core/buttons",
-			"core/calendar",
-			"core/categories",
-			"core/code",
-			"core/columns",
-			"core/column",
-			"core/cover",
-			"core/embed",
-			"core/file",
-			"core/group",
-			"core/freeform",
-			"core/html",
-			"core/media-text",
-			"core/latest-comments",
-			"core/latest-posts",
-			"core/missing",
-			"core/more",
-			"core/nextpage",
-			"core/preformatted",
-			"core/pullquote",
-			"core/rss",
-			"core/search",
-			"core/separator",
-			"core/block",
-			"core/social-links",
-			"core/social-link",
-			"core/spacer",
-			"core/subhead",
-			"core/table",
-			"core/tag-cloud",
-			"core/text-columns",
-			"core/verse",
-			"core/video",
-			"core/site-logo",
-			"core/site-title"
-		]
-	},
-	"boxShadow": {
-		"blocks": [
-			"core/paragraph",
-			"core/image",
-			"core/heading",
-			"core/gallery",
-			"core/list",
-			"core/quote",
-			"core/shortcode",
-			"core/archives",
-			"core/audio",
-			"core/button",
-			"core/buttons",
-			"core/calendar",
-			"core/categories",
-			"core/code",
-			"core/columns",
-			"core/column",
-			"core/cover",
-			"core/embed",
-			"core/file",
-			"core/group",
-			"core/freeform",
-			"core/html",
-			"core/media-text",
-			"core/latest-comments",
-			"core/latest-posts",
-			"core/missing",
-			"core/more",
-			"core/nextpage",
-			"core/preformatted",
-			"core/pullquote",
-			"core/rss",
-			"core/search",
-			"core/separator",
-			"core/block",
-			"core/social-links",
-			"core/social-link",
-			"core/spacer",
-			"core/subhead",
-			"core/table",
-			"core/tag-cloud",
-			"core/text-columns",
-			"core/verse",
-			"core/video",
-			"core/site-logo",
-			"core/site-title"
-		]
-	},
-	"flexCoreColumns": {
-		"blocks": [
-			"core/columns"
-		]
-	},
-	"fontSize": {
-		"blocks": [
-			"core/paragraph",
-			"core/heading",
-			"core/quote",
-			"core/button",
-			"core/subhead",
-			"core/verse",
-			"core/list",
-			"core/site-title"
-		]
-	},
-	"textAlign": {
-		"blocks": [
-			"core/paragraph",
-			"core/heading",
-			"core/quote",
-			"core/button",
-			"core/subhead",
-			"core/verse",
-			"core/site-logo",
-			"core/site-title"
-		]
-	},
-	"lineHeight": {
-		"blocks": [
-			"core/paragraph",
-			"core/heading",
-			"core/quote",
-			"core/button",
-			"core/subhead",
-			"core/verse",
-			"core/site-title"
-		]
-	},
-	"hyphens": {
-		"blocks": [
-			"core/paragraph",
-			"core/heading",
-			"core/quote",
-			"core/button",
-			"core/subhead",
-			"core/verse",
-			"core/site-title"
-		]
-	},
-	"gapGrid": {
-		"blocks": [
-			"core/columns"
-		],
-		"note": "Currently deactivated on code level."
-	},
-	"height": {
-		"blocks": [
-			"core/paragraph",
-			"core/image",
-			"core/heading",
-			"core/gallery",
-			"core/list",
-			"core/quote",
-			"core/archives",
-			"core/audio",
-			"core/button",
-			"core/buttons",
-			"core/calendar",
-			"core/categories",
-			"core/code",
-			"core/columns",
-			"core/column",
-			"core/cover",
-			"core/embed",
-			"core/file",
-			"core/group",
-			"core/freeform",
-			"core/html",
-			"core/media-text",
-			"core/latest-comments",
-			"core/latest-posts",
-			"core/missing",
-			"core/more",
-			"core/nextpage",
-			"core/preformatted",
-			"core/pullquote",
-			"core/rss",
-			"core/search",
-			"core/separator",
-			"core/block",
-			"core/social-links",
-			"core/social-link",
-			"core/spacer",
-			"core/subhead",
-			"core/table",
-			"core/tag-cloud",
-			"core/text-columns",
-			"core/verse",
-			"core/video",
-			"core/site-logo",
-			"core/site-title"
-		]
-	},
-	"width": {
-		"blocks": [
-			"core/paragraph",
-			"core/image",
-			"core/heading",
-			"core/gallery",
-			"core/list",
-			"core/quote",
-			"core/archives",
-			"core/audio",
-			"core/button",
-			"core/buttons",
-			"core/calendar",
-			"core/categories",
-			"core/code",
-			"core/columns",
-			"core/column",
-			"core/cover",
-			"core/embed",
-			"core/file",
-			"core/group",
-			"core/freeform",
-			"core/html",
-			"core/media-text",
-			"core/latest-comments",
-			"core/latest-posts",
-			"core/missing",
-			"core/more",
-			"core/nextpage",
-			"core/preformatted",
-			"core/pullquote",
-			"core/rss",
-			"core/search",
-			"core/separator",
-			"core/block",
-			"core/social-links",
-			"core/social-link",
-			"core/spacer",
-			"core/subhead",
-			"core/table",
-			"core/tag-cloud",
-			"core/text-columns",
-			"core/verse",
-			"core/video",
-			"core/site-logo",
-			"core/site-title"
-		]
-	},
-	"margin": {
-		"blocks": [
-			"core/paragraph",
-			"core/image",
-			"core/heading",
-			"core/gallery",
-			"core/list",
-			"core/quote",
-			"core/shortcode",
-			"core/archives",
-			"core/audio",
-			"core/button",
-			"core/buttons",
-			"core/calendar",
-			"core/categories",
-			"core/code",
-			"core/columns",
-			"core/column",
-			"core/cover",
-			"core/embed",
-			"core/file",
-			"core/group",
-			"core/freeform",
-			"core/html",
-			"core/media-text",
-			"core/latest-comments",
-			"core/latest-posts",
-			"core/missing",
-			"core/more",
-			"core/nextpage",
-			"core/preformatted",
-			"core/pullquote",
-			"core/rss",
-			"core/search",
-			"core/separator",
-			"core/block",
-			"core/social-links",
-			"core/social-link",
-			"core/spacer",
-			"core/subhead",
-			"core/table",
-			"core/tag-cloud",
-			"core/text-columns",
-			"core/verse",
-			"core/video",
-			"core/site-logo",
-			"core/site-title"
-		]
-	},
-	"padding": {
-		"blocks": [
-			"core/paragraph",
-			"core/image",
-			"core/heading",
-			"core/gallery",
-			"core/list",
-			"core/quote",
-			"core/shortcode",
-			"core/archives",
-			"core/audio",
-			"core/buttons",
-			"core/calendar",
-			"core/categories",
-			"core/code",
-			"core/columns",
-			"core/column",
-			"core/cover",
-			"core/embed",
-			"core/file",
-			"core/group",
-			"core/freeform",
-			"core/html",
-			"core/media-text",
-			"core/latest-comments",
-			"core/latest-posts",
-			"core/missing",
-			"core/more",
-			"core/nextpage",
-			"core/preformatted",
-			"core/pullquote",
-			"core/rss",
-			"core/search",
-			"core/separator",
-			"core/block",
-			"core/social-links",
-			"core/social-link",
-			"core/spacer",
-			"core/subhead",
-			"core/table",
-			"core/tag-cloud",
-			"core/text-columns",
-			"core/verse",
-			"core/video",
-			"core/site-logo",
-			"core/site-title"
-		]
-	},
-	"paddingCoreButton": {
-		"blocks": [
-			"core/button"
-		]
-	},
-	"position": {
-		"blocks": [
-			"core/paragraph",
-			"core/image",
-			"core/heading",
-			"core/gallery",
-			"core/list",
-			"core/quote",
-			"core/shortcode",
-			"core/archives",
-			"core/audio",
-			"core/button",
-			"core/buttons",
-			"core/calendar",
-			"core/categories",
-			"core/code",
-			"core/columns",
-			"core/column",
-			"core/cover",
-			"core/embed",
-			"core/file",
-			"core/group",
-			"core/freeform",
-			"core/html",
-			"core/media-text",
-			"core/latest-comments",
-			"core/latest-posts",
-			"core/missing",
-			"core/more",
-			"core/nextpage",
-			"core/preformatted",
-			"core/pullquote",
-			"core/rss",
-			"core/search",
-			"core/separator",
-			"core/block",
-			"core/social-links",
-			"core/social-link",
-			"core/spacer",
-			"core/subhead",
-			"core/table",
-			"core/tag-cloud",
-			"core/text-columns",
-			"core/verse",
-			"core/video",
-			"core/site-logo",
-			"core/site-title"
-		]
-	},
-	"posterImage": {
-		"blocks": [
-			"core/media-text"
-		]
-	},
-	"stretchLink": {
-		"blocks": [
-			"core/group",
-			"core/column",
-			"core/image",
-			"core/cover",
-			"core/media-text"
-		]
-	},
-	"hide": {
-		"blocks": [
-			"core/paragraph",
-			"core/image",
-			"core/heading",
-			"core/gallery",
-			"core/list",
-			"core/quote",
-			"core/shortcode",
-			"core/archives",
-			"core/audio",
-			"core/button",
-			"core/buttons",
-			"core/calendar",
-			"core/categories",
-			"core/code",
-			"core/columns",
-			"core/column",
-			"core/cover",
-			"core/embed",
-			"core/file",
-			"core/group",
-			"core/freeform",
-			"core/html",
-			"core/media-text",
-			"core/latest-comments",
-			"core/latest-posts",
-			"core/missing",
-			"core/more",
-			"core/nextpage",
-			"core/preformatted",
-			"core/pullquote",
-			"core/rss",
-			"core/search",
-			"core/separator",
-			"core/block",
-			"core/social-links",
-			"core/social-link",
-			"core/spacer",
-			"core/subhead",
-			"core/table",
-			"core/tag-cloud",
-			"core/text-columns",
-			"core/verse",
-			"core/video",
-			"core/site-logo",
-			"core/site-title"
-		]
+	"blocks": {
+		"core/paragraph": {
+			"support": ["Border","BorderRadius","BoxShadow","FontSize","Hide","Hyphens","LineHeight","Margin","Padding","Position","StretchLink","TextAlign","Width","Height"]
+		},
+		"core/image": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/heading": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/gallery": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/list": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/quote": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/shortcode": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/archives": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/audio": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/button": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/buttons": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/calendar": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/categories": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/code": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/columns": {
+			"support": ["*"]
+		},
+		"core/column": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/cover": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/embed": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/file": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/group": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/freeform": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/html": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/media-text": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/latest-comments": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/latest-posts": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/missing": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/more": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/nextpage": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/preformatted": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/pullquote": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/rss": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/search": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/separator": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/block": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/social-links": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/social-link": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/spacer": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/subhead": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/table": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/tag-cloud": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/text-columns": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/verse": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/video": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/site-logo": {
+			"support": ["*", "-flexCoreColumns"]
+		},
+		"core/site-title": {
+			"support": ["*", "-flexCoreColumns"]
+		}
 	}
 }
