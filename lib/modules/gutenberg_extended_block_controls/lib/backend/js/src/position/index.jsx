@@ -1,6 +1,6 @@
 import assign from 'lodash.assign';
 import EditorStyles from './editor-styles';
-import {updateCSS, updateCSSWithDimensions, optIn, optOut} from "../helpers";
+import {updateCSS, updateCSSWithDimensions, optIn, optOut, isSupported} from "../helpers";
 
 const { Fragment } = wp.element;
 const {
@@ -17,13 +17,13 @@ const InputControl =  __experimentalInputControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const Config = js_sv100_premium_gutenberg_extended_block_controls_scripts_controls.config;
-const enableCustomControlOnBlocks = Config.position.blocks;
+const _name = 'Position';
+const _prefix = 'position';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported(name, _name) ) {
 		return settings;
 	}
 	
@@ -87,10 +87,8 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function Position(props){
-	const _name = 'Position';
-	const _prefix = 'position';
 	
-	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
+	if ( ! isSupported(props.name, _name) ) {
 		return (
 			<Fragment></Fragment>
 		);

@@ -1,6 +1,5 @@
 import assign from 'lodash.assign';
-import {getUniqueBlockId, updateCSS, updateCSSWithDimensions} from "../helpers";
-import EditorStyles from "../margin/editor-styles";
+import {isSupported} from "../helpers";
 
 const { Fragment } = wp.element;
 const { ToggleControl , PanelRow, __experimentalInputControl: InputControl } = wp.components;
@@ -8,13 +7,13 @@ const {__experimentalLinkControl: LinkControl } = wp.blockEditor;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const Config = js_sv100_premium_gutenberg_extended_block_controls_scripts_controls.config;
-const enableCustomControlOnBlocks = Config.stretchLink.blocks;
+const _name = 'StretchLink';
+const _prefix = 'stretchLink';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported(name, _name) ) {
 		return settings;
 	}
 	
@@ -34,10 +33,8 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function StretchLink(props){
-	const _name = 'StretchLink';
-	const _prefix = 'stretchLink';
 	
-	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
+	if ( ! isSupported(props.name, _name) ) {
 		return (
 			<Fragment></Fragment>
 		);
