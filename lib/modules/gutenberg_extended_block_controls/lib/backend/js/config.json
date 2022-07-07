@@ -29,7 +29,7 @@
 			"support": ["*", "-flexCoreColumns"]
 		},
 		"core/button": {
-			"support": ["*", "-flexCoreColumns"]
+			"support": ["*", "-flexCoreColumns", "-Padding"]
 		},
 		"core/buttons": {
 			"support": ["*", "-flexCoreColumns"]

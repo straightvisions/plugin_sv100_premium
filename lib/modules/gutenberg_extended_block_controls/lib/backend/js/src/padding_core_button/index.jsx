@@ -14,7 +14,7 @@ const _prefix = 'padding';
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! isSupported(name, _name) ) {
+	if ( ! name === 'core/button' ) {
 		return settings;
 	}
 	
@@ -63,7 +63,7 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 // the component
 function PaddingCoreButton(props){
 	
-	if ( ! isSupported(props.name, _name) ) {
+	if ( ! props.name === 'core/button' ) {
 		return (
 			<Fragment></Fragment>
 		);
