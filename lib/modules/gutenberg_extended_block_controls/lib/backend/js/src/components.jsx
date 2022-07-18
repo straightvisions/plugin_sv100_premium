@@ -27,7 +27,6 @@ function ExtendedControlComponents( props ){
 			<Hyphens { ...props }/>
 			<Margin {...props}/>
 			<Padding {...props}/>
-			<PaddingCoreButton {...props}/>
 			<Border { ...props }/>
 			<BorderRadius { ...props }/>
 			<BoxShadow { ...props }/>
