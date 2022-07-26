@@ -78,17 +78,16 @@
 					->set_is_gutenberg()
 					->set_path( 'lib/backend/css/common/editor_components.css' )
 					->set_is_enqueued();
-				
-				$this->get_script( 'common' )
-					 ->set_inline()
-				     ->set_is_gutenberg()
-				     ->set_path( 'lib/backend/css/common/common.css' );
 
-				$this->get_script( 'sv100-premium-block-core-mod-flex' )
-				     ->set_inline()
+				$this->get_script( 'style_mod_flex_backend' )
 				     ->set_is_gutenberg()
+					 ->set_is_backend()
+					 ->set_is_enqueued()
 				     ->set_path( 'lib/backend/css/common/style_mod_flex.css' );
-		
+
+				$this->get_script( 'style_mod_flex' )
+				     ->set_inline()
+				     ->set_path( 'lib/frontend/css/common/style_mod_flex.css' );
 			}
 			
 			return $this;
@@ -165,7 +164,7 @@
 			
 			// mod css
 			if(isset($block['attrs']['_classNamesList']) && in_array('sv100-premium-block-core-mod-flex', $block['attrs']['_classNamesList']) === true){
-				$this->get_script( 'sv100-premium-block-core-mod-flex-frontend' )->set_path( 'lib/backend/css/common/style_mod_flex.css' )->set_inline()->set_is_enqueued();
+				$this->get_script( 'style_mod_flex' )->set_is_enqueued();
 			}
 			
 			// add extra props to dynamic blocks
