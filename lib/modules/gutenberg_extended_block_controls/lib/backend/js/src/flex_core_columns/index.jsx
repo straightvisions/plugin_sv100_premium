@@ -1,6 +1,7 @@
 import assign from 'lodash.assign';
 import GapFlex from './components/gap';
 import StackFlex from './components/stack';
+import JustifyFlex from './components/justify';
 import {
 	addClassNames,
 	lowercase,
@@ -92,6 +93,7 @@ function FlexCoreColumns(props){
 							[_prefix+'Active']: val,
 							['gapFlexActive']: val, // fake opt-in for sub modules
 							['stackFlexActive']: val, // fake opt-in for sub modules
+							['justifyFlexActive']: val, // fake opt-in for sub modules
 							_classNamesList: list
 						});
 					}}
@@ -99,6 +101,7 @@ function FlexCoreColumns(props){
 				/>
 				<GapFlex {...props}/>
 				<StackFlex {...props}/>
+				<JustifyFlex {...props}/>
 			</Fragment>
 		);
 	}else{
@@ -113,6 +116,7 @@ function FlexCoreColumns(props){
 							[_prefix+'Active']: val,
 							['gapFlexActive']: val, // fake opt-in for sub modules
 							['stackFlexActive']: val, // fake opt-in for sub modules
+							['justifyFlexActive']: val, // fake opt-in for sub modules
 							_classNamesList: list
 						});
 					}}
