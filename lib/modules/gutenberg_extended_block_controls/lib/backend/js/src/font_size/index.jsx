@@ -44,10 +44,27 @@ function FontSize(props){
 			<Fragment></Fragment>
 		);
 	}
+	console.log(props.attributes);
+	if(typeof props.attributes._sv100_premium_block_pasted_props !== 'undefined' && typeof props.attributes._sv100_premium_block_pasted_props.attributes.fontSizeActive !== 'undefined'){
+		let _props = props.attributes._sv100_premium_block_pasted_props;
+		props.attributes.fontSizeActive = _props.attributes.fontSizeActive ? _props.attributes.fontSizeActive : false;
+		props.attributes.fontSizeActive = _props.attributes.fontSizeMobile ? _props.attributes.fontSizeMobile : '';
+		
+		delete _props.attributes['fontSizeActive'];
+		delete _props.attributes['fontSizeMobile'];
+		
+		props.attributes._sv100_premium_block_pasted_props = _props;
+		const _new = Object.assign(_new_props, {_sv100_premium_block_pasted_props: _props});
+		console.log('update');
+		console.log(_new);
+		props.setAttributes(_new);
+		
+		updateCSS(val, props, _name, _prefix, EditorStyles)
+	}
 	
 	const values = props.attributes;
 	const currentResponsiveTab = props.attributes.currentResponsiveTab;
-
+	
 	if(values[_prefix+'Active'] === true){
 		return(
 			<Fragment>

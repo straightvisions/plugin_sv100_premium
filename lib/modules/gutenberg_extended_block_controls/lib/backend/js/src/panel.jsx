@@ -4,7 +4,7 @@ import {getUniqueBlockId, isDuplicate, injectBlockListCSS, isSupported} from './
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { InspectorControls } = wp.editor;
-const { PanelBody, TabPanel, Dashicon, Button } = wp.components;
+const { PanelBody, TabPanel, Dashicon, Flex, FlexItem, DropdownMenu } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
@@ -54,6 +54,38 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 			injectBlockListCSS(props);
 		}
 		
+		function settingsCopy(){
+			navigator.clipboard.writeText(JSON.stringify(props)).then(() => {
+				// Alert the user that the action took place.
+				// Nobody likes hidden stuff being done under the hood!
+				wp.data.dispatch('core/notices').createInfoNotice(
+					'Settings copied to clipboard.',
+					{id: 'sv100-premium'}
+				);
+			});
+		}
+		
+		function settingsPaste(){
+			navigator.clipboard.readText().then(
+				(clipText) => {
+					let _props = null;
+					try {
+						 _props = JSON.parse(clipText);
+					} catch (e) {
+						wp.data.dispatch('core/notices').createErrorNotice(
+							'Pasted data is not a valid.',
+							{id: 'sv100-premium'}
+						);
+					}
+					
+					if(_props !== null){
+						props.setAttributes({_sv100_premium_block_pasted_props: _props})
+					}
+					
+				});
+				
+		}
+		
 		return (
 			<Fragment>
 				<InspectorControls>
@@ -62,63 +94,84 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 						initialOpen={ true }
 						className={'sv100-premium-extended-controls-panel'}
 					>
-						<TabPanel
-							className='sv100-premium-panelbody'
-							tabs={[
+						<Flex alignItems={"top"}>
+							<FlexItem>
+								<TabPanel
+									className='sv100-premium-panelbody'
+									tabs={[
+										
+										{
+											name: "Mobile",
+											title: <Dashicon icon="smartphone" />,
+											className:'tab-icon',
+										},
+										
+										{
+											name: "MobileLandscape",
+											title: <Dashicon icon="smartphone" style={{transform: 'rotate(90deg)'}}/>,
+											className:'tab-icon',
+										},
+										
+										{
+											name: "Tablet",
+											title: <Dashicon icon="tablet" />,
+											className:'tab-icon',
+										},
+										
+										{
+											name: "TabletLandscape",
+											title: <Dashicon icon="tablet" style={{transform: 'rotate(90deg)'}}/>,
+											className:'tab-icon',
+										},
+										
+										{
+											name: "TabletPro",
+											title: <Dashicon icon="tablet" style={{color: 'red'}}/>,
+											className:'tab-icon',
+										},
+										
+										{
+											name: "TabletProLandscape",
+											title: <Dashicon icon="tablet" style={{transform: 'rotate(90deg)',color: 'red'}}/>,
+											className:'tab-icon',
+										},
+										
+										{
+											name: "Desktop",
+											title: <Dashicon icon="desktop" />,
+											className:'tab-icon',
+										},
+									
+									]}
+								>
+									{(tab) => {
+										let output = (
+											setAttributes({currentResponsiveTab: tab.name})
+										);
+										
+										return <div>{output}</div>;
+									}}
+								</TabPanel>
+							</FlexItem>
+							<FlexItem>
+								<DropdownMenu
+									icon={ "admin-tools" }
+									controls={ [
+										{
+											title: 'Copy',
+											onClick: () => settingsCopy(),
+										},
+										{
+											title: 'Paste',
+											onClick: () => settingsPaste(),
+										},
 								
-								{
-									name: "Mobile",
-									title: <Dashicon icon="smartphone" />,
-									className:'tab-icon',
-								},
+									] }
+								/>
 								
-								{
-									name: "MobileLandscape",
-									title: <Dashicon icon="smartphone" style={{transform: 'rotate(90deg)'}}/>,
-									className:'tab-icon',
-								},
-								
-								{
-									name: "Tablet",
-									title: <Dashicon icon="tablet" />,
-									className:'tab-icon',
-								},
-								
-								{
-									name: "TabletLandscape",
-									title: <Dashicon icon="tablet" style={{transform: 'rotate(90deg)'}}/>,
-									className:'tab-icon',
-								},
-								
-								{
-									name: "TabletPro",
-									title: <Dashicon icon="tablet" style={{color: 'red'}}/>,
-									className:'tab-icon',
-								},
-								
-								{
-									name: "TabletProLandscape",
-									title: <Dashicon icon="tablet" style={{transform: 'rotate(90deg)',color: 'red'}}/>,
-									className:'tab-icon',
-								},
-								
-								{
-									name: "Desktop",
-									title: <Dashicon icon="desktop" />,
-									className:'tab-icon',
-								}
-								
-								
-							]}
-						>
-							{(tab) => {
-								let output = (
-									setAttributes({currentResponsiveTab: tab.name})
-								);
-								
-								return <div>{output}</div>;
-							}}
-						</TabPanel>
+							</FlexItem>
+						</Flex>
+						
 						<Fragment>
 							<ExtendedControlComponents { ...props }/>
 							{/*
