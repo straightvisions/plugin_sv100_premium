@@ -1,5 +1,6 @@
 import assign from 'lodash.assign';
 import GridGap from './components/gap';
+import GridOrder from './components/order';
 
 import {
 	addClassNames,
@@ -88,11 +89,13 @@ function Grid(props){
 						optOut(props, {
 							[_prefix+'Active']: val,
 							[_prefix+'GapActive']: val, // fake opt-in for sub modules
+							[_prefix+'OrderActive']: val, // fake opt-in for sub modules
 						});
 					}}
-					help={__('This option forces flex behaviour on the selected columns block and only works if enabled constantly. Native stacking will not work with this option enabled.', 'sv100_premium')}
+					help={__('This option forces grid behaviour on the selected block and only works if enabled constantly. Native ordering will not work with this option enabled.', 'sv100_premium')}
 				/>
 				<GridGap {...props}/>
+				<GridOrder {...props}/>
 			</Fragment>
 		);
 	}else{
@@ -105,6 +108,7 @@ function Grid(props){
 						const attr = {
 							[_prefix+'Active']: val,
 							[_prefix+'GapActive']: val, // fake opt-in for sub modules
+							[_prefix+'OrderActive']: val, // fake opt-in for sub modules
 						}
 						optIn(props, attr);
 					}}

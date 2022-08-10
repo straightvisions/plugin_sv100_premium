@@ -68,7 +68,7 @@
 			"support": ["*", "-flexCoreColumns" , "-Grid"]
 		},
 		"core/media-text": {
-			"support": ["*", "-flexCoreColumns"]
+			"support": ["*", "-flexCoreColumns", "-Grid"]
 		},
 		"core/latest-comments": {
 			"support": ["*", "-flexCoreColumns" , "-Grid"]
