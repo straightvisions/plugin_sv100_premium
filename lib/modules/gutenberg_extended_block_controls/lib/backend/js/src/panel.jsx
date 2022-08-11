@@ -54,9 +54,56 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 			injectBlockListCSS(props);
 		}
 		
+		// detect if mouse is over panel
+		const panel = document.querySelector('.sv100-premium-extended-controls-panel');
+		
+		if(panel){
+			panel.addEventListener('mouseover', function(){
+				panel.classList.add('panel-hover');
+			});
+			
+			panel.addEventListener('mouseleave', function(){
+				panel.classList.remove('panel-hover');
+			});
+		}
+		
+		// detect arrow keys left / right to change breakpoint
+		document.onkeydown = function (e) {
+			const tabs = document.querySelectorAll('.sv100-premium-extended-controls-panel.panel-hover > .sv100-premium-panelbody > .components-tab-panel__tabs > button');
+			
+			if(tabs && document.activeElement){
+				let allowed = true;
+				
+				// prevent arrow function while focus is on text or number input field
+				if(['input'].indexOf(document.activeElement.tagName.toLowerCase()) !== -1
+					&& ['text', 'number'].indexOf(document.activeElement.getAttribute('type')) !== -1){
+						allowed = false;
+				}
+				
+				if(allowed === true){
+					for(let i=0;i<tabs.length;i++){
+						if(tabs[i].classList.contains('is-active')){
+							if(e.key === 'ArrowLeft' && i > 0){
+								tabs[i-1].click();
+								break;
+							}
+							
+							if(e.key === 'ArrowRight' && i < tabs.length){
+								tabs[i+1].click();
+								break;
+							}
+						}
+					}
+				}
+				
+				
+			}
+			
+		};
+		
 		return (
 			<Fragment>
-				<InspectorControls>
+				<InspectorControls className={'sv100-premium-extended-controls-panel'}>
 					<PanelBody
 						title={ __( 'SV100 Premium - Extended Controls', 'sv100_premium' ) }
 						initialOpen={ true }
