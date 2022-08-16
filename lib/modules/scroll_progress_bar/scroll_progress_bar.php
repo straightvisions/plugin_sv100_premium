@@ -44,8 +44,7 @@
 		}
 		protected function load_settings(): scroll_progress_bar {
 			$this->get_setting( 'activate' )
-			     ->set_title( __( 'Enable Style: Sticky Group Block', 'sv100' ) )
-			     ->set_description( __( 'Groups can be made sticky. Enable this to enable in style-selection of group block.', 'sv100' ) )
+			     ->set_title( __( 'Enable Scroll Progress Bar', 'sv100' ) )
 			     ->load_type( 'checkbox' );
 
 			$this->get_setting( 'height' )
