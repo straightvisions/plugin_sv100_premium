@@ -1,4 +1,4 @@
-import assign from 'lodash.assign';
+
 import EditorStyles from './editor-styles';
 import {updateCSSWithDimensionsCorners, optIn, optOut, isSupported} from "../helpers";
 
@@ -19,7 +19,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		borderRadiusActive                    :{ type: 'boolean', default: false },
 	
 		borderRadiusTopLeftMobile                 :{ type: 'string'},

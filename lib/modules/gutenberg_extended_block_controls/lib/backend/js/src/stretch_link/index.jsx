@@ -1,4 +1,4 @@
-import assign from 'lodash.assign';
+
 import {isSupported} from "../helpers";
 
 const { Fragment } = wp.element;
@@ -18,7 +18,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		stretchLink         :{ type: 'boolean', default: false, },
 		stretchLinkURL      :{ type: 'string', default: '', },
 		stretchLinkTitle    :{ type: 'string', default: '', },

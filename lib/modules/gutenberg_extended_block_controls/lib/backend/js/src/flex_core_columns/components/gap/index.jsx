@@ -1,4 +1,4 @@
-import assign from 'lodash.assign';
+
 import EditorStyles from './editor-styles';
 import {lowercase, updateCSS, isSupported} from '../../../helpers';
 const { Fragment } = wp.element;
@@ -17,7 +17,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		gapMobile                 :{ type: 'integer', default: 10, },
 		gapMobileLandscape        :{ type: 'integer', default: 10, },
 		gapTablet                 :{ type: 'integer', default: 10, },

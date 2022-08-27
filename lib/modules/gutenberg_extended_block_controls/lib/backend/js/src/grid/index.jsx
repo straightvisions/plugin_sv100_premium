@@ -1,4 +1,4 @@
-import assign from 'lodash.assign';
+
 import GridGap from './components/gap';
 import GridOrder from './components/order';
 
@@ -30,7 +30,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		gridActive  :{ type: 'boolean', default: false, },
 		gridInit  :{ type: 'boolean', default: false, },
 

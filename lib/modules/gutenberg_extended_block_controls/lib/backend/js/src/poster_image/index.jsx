@@ -1,4 +1,4 @@
-import assign from 'lodash.assign';
+
 
 const { Fragment } = wp.element;
 const { PanelRow, ToggleControl, Button, BaseControl  } = wp.components;
@@ -20,7 +20,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		posterImage                 :{ type: 'boolean', default: false, },
 		posterImageURL              :{ type: 'string', default: '', },
 	} );
