@@ -12,5 +12,6 @@
 			$this->load_module('block_patterns');
 			$this->load_module('scroll_progress_bar');
 			$this->load_module('insert_post');
+			//$this->load_module('query_infinite_scroll');
 		}
 	}
