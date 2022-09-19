@@ -1,7 +1,7 @@
 
-import GapFlex from './components/gap';
-import StackFlex from './components/stack';
-import JustifyFlex from './components/justify';
+import GridGap from './components/gap';
+import GridOrder from './components/order';
+
 import {
 	addClassNames,
 	lowercase,
@@ -13,15 +13,14 @@ import {
 	isSupported
 } from "../helpers";
 import gapEditorStyles from "./components/gap/editor-styles";
-import stackEditorStyles from "./components/stack/editor-styles";
 
 const { Fragment } = wp.element;
 const { ToggleControl, PanelRow, Tooltip  } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const _name = 'flexCoreColumns';
-const _prefix = 'flexCoreColumns';
+const _name = 'grid';
+const _prefix = 'grid';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
@@ -32,8 +31,8 @@ const addCustomControlAttributes = ( settings, name ) => {
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	Object.assign(settings.attributes, {
-		flexCoreColumnsActive  :{ type: 'boolean', default: false, },
-		flexCoreColumnsInit  :{ type: 'boolean', default: false, },
+		gridActive  :{ type: 'boolean', default: false, },
+		gridInit  :{ type: 'boolean', default: false, },
 
 	} );
 	
@@ -43,7 +42,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-controls', addCustomControlAttributes );
 
 // the component
-function FlexCoreColumns(props){
+function Grid(props){
 	
 	if ( ! isSupported(props.name, _name) ) {
 		return (
@@ -55,14 +54,13 @@ function FlexCoreColumns(props){
 	const currentResponsiveTab = props.attributes.currentResponsiveTab;
 	
 	// initialise default values -------------------------------------------------
-	if(values[_prefix+'Active'] === true && values.flexCoreColumnsInit === false){
+	if(values[_prefix+'Active'] === true && values.gridInit === false){
 		// move this later to a global function
 		const attr = props.attributes;
 		
 		attr.parsedCSS = JSON.parse(attr.parsedCSS);
 		// parse sub module CSS
-		attr.parsedCSS['GapFlex'] = gapEditorStyles(attr, props.name);
-		attr.parsedCSS['StackFlex'] = stackEditorStyles(attr, props.name);
+		attr.parsedCSS['Gap'] = gapEditorStyles(attr, props.name);
 		//collapse css objects
 		let css = '';
 		Object.keys( attr.parsedCSS ).map(function(key, index) {
@@ -75,7 +73,7 @@ function FlexCoreColumns(props){
 		props.setAttributes({
 			parsedCSS: JSON.stringify(attr.parsedCSS),
 			parsedCSSString: css, // this gets injected
-			flexCoreColumnsInit: true,
+			gridInit: true,
 		});
 	}
 	// initialise default values -------------------------------------------------
@@ -85,40 +83,34 @@ function FlexCoreColumns(props){
 		return(
 			<Fragment>
 				<ToggleControl
-					label={__('Columns Control', 'sv100_premium')}
+					label={__('Grid Control', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
 					onChange={(val) => {
-						const list = removeClassNames(props, ['sv100-premium-block-core-mod-flex']);
 						optOut(props, {
 							[_prefix+'Active']: val,
-							['gapFlexActive']: val, // fake opt-in for sub modules
-							['stackFlexActive']: val, // fake opt-in for sub modules
-							['justifyFlexActive']: val, // fake opt-in for sub modules
-							_classNamesList: list
+							[_prefix+'GapActive']: val, // fake opt-in for sub modules
+							[_prefix+'OrderActive']: val, // fake opt-in for sub modules
 						});
 					}}
-					help={__('This option forces flex behaviour on the selected columns block and only works if enabled constantly. Native stacking will not work with this option enabled.', 'sv100_premium')}
+					help={__('This option forces grid behaviour on the selected block and only works if enabled constantly. Native ordering will not work with this option enabled.', 'sv100_premium')}
 				/>
-				<GapFlex {...props}/>
-				<StackFlex {...props}/>
-				<JustifyFlex {...props}/>
+				<GridGap {...props}/>
+				<GridOrder {...props}/>
 			</Fragment>
 		);
 	}else{
 		return(
 			<Fragment>
 				<ToggleControl
-					label={__('Columns Control', 'sv100_premium')}
+					label={__('Grid Control', 'sv100_premium')}
 					checked={values[_prefix+'Active']}
 					onChange={(val) => {
-						const list = addClassNames(props, ['sv100-premium-block-core-mod-flex']);
-						optIn(props, {
+						const attr = {
 							[_prefix+'Active']: val,
-							['gapFlexActive']: val, // fake opt-in for sub modules
-							['stackFlexActive']: val, // fake opt-in for sub modules
-							['justifyFlexActive']: val, // fake opt-in for sub modules
-							_classNamesList: list
-						});
+							[_prefix+'GapActive']: val, // fake opt-in for sub modules
+							[_prefix+'OrderActive']: val, // fake opt-in for sub modules
+						}
+						optIn(props, attr);
 					}}
 				/>
 				
@@ -128,4 +120,4 @@ function FlexCoreColumns(props){
 	
 }
 
-export default FlexCoreColumns;
+export default Grid;

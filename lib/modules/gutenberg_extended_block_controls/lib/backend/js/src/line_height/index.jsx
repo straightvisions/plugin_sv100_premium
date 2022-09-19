@@ -1,4 +1,4 @@
-import assign from 'lodash.assign';
+
 import EditorStyles from './editor-styles';
 import {updateCSS, optIn, optOut, isSupported} from "../helpers";
 
@@ -19,7 +19,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		lineHeightActive                 :{ type: 'boolean', default: false },
 		lineHeightMobile                 :{ type: 'string', default: '' },
 		lineHeightMobileLandscape        :{ type: 'string', default: '' },

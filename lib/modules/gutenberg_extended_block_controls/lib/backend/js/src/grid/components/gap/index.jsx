@@ -6,8 +6,8 @@ const { RangeControl } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const _name = 'GapFlex';
-const _prefix = 'gap';
+const _name = 'GridGap';
+const _prefix = 'gridGap';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
@@ -18,13 +18,13 @@ const addCustomControlAttributes = ( settings, name ) => {
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
 	Object.assign(settings.attributes, {
-		gapMobile                 :{ type: 'integer', default: 10, },
-		gapMobileLandscape        :{ type: 'integer', default: 10, },
-		gapTablet                 :{ type: 'integer', default: 10, },
-		gapTabletLandscape        :{ type: 'integer', default: 10, },
-		gapTabletPro              :{ type: 'integer', default: 10, },
-		gapTabletProLandscape     :{ type: 'integer', default: 10, },
-		gapDesktop                :{ type: 'integer', default: 10, },
+		gridGapMobile                 :{ type: 'integer', default: 10, },
+		gridGapMobileLandscape        :{ type: 'integer', default: 10, },
+		gridGapTablet                 :{ type: 'integer', default: 10, },
+		gridGapTabletLandscape        :{ type: 'integer', default: 10, },
+		gridGapTabletPro              :{ type: 'integer', default: 10, },
+		gridGapTabletProLandscape     :{ type: 'integer', default: 10, },
+		gridGapDesktop                :{ type: 'integer', default: 10, },
 	} );
 	
 	return settings;
@@ -33,7 +33,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-controls', addCustomControlAttributes );
 
 // the component
-function GapFlex(props){
+function GridGap(props){
 	
 	if ( ! isSupported(props.name, _name) ) {
 		return (
@@ -54,4 +54,4 @@ function GapFlex(props){
 	
 }
 
-export default GapFlex;
+export default GridGap;
