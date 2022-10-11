@@ -1,4 +1,4 @@
-import assign from 'lodash.assign';
+
 import EditorStyles from './editor-styles';
 import {lowercase, updateCSS, isSupported, optOut} from '../../../helpers';
 const { Fragment } = wp.element;
@@ -17,7 +17,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		gridOrderMobile                 :{ type: 'integer', default: '{}', },
 		gridOrderMobileLandscape        :{ type: 'integer', default: '{}', },
 		gridOrderTablet                 :{ type: 'integer', default: '{}', },

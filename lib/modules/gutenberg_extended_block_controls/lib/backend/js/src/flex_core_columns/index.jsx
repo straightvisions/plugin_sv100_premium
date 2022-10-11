@@ -1,4 +1,4 @@
-import assign from 'lodash.assign';
+
 import GapFlex from './components/gap';
 import StackFlex from './components/stack';
 import JustifyFlex from './components/justify';
@@ -31,7 +31,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		flexCoreColumnsActive  :{ type: 'boolean', default: false, },
 		flexCoreColumnsInit  :{ type: 'boolean', default: false, },
 

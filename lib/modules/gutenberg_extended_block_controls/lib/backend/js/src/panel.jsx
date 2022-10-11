@@ -1,4 +1,4 @@
-import assign from 'lodash.assign';
+
 import ExtendedControlComponents from './components.jsx';
 import {getUniqueBlockId, isDuplicate, injectBlockListCSS, isSupported} from './helpers';
 const { createHigherOrderComponent } = wp.compose;
@@ -194,7 +194,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 		return settings;
 	}
 	
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		blockId:{ type: 'string' },
 		parsedCSS:{ type: 'string', default: '{}' },
 		parsedCSSString:{ type: 'string', default: '' },
@@ -276,7 +276,7 @@ const addCustomProps = ( props, blockType, attributes ) => {
 			classNames += ' ' + _classNamesList[i];
 		}
 	
-		assign( props, { className : classNames  } );
+		Object.assign( props,{ className : classNames  } );
 	}
 	
 	return props;

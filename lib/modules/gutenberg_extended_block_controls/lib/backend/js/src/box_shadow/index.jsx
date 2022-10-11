@@ -1,4 +1,4 @@
-import assign from 'lodash.assign';
+
 import {optIn, optOut, isSupported} from "../helpers";
 import attributes from "./attributes.js";
 import BoxShadowFragment from "./components/box_shadow";
@@ -22,7 +22,7 @@ const addCustomControlAttributes = ( settings, name ) => {
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, attributes );
+	Object.assign(settings.attributes, settings.attributes, attributes);
 	
 	return settings;
 };
