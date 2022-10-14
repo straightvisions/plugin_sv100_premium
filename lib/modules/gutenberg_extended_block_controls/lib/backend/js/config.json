@@ -66,12 +66,9 @@
 		},
 		"core/group": {
 			"support": ["*", "-flexCoreColumns" , "-Grid"]
-<<<<<<< HEAD
 		},
 		"core/query": {
 			"support": ["*", "-flexCoreColumns" , "-Grid"]
-=======
->>>>>>> origin/v1.905
 		},
 		"core/freeform": {
 			"support": ["*", "-flexCoreColumns" , "-Grid"]
