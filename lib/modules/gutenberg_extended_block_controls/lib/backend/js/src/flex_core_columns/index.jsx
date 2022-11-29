@@ -1,6 +1,7 @@
 
 import GapFlex from './components/gap';
 import StackFlex from './components/stack';
+import WrapFlex from './components/wrap';
 import JustifyFlex from './components/justify';
 import {
 	addClassNames,
@@ -14,6 +15,8 @@ import {
 } from "../helpers";
 import gapEditorStyles from "./components/gap/editor-styles";
 import stackEditorStyles from "./components/stack/editor-styles";
+import wrapEditorStyles from "./components/stack/editor-styles";
+import justifyEditorStyles from "./components/justify/editor-styles";
 
 const { Fragment } = wp.element;
 const { ToggleControl, PanelRow, Tooltip  } = wp.components;
@@ -34,7 +37,6 @@ const addCustomControlAttributes = ( settings, name ) => {
 	Object.assign(settings.attributes, {
 		flexCoreColumnsActive  :{ type: 'boolean', default: false, },
 		flexCoreColumnsInit  :{ type: 'boolean', default: false, },
-
 	} );
 	
 	return settings;
@@ -63,6 +65,7 @@ function FlexCoreColumns(props){
 		// parse sub module CSS
 		attr.parsedCSS['GapFlex'] = gapEditorStyles(attr, props.name);
 		attr.parsedCSS['StackFlex'] = stackEditorStyles(attr, props.name);
+		//@todo why no justify and wrap css here? looks like that would be buggy, but makes no sense?
 		//collapse css objects
 		let css = '';
 		Object.keys( attr.parsedCSS ).map(function(key, index) {
@@ -93,6 +96,7 @@ function FlexCoreColumns(props){
 							[_prefix+'Active']: val,
 							['gapFlexActive']: val, // fake opt-in for sub modules
 							['stackFlexActive']: val, // fake opt-in for sub modules
+							['wrapFlexActive']: val, // fake opt-in for sub modules
 							['justifyFlexActive']: val, // fake opt-in for sub modules
 							_classNamesList: list
 						});
@@ -101,6 +105,7 @@ function FlexCoreColumns(props){
 				/>
 				<GapFlex {...props}/>
 				<StackFlex {...props}/>
+				<WrapFlex {...props}/>
 				<JustifyFlex {...props}/>
 			</Fragment>
 		);
@@ -116,6 +121,7 @@ function FlexCoreColumns(props){
 							[_prefix+'Active']: val,
 							['gapFlexActive']: val, // fake opt-in for sub modules
 							['stackFlexActive']: val, // fake opt-in for sub modules
+							['wrapFlexActive']: val, // fake opt-in for sub modules
 							['justifyFlexActive']: val, // fake opt-in for sub modules
 							_classNamesList: list
 						});
