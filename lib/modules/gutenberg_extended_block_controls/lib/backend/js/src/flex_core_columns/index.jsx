@@ -1,8 +1,8 @@
-
 import GapFlex from './components/gap';
 import StackFlex from './components/stack';
 import WrapFlex from './components/wrap';
 import JustifyFlex from './components/justify';
+import AlignFlex from './components/align';
 import {
 	addClassNames,
 	lowercase,
@@ -17,6 +17,7 @@ import gapEditorStyles from "./components/gap/editor-styles";
 import stackEditorStyles from "./components/stack/editor-styles";
 import wrapEditorStyles from "./components/stack/editor-styles";
 import justifyEditorStyles from "./components/justify/editor-styles";
+import alignEditorStyles from "./components/align/editor-styles";
 
 const { Fragment } = wp.element;
 const { ToggleControl, PanelRow, Tooltip  } = wp.components;
@@ -98,6 +99,7 @@ function FlexCoreColumns(props){
 							['stackFlexActive']: val, // fake opt-in for sub modules
 							['wrapFlexActive']: val, // fake opt-in for sub modules
 							['justifyFlexActive']: val, // fake opt-in for sub modules
+							['alignFlexActive']: val, // fake opt-in for sub modules
 							_classNamesList: list
 						});
 					}}
@@ -107,6 +109,7 @@ function FlexCoreColumns(props){
 				<StackFlex {...props}/>
 				<WrapFlex {...props}/>
 				<JustifyFlex {...props}/>
+				<AlignFlex {...props}/>
 			</Fragment>
 		);
 	}else{
@@ -123,6 +126,7 @@ function FlexCoreColumns(props){
 							['stackFlexActive']: val, // fake opt-in for sub modules
 							['wrapFlexActive']: val, // fake opt-in for sub modules
 							['justifyFlexActive']: val, // fake opt-in for sub modules
+							['alignFlexActive']: val, // fake opt-in for sub modules
 							_classNamesList: list
 						});
 					}}
