@@ -190,15 +190,18 @@
 		private function HTML_append(string $html, string $element, array $block){
 			$html = rtrim($html);
 			$name = $block['blockName'];
+            $found = false;
 			
 			// div based wrappers
 			if(strpos($html, '</div>', -6) !== false){
 				$html = substr_replace($html, $element . '</div>', -6);
+                $found = true;
 			}
-			
+
 			// image based wrappers
-			if(strpos($html, '</figure>', -9) !== false){
+			if($found === false && strpos($html, '</figure>', -9) !== false){
 				$html = substr_replace($html, $element . '</figure>', -9);
+                $found = true;
 			}
 			
 			return $html;
