@@ -5,145 +5,145 @@
 			"support": ["Border","BorderRadius","BoxShadow","FontSize","Hide","Hyphens","LineHeight","Margin","Padding","Position","StretchLink","TextAlign","Width","Height"]
 		},
 		"core/image": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/heading": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/post-date": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/post-excerpt": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/gallery": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/list": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/quote": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/shortcode": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/archives": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/audio": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/button": {
-			"support": ["*", "-flexCoreColumns" , "-Grid", "-Padding"]
+			"support": ["*", "-flexCoreColumns" , "-grid", "-Padding"]
 		},
 		"core/buttons": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/calendar": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/categories": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/code": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/columns": {
-			"support": ["*", "-Grid"]
+			"support": ["*", "-grid"]
 		},
 		"core/column": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/cover": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/embed": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/file": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/group": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/query": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/freeform": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/html": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/media-text": {
-			"support": ["*", "-flexCoreColumns", "-Grid"]
+			"support": ["*", "-flexCoreColumns", "-grid"]
 		},
 		"core/latest-comments": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/latest-posts": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/missing": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/more": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/nextpage": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/preformatted": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/pullquote": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/rss": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/search": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/separator": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/block": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/social-links": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/social-link": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/spacer": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/subhead": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/table": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/tag-cloud": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/text-columns": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/verse": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/video": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/site-logo": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
 		"core/site-title": {
-			"support": ["*", "-flexCoreColumns" , "-Grid"]
+			"support": ["*", "-flexCoreColumns" , "-grid"]
 		}
 	}
 }
