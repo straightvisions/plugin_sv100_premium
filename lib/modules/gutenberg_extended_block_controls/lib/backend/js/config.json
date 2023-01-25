@@ -22,6 +22,9 @@
 		"core/list": {
 			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
+		"core/list-item": {
+			"support": ["*", "-flexCoreColumns" , "-grid"]
+		},
 		"core/quote": {
 			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
