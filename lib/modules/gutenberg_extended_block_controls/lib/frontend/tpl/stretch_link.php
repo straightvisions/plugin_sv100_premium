@@ -11,5 +11,5 @@
 		$html = $this->HTML_append($html, $element, $block);
 
 		// enqueue additional css
-		$this->get_script( 'stretch_link' )->set_path( 'lib/frontend/css/common/stretch_link.css' )->set_is_enqueued();
+		$this->get_script( 'stretch_link' )->set_is_enqueued();
 	}

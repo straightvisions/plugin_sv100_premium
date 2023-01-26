@@ -88,6 +88,8 @@
 				$this->get_script( 'style_mod_flex' )
 				     ->set_inline()
 				     ->set_path( 'lib/frontend/css/common/style_mod_flex.css' );
+
+				$this->get_script( 'stretch_link' )->set_path( 'lib/frontend/css/common/stretch_link.css' );
 			}
 			
 			return $this;
