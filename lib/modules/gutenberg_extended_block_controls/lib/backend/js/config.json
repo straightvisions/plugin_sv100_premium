@@ -10,6 +10,9 @@
 		"core/heading": {
 			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
+		"core/post-title": {
+			"support": ["*", "-flexCoreColumns" , "-grid"]
+		},
 		"core/post-date": {
 			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
