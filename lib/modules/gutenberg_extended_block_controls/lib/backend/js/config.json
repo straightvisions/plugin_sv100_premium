@@ -55,6 +55,9 @@
 		"core/code": {
 			"support": ["*", "-flexCoreColumns" , "-grid"]
 		},
+		"core/navigation": {
+			"support": ["*", "-flexCoreColumns" , "-grid"]
+		},
 		"core/columns": {
 			"support": ["*", "-grid"]
 		},
