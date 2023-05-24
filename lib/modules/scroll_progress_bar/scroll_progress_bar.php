@@ -25,24 +25,28 @@
 			return $this;
 		}
 		public function add_metaboxes(): scroll_progress_bar{
-			$states = array(
-				'' => __('Default', 'sv100'),
-				'0' => __('Disabled', 'sv100'),
-				'1' => __('Enabled', 'sv100')
-			);
-			
-			if($this->is_instance_active('sv100') !== false){
-				$this->get_instance('sv100')->get_module('sv_metabox')->get_setting( $this->get_prefix('activate') )
-				     ->set_title( __('Progress Bar', 'sv100') )
-				     ->set_description( __('Overwrite Global Setting for this post.', 'sv100') )
-				     ->set_default_value('0')
+			if($this->is_active()) {
+				$states = array(
+					''  => __( 'Default', 'sv100' ),
+					'0' => __( 'Disabled', 'sv100' ),
+					'1' => __( 'Enabled', 'sv100' )
+				);
+
+				$this->get_module( 'metaboxes' )->get_setting( $this->get_prefix( 'activate' ) )
+				     ->set_title( __( 'Progress Bar', 'sv100' ) )
+				     ->set_description( __( 'Overwrite Global Setting for this post.', 'sv100' ) )
+				     ->set_default_value( '0' )
 				     ->load_type( 'select' )
-				     ->set_options($states);
+				     ->set_options( $states );
 			}
 
 			return $this;
 		}
 		protected function load_settings(): scroll_progress_bar {
+			$this->get_setting( 'activate' )
+			     ->set_title( __( 'Enable Scroll Progress Bar', 'sv100' ) )
+			     ->load_type( 'checkbox' );
+
 			$this->get_setting( 'height' )
 				->set_title( __( 'Height in Pixel', 'sv100_premium' ) )
 				->set_default_value( '8' )
@@ -68,11 +72,13 @@
 				->set_is_responsive(true)
 				->load_type( 'color' );
 
-			foreach(get_post_types(array('public' => true)) as $post_type) {
-				$this->get_setting('activate_'.$post_type)
-					->set_title(__('Activate for '.$post_type, 'sv100'))
-					->load_type('checkbox');
-			}
+			add_action('init', function(){
+				foreach(get_post_types(array('public' => true)) as $post_type) {
+					$this->get_setting('activate_'.$post_type)
+					     ->set_title(__('Activate for '.$post_type, 'sv100'))
+					     ->load_type('checkbox');
+				}
+			});
 
 			return $this;
 		}
@@ -100,7 +106,19 @@
 		}
 		public function is_active($post_type = false): bool{
 			global $post;
-			$setting = false;
+
+			// activate not set
+			if(!$this->get_setting('activate')->get_data()){
+				return false;
+			}
+			// activate not true
+			if($this->get_setting('activate')->get_data() !== '1'){
+				return false;
+			}
+
+			if(is_admin()){
+				return true;
+			}
 
 			if (!$post) {
 				return false;
@@ -111,9 +129,9 @@
 			}
 			
 			if($this->is_instance_active('sv100') !== false) {
-				$setting = boolval( $this->get_instance('sv100')->get_module( 'sv_metabox' )->get_data( $post->ID, $this->get_prefix( 'activate' ), $this->get_setting( 'activate_' . $post_type )->get_data() ) );
+				return boolval( $this->get_instance('sv100')->get_module( 'sv_metabox' )->get_data( $post->ID, $this->get_prefix( 'activate' ), $this->get_setting( 'activate_' . $post_type )->get_data() ) );
 			}
 
-			return $setting;
+			return false;
 		}
 	}

@@ -4,6 +4,7 @@
 		<h3 class="divider"><?php _e( 'Size', 'sv100_premium' ); ?></h3>
 		<div class="sv_setting_flex">
 			<?php
+				echo $module->get_setting( 'activate' )->form();
 				echo $module->get_setting( 'height' )->form();
 				echo $module->get_setting( 'width' )->form();
 			?>

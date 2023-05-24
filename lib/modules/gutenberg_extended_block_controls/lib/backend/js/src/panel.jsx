@@ -1,6 +1,6 @@
-import assign from 'lodash.assign';
+
 import ExtendedControlComponents from './components.jsx';
-import {getUniqueBlockId, isDuplicate, injectBlockListCSS} from './helpers';
+import {getUniqueBlockId, isDuplicate, injectBlockListCSS, isSupported} from './helpers';
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment } = wp.element;
 const { InspectorControls } = wp.editor;
@@ -8,58 +8,11 @@ const { PanelBody, TabPanel, Dashicon, Button } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-// whitelist blocks (could be replace by a generation function
-const enableExtendedControlOnBlocks = [
-	'core/paragraph',
-	'core/image',
-	'core/heading',
-	'core/gallery',
-	'core/list',
-	'core/quote',
-	'core/shortcode',
-	'core/archives',
-	'core/audio',
-	'core/button',
-	'core/buttons',
-	'core/calendar',
-	'core/categories',
-	'core/code',
-	'core/columns',
-	'core/column',
-	'core/cover',
-	'core/embed',
-	'core/file',
-	'core/group',
-	'core/freeform',
-	'core/html',
-	'core/media-text',
-	'core/latest-comments',
-	'core/latest-posts',
-	'core/missing',
-	'core/more',
-	'core/nextpage',
-	'core/preformatted',
-	'core/pullquote',
-	'core/rss',
-	'core/search',
-	'core/separator',
-	'core/block',
-	'core/social-links',
-	'core/social-link',
-	'core/spacer',
-	'core/subhead',
-	'core/table',
-	'core/tag-cloud',
-	'core/text-columns',
-	'core/verse',
-	'core/video'
-];
-
 // register control panel
 const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
 		// Do nothing if it's another block than our defined ones.
-		if ( ! enableExtendedControlOnBlocks.includes( props.name ) ) {
+		if ( ! isSupported( props.name ) ) {
 			return (
 				<BlockEdit { ...props } />
 			);
@@ -101,9 +54,56 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 			injectBlockListCSS(props);
 		}
 		
+		// detect if mouse is over panel
+		const panel = document.querySelector('.sv100-premium-extended-controls-panel');
+		
+		if(panel){
+			panel.addEventListener('mouseover', function(){
+				panel.classList.add('panel-hover');
+			});
+			
+			panel.addEventListener('mouseleave', function(){
+				panel.classList.remove('panel-hover');
+			});
+		}
+		
+		// detect arrow keys left / right to change breakpoint
+		document.onkeydown = function (e) {
+			const tabs = document.querySelectorAll('.sv100-premium-extended-controls-panel.panel-hover > .sv100-premium-panelbody > .components-tab-panel__tabs > button');
+			
+			if(tabs && document.activeElement){
+				let allowed = true;
+				
+				// prevent arrow function while focus is on text or number input field
+				if(['input'].indexOf(document.activeElement.tagName.toLowerCase()) !== -1
+					&& ['text', 'number'].indexOf(document.activeElement.getAttribute('type')) !== -1){
+						allowed = false;
+				}
+				
+				if(allowed === true){
+					for(let i=0;i<tabs.length;i++){
+						if(tabs[i].classList.contains('is-active')){
+							if(e.key === 'ArrowLeft' && i > 0){
+								tabs[i-1].click();
+								break;
+							}
+							
+							if(e.key === 'ArrowRight' && i < tabs.length){
+								tabs[i+1].click();
+								break;
+							}
+						}
+					}
+				}
+				
+				
+			}
+			
+		};
+		
 		return (
 			<Fragment>
-				<InspectorControls>
+				<InspectorControls className={'sv100-premium-extended-controls-panel'}>
 					<PanelBody
 						title={ __( 'SV100 Premium - Extended Controls', 'sv100_premium' ) }
 						initialOpen={ true }
@@ -190,11 +190,11 @@ addFilter( 'editor.BlockEdit', 'sv100-premium/gutenberg-extended-block-controls'
 // register custom attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableExtendedControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported( name ) ) {
 		return settings;
 	}
 	
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		blockId:{ type: 'string' },
 		parsedCSS:{ type: 'string', default: '{}' },
 		parsedCSSString:{ type: 'string', default: '' },
@@ -213,7 +213,7 @@ const withClientIdClassName  = createHigherOrderComponent(
 	( BlockListBlock ) => {
 		return ( props ) => {
 			
-			if ( ! enableExtendedControlOnBlocks.includes( props.name ) ) {
+			if ( ! isSupported( props.name ) ) {
 				return (
 					<BlockListBlock { ...props } />
 				);
@@ -247,9 +247,10 @@ const withClientIdClassName  = createHigherOrderComponent(
 wp.hooks.addFilter('editor.BlockListBlock', 'sv100-premium/gutenberg-extended-block-controls', withClientIdClassName );
 
 // add blockid-class to props
+//@todo move this function completely to the php block render function
 const addCustomProps = ( props, blockType, attributes ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableExtendedControlOnBlocks.includes( blockType.name ) ) {
+	if ( ! isSupported( blockType.name ) ) {
 		return props;
 	}
 
@@ -275,7 +276,7 @@ const addCustomProps = ( props, blockType, attributes ) => {
 			classNames += ' ' + _classNamesList[i];
 		}
 	
-		assign( props, { className : classNames  } );
+		Object.assign( props,{ className : classNames  } );
 	}
 	
 	return props;

@@ -2,24 +2,25 @@
 	"name": "sv100-premium-gutenbert-extended-controls",
 	"version": "1.0.0",
 	"scripts": {
-		"start": "parcel watch --no-hmr src/index.js -d dist",
-		"build": "parcel build src/index.js -d dist",
+		"start": "parcel watch",
+		"build": "parcel build",
 		"lint": "eslint src"
 	},
 	"dependencies": {
 		"classnames": "^2.3.1",
-		"lodash.assign": "^4.2.0"
+		"lodash": "^4.17.21"
 	},
 	"devDependencies": {
-		"babel-core": "^6.26.3",
-		"babel-eslint": "^10.0.1",
-		"babel-plugin-transform-react-jsx": "^6.24.1",
-		"eslint": "^5.16.0",
-		"eslint-config-wordpress": "^2.0.0",
-		"eslint-plugin-jest": "^22.5.1",
-		"eslint-plugin-jsx-a11y": "^6.2.1",
-		"eslint-plugin-react": "^7.13.0",
-		"parcel-bundler": "^1.12.3"
+		"@babel/core": "^7.18.13",
+		"@babel/eslint-parser": "^7.18.9",
+		"@babel/plugin-transform-react-jsx": "^7.18.10",
+		"eslint": "^8.23.0",
+		"eslint-plugin-jest": "^26.8.7",
+		"eslint-plugin-jsx-a11y": "^6.6.1",
+		"eslint-plugin-react": "^7.31.1",
+		"parcel": "^2.0.0"
 	},
-	"private": true
+	"private": true,
+	"source": "src/index.js",
+	"main": "dist/index.js"
 }

@@ -1,0 +1,11 @@
+.wp-block-columns.sv100-premium-block-core-mod-flex{
+	display:flex;
+}
+.wp-block-columns.sv100-premium-block-core-mod-flex > .wp-block-column,
+.wp-block-columns.sv100-premium-block-core-mod-flex > .wp-block-column:first-child,
+.wp-block-columns.sv100-premium-block-core-mod-flex > .wp-block-column:last-child,
+.wp-block-columns.sv100-premium-block-core-mod-flex > .wp-block-column:not(:first-child),
+.wp-block-columns.sv100-premium-block-core-mod-flex > .wp-block-column:not(:last-child)
+{
+	margin:0;
+}

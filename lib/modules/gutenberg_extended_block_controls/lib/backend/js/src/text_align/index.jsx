@@ -1,30 +1,24 @@
-import assign from 'lodash.assign';
+
 import EditorStyles from './editor-styles';
-import {updateCSS, optIn, optOut} from "../helpers";
+import {updateCSS, optIn, optOut, isSupported} from "../helpers";
 
 const { Fragment } = wp.element;
 const { PanelRow, ToggleControl, SelectControl } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const enableCustomControlOnBlocks = [
-	'core/paragraph',
-	'core/heading',
-	'core/quote',
-	'core/button',
-	'core/subhead',
-	'core/verse',
-];
+const _name = 'TextAlign';
+const _prefix = 'textAlign';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported(name, _name) ) {
 		return settings;
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		textAlignActive                 :{ type: 'boolean', default: false },
 		textAlignMobile                 :{ type: 'string', default: '' },
 		textAlignMobileLandscape        :{ type: 'string', default: '' },
@@ -43,10 +37,8 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function TextAlign(props){
-	const _name = 'TextAlign';
-	const _prefix = 'textAlign';
 	
-	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
+	if ( ! isSupported(props.name, _name) ) {
 		return (
 			<Fragment></Fragment>
 		);

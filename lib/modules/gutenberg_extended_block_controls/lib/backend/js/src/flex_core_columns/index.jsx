@@ -1,6 +1,8 @@
-import assign from 'lodash.assign';
 import GapFlex from './components/gap';
 import StackFlex from './components/stack';
+import WrapFlex from './components/wrap';
+import JustifyFlex from './components/justify';
+import AlignFlex from './components/align';
 import {
 	addClassNames,
 	lowercase,
@@ -8,32 +10,34 @@ import {
 	optOut,
 	removeClassNames,
 	updateCSS,
-	updateCSSWithDimensionsCorners
+	updateCSSWithDimensionsCorners,
+	isSupported
 } from "../helpers";
 import gapEditorStyles from "./components/gap/editor-styles";
 import stackEditorStyles from "./components/stack/editor-styles";
+import wrapEditorStyles from "./components/stack/editor-styles";
+import justifyEditorStyles from "./components/justify/editor-styles";
+import alignEditorStyles from "./components/align/editor-styles";
 
 const { Fragment } = wp.element;
 const { ToggleControl, PanelRow, Tooltip  } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const enableCustomControlOnBlocks = [
-	'core/columns',
-];
+const _name = 'flexCoreColumns';
+const _prefix = 'flexCoreColumns';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported(name, _name) ) {
 		return settings;
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		flexCoreColumnsActive  :{ type: 'boolean', default: false, },
 		flexCoreColumnsInit  :{ type: 'boolean', default: false, },
-
 	} );
 	
 	return settings;
@@ -43,10 +47,8 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function FlexCoreColumns(props){
-	const _name = 'flexCoreColumns';
-	const _prefix = 'flexCoreColumns';
 	
-	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
+	if ( ! isSupported(props.name, _name) ) {
 		return (
 			<Fragment></Fragment>
 		);
@@ -64,6 +66,7 @@ function FlexCoreColumns(props){
 		// parse sub module CSS
 		attr.parsedCSS['GapFlex'] = gapEditorStyles(attr, props.name);
 		attr.parsedCSS['StackFlex'] = stackEditorStyles(attr, props.name);
+		//@todo why no justify and wrap css here? looks like that would be buggy, but makes no sense?
 		//collapse css objects
 		let css = '';
 		Object.keys( attr.parsedCSS ).map(function(key, index) {
@@ -94,6 +97,9 @@ function FlexCoreColumns(props){
 							[_prefix+'Active']: val,
 							['gapFlexActive']: val, // fake opt-in for sub modules
 							['stackFlexActive']: val, // fake opt-in for sub modules
+							['wrapFlexActive']: val, // fake opt-in for sub modules
+							['justifyFlexActive']: val, // fake opt-in for sub modules
+							['alignFlexActive']: val, // fake opt-in for sub modules
 							_classNamesList: list
 						});
 					}}
@@ -101,6 +107,9 @@ function FlexCoreColumns(props){
 				/>
 				<GapFlex {...props}/>
 				<StackFlex {...props}/>
+				<WrapFlex {...props}/>
+				<JustifyFlex {...props}/>
+				<AlignFlex {...props}/>
 			</Fragment>
 		);
 	}else{
@@ -115,6 +124,9 @@ function FlexCoreColumns(props){
 							[_prefix+'Active']: val,
 							['gapFlexActive']: val, // fake opt-in for sub modules
 							['stackFlexActive']: val, // fake opt-in for sub modules
+							['wrapFlexActive']: val, // fake opt-in for sub modules
+							['justifyFlexActive']: val, // fake opt-in for sub modules
+							['alignFlexActive']: val, // fake opt-in for sub modules
 							_classNamesList: list
 						});
 					}}

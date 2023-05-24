@@ -20,7 +20,10 @@
 			$post		= get_post(intval( $atts['id']));
 
 			if($post){
-				return do_shortcode($post->post_content);
+				// sv100_premium_insert_post_id
+				add_filter($this->get_prefix('id'), function() use($atts){ return $atts['id']; });
+
+				return apply_filters('the_content', $post->post_content);
 			}
 
 			return '';

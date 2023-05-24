@@ -59,7 +59,7 @@
 			// --------------------------------------------------
 			// --------------------------------------------------
 			
-			if(is_array($lightbox['prevent_background_scrolling'])) {
+			if(isset($lightbox['prevent_background_scrolling']) && is_array($lightbox['prevent_background_scrolling'])) {
 				$properties = array();
 				$properties['overflow'] = $_s->prepare_css_property_responsive(array_map(function ($prevent_background_scrolling) {
 					return $prevent_background_scrolling ? 'hidden' : 'revert';

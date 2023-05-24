@@ -1,6 +1,6 @@
-import assign from 'lodash.assign';
+
 import EditorStyles from './editor-styles';
-import {updateCSS, optIn, optOut} from "../helpers";
+import {updateCSS, optIn, optOut, isSupported} from "../helpers";
 
 const { Fragment } = wp.element;
 const { PanelBody, PanelRow, ToggleControl,  __experimentalUnitControl } = wp.components;
@@ -8,60 +8,18 @@ const UnitControl =  __experimentalUnitControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const enableCustomControlOnBlocks = [
-	'core/paragraph',
-	'core/image',
-	'core/heading',
-	'core/gallery',
-	'core/list',
-	'core/quote',
-	'core/archives',
-	'core/audio',
-	'core/button',
-	'core/buttons',
-	'core/calendar',
-	'core/categories',
-	'core/code',
-	'core/columns',
-	'core/column',
-	'core/cover',
-	'core/embed',
-	'core/file',
-	'core/group',
-	'core/freeform',
-	'core/html',
-	'core/media-text',
-	'core/latest-comments',
-	'core/latest-posts',
-	'core/missing',
-	'core/more',
-	'core/nextpage',
-	'core/preformatted',
-	'core/pullquote',
-	'core/rss',
-	'core/search',
-	'core/separator',
-	'core/block',
-	'core/social-links',
-	'core/social-link',
-	'core/spacer',
-	'core/subhead',
-	'core/table',
-	'core/tag-cloud',
-	'core/text-columns',
-	'core/verse',
-	'core/video'
-];
+const _name = 'Height';
+const _prefix = 'height';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported(name, _name) ) {
 		return settings;
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		heightActive                 :{ type: 'boolean', default: false },
 		heightMobile                 :{ type: 'string', default: '' },
 		heightMobileLandscape        :{ type: 'string', default: '' },
@@ -96,10 +54,8 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function Height(props){
-	const _name = 'Height';
-	const _prefix = 'height';
 	
-	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
+	if ( ! isSupported(props.name, _name) ) {
 		return (
 			<Fragment></Fragment>
 		);

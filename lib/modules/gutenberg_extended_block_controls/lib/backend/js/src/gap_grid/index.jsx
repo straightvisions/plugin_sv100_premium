@@ -1,24 +1,23 @@
-import assign from 'lodash.assign';
+
 import EditorStyles from './editor-styles';
+import {updateCSS, optIn, optOut, isSupported} from "../helpers";
 
 const { Fragment } = wp.element;
 const { RangeControl } = wp.components;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const enableCustomControlOnBlocks = [
-	'core/columns',
-];
+const _name = 'gapGrid';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported(name, _name) ) {
 		return settings;
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		
 		columnGapMobile                 :{ type: 'integer', default: 10, },
 		columnGapMobileLandscape        :{ type: 'integer', default: 10, },
@@ -44,9 +43,8 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function gapGrid(props){
-	const _name = 'gapGrid';
 	
-	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
+	if ( ! isSupported(props.name, _name) ) {
 		return (
 			<Fragment></Fragment>
 		);

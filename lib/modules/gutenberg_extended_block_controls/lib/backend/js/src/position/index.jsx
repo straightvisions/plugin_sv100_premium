@@ -1,6 +1,6 @@
-import assign from 'lodash.assign';
+
 import EditorStyles from './editor-styles';
-import {updateCSS, updateCSSWithDimensions, optIn, optOut} from "../helpers";
+import {updateCSS, updateCSSWithDimensions, optIn, optOut, isSupported} from "../helpers";
 
 const { Fragment } = wp.element;
 const {
@@ -17,61 +17,18 @@ const InputControl =  __experimentalInputControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const enableCustomControlOnBlocks = [
-	'core/paragraph',
-	'core/image',
-	'core/heading',
-	'core/gallery',
-	'core/list',
-	'core/quote',
-	'core/shortcode',
-	'core/archives',
-	'core/audio',
-	'core/button',
-	'core/buttons',
-	'core/calendar',
-	'core/categories',
-	'core/code',
-	'core/columns',
-	'core/column',
-	'core/cover',
-	'core/embed',
-	'core/file',
-	'core/group',
-	'core/freeform',
-	'core/html',
-	'core/media-text',
-	'core/latest-comments',
-	'core/latest-posts',
-	'core/missing',
-	'core/more',
-	'core/nextpage',
-	'core/preformatted',
-	'core/pullquote',
-	'core/rss',
-	'core/search',
-	'core/separator',
-	'core/block',
-	'core/social-links',
-	'core/social-link',
-	'core/spacer',
-	'core/subhead',
-	'core/table',
-	'core/tag-cloud',
-	'core/text-columns',
-	'core/verse',
-	'core/video'
-];
+const _name = 'Position';
+const _prefix = 'position';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported(name, _name) ) {
 		return settings;
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		positionActive                 :{ type: 'boolean', default: false },
 		positionMobile                 :{ type: 'string', default: '' },
 		positionMobileLandscape        :{ type: 'string', default: '' },
@@ -130,10 +87,8 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function Position(props){
-	const _name = 'Position';
-	const _prefix = 'position';
 	
-	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
+	if ( ! isSupported(props.name, _name) ) {
 		return (
 			<Fragment></Fragment>
 		);

@@ -1,7 +1,6 @@
 import FlexCoreColumns from './flex_core_columns/index.jsx';
 import Margin from './margin/index.jsx';
 import Padding from './padding/index.jsx';
-import PaddingCoreButton from './padding_core_button/index.jsx';
 import Hide from './hide/index.jsx';
 import Position from './position/index.jsx';
 import Border from './border/index.jsx';
@@ -15,19 +14,20 @@ import Width from './width/index.jsx';
 import StretchLink from './stretch_link/index.jsx';
 import PosterImage from './poster_image/index.jsx';
 import BoxShadow from './box_shadow/index.jsx';
+import Grid from './grid/index.jsx';
 const { Fragment } = wp.element;
 
 function ExtendedControlComponents( props ){
 	let input =
 		<Fragment>
 			<FlexCoreColumns { ...props }/>
+			<Grid { ...props }/>
 			<TextAlign { ...props }/>
 			<FontSize { ...props }/>
 			<LineHeight { ...props }/>
 			<Hyphens { ...props }/>
 			<Margin {...props}/>
 			<Padding {...props}/>
-			<PaddingCoreButton {...props}/>
 			<Border { ...props }/>
 			<BorderRadius { ...props }/>
 			<BoxShadow { ...props }/>

@@ -1,4 +1,4 @@
-import assign from 'lodash.assign';
+
 
 const { Fragment } = wp.element;
 const { PanelRow, ToggleControl, Button, BaseControl  } = wp.components;
@@ -7,21 +7,20 @@ const { useRef, useEffect } = wp.element;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-import {getBlockDocumentRoot} from '../helpers.js';
+import {getBlockDocumentRoot, isSupported} from '../helpers.js';
 
-const enableCustomControlOnBlocks = [
-	'core/media-text',
-];
+const _name = 'PosterImage';
+const _prefix = 'posterImage';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported(name, _name) ) {
 		return settings;
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		posterImage                 :{ type: 'boolean', default: false, },
 		posterImageURL              :{ type: 'string', default: '', },
 	} );
@@ -33,10 +32,8 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function PosterImage(props){
-	const _name = 'PosterImage';
-	const _prefix = 'posterImage';
 	
-	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
+	if ( ! isSupported(props.name, _name) ) {
 		return (
 			<Fragment></Fragment>
 		);

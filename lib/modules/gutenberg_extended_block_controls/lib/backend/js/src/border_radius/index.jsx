@@ -1,6 +1,6 @@
-import assign from 'lodash.assign';
+
 import EditorStyles from './editor-styles';
-import {updateCSSWithDimensionsCorners, optIn, optOut} from "../helpers";
+import {updateCSSWithDimensionsCorners, optIn, optOut, isSupported} from "../helpers";
 
 const { Fragment } = wp.element;
 const { PanelRow, ToggleControl, __experimentalBoxControl } = wp.components;
@@ -8,61 +8,18 @@ const BoxControl = __experimentalBoxControl;
 const { addFilter } = wp.hooks;
 const { __ } = wp.i18n;
 
-const enableCustomControlOnBlocks = [
-	'core/paragraph',
-	'core/image',
-	'core/heading',
-	'core/gallery',
-	'core/list',
-	'core/quote',
-	'core/shortcode',
-	'core/archives',
-	'core/audio',
-	'core/button',
-	'core/buttons',
-	'core/calendar',
-	'core/categories',
-	'core/code',
-	'core/columns',
-	'core/column',
-	'core/cover',
-	'core/embed',
-	'core/file',
-	'core/group',
-	'core/freeform',
-	'core/html',
-	'core/media-text',
-	'core/latest-comments',
-	'core/latest-posts',
-	'core/missing',
-	'core/more',
-	'core/nextpage',
-	'core/preformatted',
-	'core/pullquote',
-	'core/rss',
-	'core/search',
-	'core/separator',
-	'core/block',
-	'core/social-links',
-	'core/social-link',
-	'core/spacer',
-	'core/subhead',
-	'core/table',
-	'core/tag-cloud',
-	'core/text-columns',
-	'core/verse',
-	'core/video'
-];
+const _name = 'BorderRadius';
+const _prefix = 'borderRadius';
 
 // register attributes
 const addCustomControlAttributes = ( settings, name ) => {
 	// Do nothing if it's another block than our defined ones.
-	if ( ! enableCustomControlOnBlocks.includes( name ) ) {
+	if ( ! isSupported(name, _name) ) {
 		return settings;
 	}
 	
 	// Use Lodash's assign to gracefully handle if attributes are undefined
-	settings.attributes = assign( settings.attributes, {
+	Object.assign(settings.attributes, {
 		borderRadiusActive                    :{ type: 'boolean', default: false },
 	
 		borderRadiusTopLeftMobile                 :{ type: 'string'},
@@ -105,10 +62,8 @@ addFilter( 'blocks.registerBlockType', 'sv100-premium/gutenberg-extended-block-c
 
 // the component
 function BorderRadius(props){
-	const _name = 'BorderRadius';
-	const _prefix = 'borderRadius';
 	
-	if ( ! enableCustomControlOnBlocks.includes( props.name ) ) {
+	if ( ! isSupported(props.name, _name) ) {
 		return (
 			<Fragment></Fragment>
 		);

@@ -16,9 +16,16 @@
 				add_action('wp', array($this, 'enqueue_scripts'));
 			}
 			
-			if( is_admin() === false && wp_is_json_request() === false){
-				add_action( 'wp_footer', array( $this, 'get_frontend_block_styles' ), 99, 1 );
+			// normal frontend call
+			if( is_admin() === false && wp_doing_ajax() === false){
 				add_filter('render_block', array($this, 'render_block_overwrite'), 99, 2);
+				add_action( 'wp_footer', array( $this, 'get_frontend_block_styles' ), 99, 1 );
+			}
+			
+			// ajax call
+			if(wp_doing_ajax()){
+				add_filter('render_block', array($this, 'render_block_overwrite'), 99, 2);
+				add_action('the_content', array($this, 'parse_the_content'),99, 1);
 			}
 
 			return $this;
@@ -47,21 +54,42 @@
 
 		protected function register_scripts(): gutenberg_extended_block_controls {
 			if($this->is_active() === true){
+				
+				ob_start();
+				require($this->get_path('lib/backend/js/config.json'));
+				$config = json_decode(ob_get_clean());
+				
 				$this->get_script('controls')
 				     ->set_path('lib/backend/js/dist/index.js')
 				     ->set_type('js')
 				     ->set_is_gutenberg()
 				     ->set_is_backend()
 				     ->set_deps(array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'))
+				     ->set_localized(
+				     	array_merge(
+				     		$this->get_script('controls')->get_localized(),
+				     	    array('config' => $config)
+				        )
+				     )
 				     ->set_is_enqueued();
 				
 				$this->get_script( 'editor_components' )
-				     ->set_is_backend()->set_is_gutenberg()->set_path( 'lib/backend/css/common/editor_components.css' );
-				
-				$this->get_script( 'common' )->set_is_gutenberg()->set_path( 'lib/backend/css/common/common.css' );
-				$this->get_script( 'sv100-premium-block-core-mod-flex' )
-				     ->set_is_gutenberg()->set_path( 'lib/backend/css/common/style_mod_flex.css' );
-		
+					->set_is_backend()
+					->set_is_gutenberg()
+					->set_path( 'lib/backend/css/common/editor_components.css' )
+					->set_is_enqueued();
+
+				$this->get_script( 'style_mod_flex_backend' )
+				     ->set_is_gutenberg()
+					 ->set_is_backend()
+					 ->set_is_enqueued()
+				     ->set_path( 'lib/backend/css/common/style_mod_flex.css' );
+
+				$this->get_script( 'style_mod_flex' )
+				     ->set_inline()
+				     ->set_path( 'lib/frontend/css/common/style_mod_flex.css' );
+
+				$this->get_script( 'stretch_link' )->set_path( 'lib/frontend/css/common/stretch_link.css' );
 			}
 			
 			return $this;
@@ -86,7 +114,6 @@
 			foreach ( $blocks as $block ) {
 				if ( 'core/heading' === $block['blockName'] ) {
 					// add current item, if it's a heading block
-					
 					$list[] = $block;
 				} elseif ( ! empty( $block['innerBlocks'] ) ) {
 					// or call the function recursively, to find heading blocks in inner blocks
@@ -101,8 +128,7 @@
 		 * load parsedCSSString from blocks within content
 		 * inject the parsed CSS into the page
 		 */
-		public function get_frontend_block_styles(){
-			global $post;
+		public function get_frontend_block_styles(bool $as_return = false){
 			$blocks = array();
 			$output = '';
 		
@@ -115,7 +141,14 @@
 			
 			$output = str_replace('#block-', '.block-', $output);
 		
-			echo '<style id="sv100_premium_gutenberg_extended_block_control_styles">'.$output.'</style>'; //phpcs:ignore
+			$output = '<style id="sv100_premium_gutenberg_extended_block_control_styles">'.$output.'</style>'; //phpcs:ignore
+			
+			if($as_return){
+				return $output;
+			}else{
+				echo $output;
+			}
+			
 		}
 		
 		public function render_block_overwrite(string $block_content, array $block): string{
@@ -126,14 +159,30 @@
 			if(isset($attrs['blockId']) && empty($attrs['blockId']) === false) {
 				$this->rendered_blocks[ $attrs['blockId'] ] = $block;
 			}
-			
+		
 			// overwrites
 			include($this->get_path('lib/frontend/tpl/stretch_link.php'));
 			include($this->get_path('lib/frontend/tpl/poster_image.php'));
 			
 			// mod css
 			if(isset($block['attrs']['_classNamesList']) && in_array('sv100-premium-block-core-mod-flex', $block['attrs']['_classNamesList']) === true){
-				$this->get_script( 'sv100-premium-block-core-mod-flex-frontend' )->set_path( 'lib/backend/css/common/style_mod_flex.css' )->set_is_enqueued();
+				$this->get_script( 'style_mod_flex' )->set_is_enqueued();
+			}
+			
+			// add extra props to dynamic blocks
+			if ( $block_content && isset( $block['attrs']['blockId'] ) ) {
+				// add blockId class
+				$injected_class = 'sv100-premium-block-core-' . $block['attrs']['blockId'];
+				
+				if(strpos($html, $injected_class) === false){ // prevent duplicates
+					$html = preg_replace(
+						'/' . preg_quote( 'class="', '/' ) . '/',
+						'class="' . esc_attr( $injected_class ) . ' ',
+						$block_content,
+						1
+					);
+				}
+				
 			}
 			
 			return $html;
@@ -143,17 +192,42 @@
 		private function HTML_append(string $html, string $element, array $block){
 			$html = rtrim($html);
 			$name = $block['blockName'];
+            $found = false;
 			
 			// div based wrappers
 			if(strpos($html, '</div>', -6) !== false){
 				$html = substr_replace($html, $element . '</div>', -6);
+                $found = true;
 			}
-			
+
 			// image based wrappers
-			if(strpos($html, '</figure>', -9) !== false){
+			if($found === false && strpos($html, '</figure>', -9) !== false){
 				$html = substr_replace($html, $element . '</figure>', -9);
+                $found = true;
 			}
 			
 			return $html;
 		}
+		
+		/* add custom props to dynamic blocks which are not affected by blocks.getSaveContent.extraProps */
+		public function add_block_extra_props( $block_content, $block ) {
+			if ( ! $block_content || ! isset( $block['attrs']['foo'] ) ) {
+				return $block_content;
+			}
+			
+			$injected_class = 'foo-' . $block['attrs']['foo'];
+			return preg_replace(
+				'/' . preg_quote( 'class="', '/' ) . '/',
+				'class="' . esc_attr( $injected_class ) . ' ',
+				$block_content,
+				1
+			);
+		}
+		
+		public function parse_the_content($content){
+			$content .= $this->get_frontend_block_styles(true);
+			
+			return $content;
+		}
+	
 	}
