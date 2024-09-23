@@ -106,7 +106,7 @@ const withExtendedControl = createHigherOrderComponent( ( BlockEdit ) => {
 				<InspectorControls className={'sv100-premium-extended-controls-panel'}>
 					<PanelBody
 						title={ __( 'SV100 Premium - Extended Controls', 'sv100_premium' ) }
-						initialOpen={ true }
+						initialOpen={ false }
 						className={'sv100-premium-extended-controls-panel'}
 					>
 						<TabPanel
